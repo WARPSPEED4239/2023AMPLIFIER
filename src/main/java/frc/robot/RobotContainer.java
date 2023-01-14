@@ -56,6 +56,8 @@ public class RobotContainer {
 
 		jButton3.whileHeld(new FeederWheelsSpin(mFeederWheels, 1.0));
 		jButton4.whileHeld(new FeederWheelsSpin(mFeederWheels, -1.0));
+
+		jButton1.whileHeld(new ShooterSpin(mLShooter, mRShooter, 1.0));
   }
 
   public Command getAutonomousCommand() {

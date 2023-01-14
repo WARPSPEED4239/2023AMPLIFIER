@@ -1,17 +1,34 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
-  /** Creates a new Shooter. */
-  public Shooter() {}
+
+  private final WPI_TalonSRX LShooter = new WPI_TalonSRX(17);
+  private final WPI_TalonSRX RShooter = new WPI_TalonSRX(18);
+
+  public Shooter() {
+
+    LShooter.configFactoryDefault();
+    LShooter.setInverted(true);
+    LShooter.setNuetralMode(NuetralMode.Coast);
+    LShooter.configVoltageCompSaturation(12.0);
+    LShooter.enableVoltageCompensation(true);
+
+    RShooter.configFactoryDefault();
+    RShooter.setInverted(true);
+    RShooter.setNuetralMode(Nuetralmode.Coast);
+    RShooter.configVoltageCompSaturation(12.0);
+    RShooter.enableVoltageCompensation(true);
+
+    }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public void periodic() {}
+
+  public void ShooterSetSpeed(double speed) {
+    Shooter.set(speed);
+    Shooter.set(speed);
   }
+
 }
