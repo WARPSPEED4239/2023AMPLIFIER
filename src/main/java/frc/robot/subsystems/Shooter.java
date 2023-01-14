@@ -27,8 +27,8 @@ public class Shooter extends SubsystemBase {
   public void periodic() {}
 
   public void ShooterSetSpeed(double speed) {
-    Shooter.set(speed);
-    Shooter.set(speed);
+    LShooter.set(speed);
+    RShooter.set(speed);
   }
 
 }

@@ -16,10 +16,12 @@ public class RobotContainer {
   private final Joystick mJoystick = new Joystick(Constants.JOYSTICK_PORT);
   private final FeederWheels mFeederWheels = new FeederWheels();
   private final Drivetrain mDriveTrain = new Drivetrain();
+  private final Shooter mShooter = new Shooter();
 
   public RobotContainer() {
     mDriveTrain.setDefaultCommand(new DrivetrainArcadeDrive(mDriveTrain, mController));
 	mFeederWheels.setDefaultCommand(new FeederWheelsSpin(mFeederWheels, 0.0));
+	mShooter.setDefaultCommand(new ShooterSpin(mShooter, 0.0));
 
     configureBindings();
   }
@@ -51,8 +53,8 @@ public class RobotContainer {
 		jButton7 = new JoystickButton(mJoystick, 7);
 		jButton8 = new JoystickButton(mJoystick, 8);
 		jButton9 = new JoystickButton(mJoystick, 9);
-		jButton10 = new JoystickButton(mJoystick, 10);
-		jButton11 = new JoystickButton(mJoystick, 11);
+	   jButton10 = new JoystickButton(mJoystick, 10);
+	   jButton11 = new JoystickButton(mJoystick, 11);
 
 		jButton3.whileHeld(new FeederWheelsSpin(mFeederWheels, 1.0));
 		jButton4.whileHeld(new FeederWheelsSpin(mFeederWheels, -1.0));

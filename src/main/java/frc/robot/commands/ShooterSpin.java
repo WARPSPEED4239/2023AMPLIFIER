@@ -6,14 +6,13 @@ import frc.subsystems.RShooter;
 
 public class ShooterSpin extends CommandBase {
 
-  private final LShooter mLShooter;
-  private final RShooter mRShooter;
+  private final Shooter mShooter;
   private final double mSpeed;
 
-  public ShooterSpin(LShooter lShooter, RShooter rShooter, double speed) {
-    mLShooter = lShooter;
-    mRShooter = rShooter;
+  public ShooterSpin(Shooter shooter, double speed) {
+    mShooter = shooter;
     mSpeed = speed;
+    addRequirements(mShooter);
   }
 
   // Called when the command is initially scheduled.
