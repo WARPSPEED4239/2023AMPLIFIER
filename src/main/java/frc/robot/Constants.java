@@ -40,5 +40,4 @@ public final class Constants {
         
     public static final double
         RAMP_RATE = 0.3;
-    
 }
