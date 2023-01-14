@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -12,8 +12,8 @@ import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
 
 public class Drivetrain extends SubsystemBase {
-  private final int TIMEOUT_MS = 30;
-  private final double kP = 0.05;// 0.464;//0.297;
+  private final int TIMEOUT_MS = 30; 
+  private final double kP = 0.05; // 0.464;//0.297;
   private final double kI = 0.0;
   private final double kD = 0.0;
   private final double kF = 0.0;
@@ -27,6 +27,7 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_ONE);
   private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
   private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
+  
   private final DifferentialDrive DriveTrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   private final PigeonIMU IMU = new PigeonIMU(Constants.PIGEON_IMU);
 
