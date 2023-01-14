@@ -1,17 +1,24 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class FeederWheels extends SubsystemBase {
-  /** Creates a new FeederWheels. */
-  public FeederWheels() {}
+  // make motors and pistons here
+  private final WPI_TalonSRX FeederWheels = new WPI_TalonSRX(16);
+
+  public FeederWheels() {
+    FeederWheels.configFactoryDefault();
+    FeederWheels.setInverted(true);
+    FeederWheels.setNuetralMode(NuetralMode.Coast);
+    FeederWheels.configVoltageCompSaturation(12.0);
+    FeederWheels.enableVoltageCompensation(true);
+
+  }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public void periodic() {}
+
+  public void FeederWheelsSetSpeed(double speed) {
+    FeederWheels.set(speed);
   }
 }

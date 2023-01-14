@@ -6,16 +6,20 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DrivetrainArcadeDrive;
+import frc.robot.commands.FeederWheelsSpin;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.FeederWheels;
 
 public class RobotContainer {
 
   private final XboxController mController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-  private final Drivetrain mDriveTrain = new Drivetrain();
   private final Joystick mJoystick = new Joystick(Constants.JOYSTICK_PORT);
+  private final FeederWheels mFeederWheels = new FeederWheels();
+  private final Drivetrain mDriveTrain = new Drivetrain();
 
   public RobotContainer() {
     mDriveTrain.setDefaultCommand(new DrivetrainArcadeDrive(mDriveTrain, mController));
+	mFeederWheels.setDefaultCommand(new FeederWheelsSpin(mFeederWheels, 0.0));
 
     configureBindings();
   }
@@ -49,6 +53,9 @@ public class RobotContainer {
 		jButton9 = new JoystickButton(mJoystick, 9);
 		jButton10 = new JoystickButton(mJoystick, 10);
 		jButton11 = new JoystickButton(mJoystick, 11);
+
+		jButton3.whileHeld(new FeederWheelsSpin(mFeederWheels, 1.0));
+		jButton4.whileHeld(new FeederWheelsSpin(mFeederWheels, -1.0));
   }
 
   public Command getAutonomousCommand() {
