@@ -11,7 +11,7 @@ public class FeederWheelsSpin extends CommandBase {
   public FeederWheelsSpin(FeederWheels feederWheels, double speed) {
     mFeederWheels = feederWheels;
     mSpeed = speed;
-    addRequirements(mFeederWheels, mSpeed);
+    addRequirements(mFeederWheels);
   }
 
   // Called when the command is initially scheduled.

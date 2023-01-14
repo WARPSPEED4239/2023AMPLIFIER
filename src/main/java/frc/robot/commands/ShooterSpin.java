@@ -1,8 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.subsystems.LShooter;
-import frc.subsystems.RShooter;
+import frc.robot.subsystems.Shooter;
 
 public class ShooterSpin extends CommandBase {
 
@@ -22,8 +21,7 @@ public class ShooterSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    mLShooter.LShooterSetSpeed(mSpeed);
-    mRShooter.RshooterSetSpeed(mSpeed);
+    mShooter. ShooterSetSpeed(mSpeed);
   }
 
   // Called once the command ends or is interrupted.

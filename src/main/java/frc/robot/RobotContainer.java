@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.commands.FeederWheelsSpin;
+import frc.robot.commands.ShooterSpin;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.FeederWheels;
+import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
 
@@ -59,7 +61,7 @@ public class RobotContainer {
 		jButton3.whileHeld(new FeederWheelsSpin(mFeederWheels, 1.0));
 		jButton4.whileHeld(new FeederWheelsSpin(mFeederWheels, -1.0));
 
-		jButton1.whileHeld(new ShooterSpin(mLShooter, mRShooter, 1.0));
+		jButton1.whileHeld(new ShooterSpin(mShooter, 1.0));
   }
 
   public Command getAutonomousCommand() {
