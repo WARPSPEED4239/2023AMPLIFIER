@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
+import edu.wpi.first.math.util.Units;
 
 public class Drivetrain extends SubsystemBase {
   private final int TIMEOUT_MS = 30; 
@@ -116,7 +117,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void setPositionFeet(double targetPositionInFeet) {
     double targetPositionInMeters = 0;
-    targetPositionInMeters = UnitConversion.FeetToMeters(targetPositionInMeters);
+    targetPositionInMeters = Units.feetToMeters(targetPositionInFeet);
     double targetPositionInFXUnits = UnitConversion.TargetPositionInMetersToFXUnits(targetPositionInMeters);
 
     LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
