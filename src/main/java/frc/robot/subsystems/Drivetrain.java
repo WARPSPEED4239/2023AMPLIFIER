@@ -107,7 +107,7 @@ public class Drivetrain extends SubsystemBase {
   }
   
   public void setPositionMeters(double targetPositionInMeters) {
-    double targetPositionInFXUnits = UnitConversion.convertTargetPositionInMetersToFXUnits(targetPositionInMeters);
+    double targetPositionInFXUnits = UnitConversion.TargetPositionInMetersToFXUnits(targetPositionInMeters);
 
     LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
     RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
@@ -116,8 +116,8 @@ public class Drivetrain extends SubsystemBase {
 
   public void setPositionFeet(double targetPositionInFeet) {
     double targetPositionInMeters = 0;
-    targetPositionInMeters = UnitConversion.convertFeetToMeters(targetPositionInMeters);
-    double targetPositionInFXUnits = UnitConversion.convertTargetPositionInMetersToFXUnits(targetPositionInMeters);
+    targetPositionInMeters = UnitConversion.FeetToMeters(targetPositionInMeters);
+    double targetPositionInFXUnits = UnitConversion.TargetPositionInMetersToFXUnits(targetPositionInMeters);
 
     LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
     RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
