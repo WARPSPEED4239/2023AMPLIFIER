@@ -11,10 +11,6 @@ public class UnitConversion {
 
     public static final int SRX_UNITS_PER_ROTATION = 4096;
 
-    public static double inchesToFeet(double inches) {
-        return inches / 12.0;
-    }
-
     public static double revolutionsPerMinuteToRadiansPerSecond(double rpm) {
         return rpm * 2.0 * Math.PI / 60;
     }
