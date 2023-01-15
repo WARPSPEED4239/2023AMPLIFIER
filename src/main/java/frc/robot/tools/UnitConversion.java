@@ -19,55 +19,55 @@ public class UnitConversion {
 
     public static final int SRX_UNITS_PER_ROTATION = 4096;
 
-    public static double convertMetersToFeet(double meters) {
+    public static double MetersToFeet(double meters) {
         return meters * FEET_PER_METER;
     }
 
-    public static double convertFeetToMeters(double feet) {
+    public static double FeetToMeters(double feet) {
         return feet * METERS_PER_FEET;
     }
 
-    public static double convertInchesToFeet(double inches) {
+    public static double InchesToFeet(double inches) {
         return inches * INCHES_PER_FEET;
     }
 
-    public static double convertPoundsToKilograms(double pounds) {
+    public static double PoundsToKilograms(double pounds) {
         return pounds * KILOGRAMS_PER_POUND;
     }
 
-    public static double convertKilogramsToPounds(double kilograms) {
+    public static double KilogramsToPounds(double kilograms) {
         return kilograms * POUNDS_PER_KILOGRAM;
     }
 
-    public static double convertRevolutionsPerMinuteToRadiansPerSecond(double rpm) {
+    public static double RevolutionsPerMinuteToRadiansPerSecond(double rpm) {
         return rpm * 2.0 * PI / 60;
     }
 
-    public static double convertSRXUnitsToRotations(double units) {
+    public static double SRXUnitsToRotations(double units) {
         return units / SRX_UNITS_PER_ROTATION;
     }
 
-    public static double convertRotationsToSRXUnits(double rotations) {
+    public static double RotationsToSRXUnits(double rotations) {
         return rotations * SRX_UNITS_PER_ROTATION;
     }
 
-    public static double convertRotationsToInches(double rotations, double pulleyDiameter) {
+    public static double RotationsToInches(double rotations, double pulleyDiameter) {
         return rotations * Math.PI * pulleyDiameter;
     }
 
-    public static double convertPositionInInchesToRotations(double positionInInches, double pulleyDiameter) {
+    public static double PositionInInchesToRotations(double positionInInches, double pulleyDiameter) {
         return positionInInches / (pulleyDiameter * Math.PI);
     }
 
-    public static double convertSRXUnitsToDegrees(double units) {
+    public static double SRXUnitsToDegrees(double units) {
         return (units / SRX_UNITS_PER_ROTATION) * 360;
     }
 
-    public static double convertPositionInDegreesToSRXUnits(double positionInDegrees) {
+    public static double PositionInDegreesToSRXUnits(double positionInDegrees) {
         return (positionInDegrees / 360) * SRX_UNITS_PER_ROTATION;
     }
 
-    public static double convertTargetPositionInMetersToFXUnits(double targetPositionInMeters) {
+    public static double TargetPositionInMetersToFXUnits(double targetPositionInMeters) {
         return (Math.PI * WHEEL_DIAMETER_METERS) / (GEARBOX_RATIO * targetPositionInMeters);
     }
 }
