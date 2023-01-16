@@ -30,7 +30,7 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
   private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
   
-  private final DifferentialDrive DriveTrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
+  private final DifferentialDrive Drivetrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   private final PigeonIMU IMU = new PigeonIMU(Constants.PIGEON_IMU);
 
   public Drivetrain() {
@@ -41,7 +41,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {}
 
   public void DrivetrainArcadeDrive(double move, double rotate) {
-    DriveTrain.arcadeDrive(move, rotate);
+    Drivetrain.arcadeDrive(move, rotate);
   }
 
   public void resetEncoders() {
