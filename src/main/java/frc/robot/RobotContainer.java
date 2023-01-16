@@ -11,11 +11,11 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
 
   private final XboxController mController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-  private final Drivetrain mDriveTrain = new Drivetrain();
+  private final Drivetrain mDrivetrain = new Drivetrain();
   private final Joystick mJoystick = new Joystick(Constants.JOYSTICK_PORT);
 
   public RobotContainer() {
-    mDriveTrain.setDefaultCommand(new DrivetrainArcadeDrive(mDriveTrain, mController));
+    mDriveTrain.setDefaultCommand(new DrivetrainArcadeDrive(mDrivetrain, mController));
 
     configureBindings();
   }
