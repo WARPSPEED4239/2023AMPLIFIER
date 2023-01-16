@@ -1,11 +1,7 @@
 # TO DO
 
-> fix capitalization error where 'Drivetrain' is 'DriveTrain'
+> research on gyros and how to use them to drive straight(sam)
 
-> research on gyros and how to use them to drive straight
+> code compressor(vince)
 
-> code compressor
-
-> code drivetrain shifters
-
-> switch to using 'Trigger' class instead of 'JoystickButton'
+> switch to using 'Trigger' class instead of 'JoystickButton'(miguel)
