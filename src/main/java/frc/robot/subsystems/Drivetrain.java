@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
+import edu.wpi.first.math.util.Units;
 
 public class Drivetrain extends SubsystemBase {
   private final int TIMEOUT_MS = 30; 
@@ -23,15 +24,48 @@ public class Drivetrain extends SubsystemBase {
   private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_ONE);
   private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_TWO);
   private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_THREE);
+
   //Right Leader
   private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_ONE);
   private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
   private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
   
-  private final DifferentialDrive DriveTrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
+  private final DifferentialDrive Drivetrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   private final PigeonIMU IMU = new PigeonIMU(Constants.PIGEON_IMU);
 
   public Drivetrain() {
+    configureSettings();
+  }
+
+  @Override
+  public void periodic() {}
+
+  public void DrivetrainArcadeDrive(double move, double rotate) {
+    Drivetrain.arcadeDrive(move, rotate);
+  }
+
+  public void resetEncoders() {
+    LeftMotorOne.setSelectedSensorPosition(0);
+    RightMotorOne.setSelectedSensorPosition(0);
+  }
+  
+  public void setPositionMeters(double targetPositionInMeters) {
+    double targetPositionInFXUnits = UnitConversion.targetPositionInMetersToFXUnits(targetPositionInMeters);
+
+    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+  }
+
+  public void setPositionFeet(double targetPositionInFeet) {
+    double targetPositionInMeters = 0;
+    targetPositionInMeters = Units.feetToMeters(targetPositionInFeet);
+    double targetPositionInFXUnits = UnitConversion.targetPositionInMetersToFXUnits(targetPositionInMeters);
+
+    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+  }
+
+  private void configureSettings() {
     LeftMotorOne.configFactoryDefault();
     LeftMotorTwo.configFactoryDefault();
     LeftMotorThree.configFactoryDefault();
@@ -91,37 +125,5 @@ public class Drivetrain extends SubsystemBase {
     IMU.setYaw(0.0);
     LeftMotorOne.setSelectedSensorPosition(0);
     RightMotorOne.setSelectedSensorPosition(0);
-
-  }
-
-  @Override
-  public void periodic() {}
-
-  public void DrivetrainArcadeDrive(double move, double rotate) {
-    DriveTrain.arcadeDrive(move, rotate);
-  }
-
-  public void resetEncoders() {
-    LeftMotorOne.setSelectedSensorPosition(0);
-    RightMotorOne.setSelectedSensorPosition(0);
-  }
-  
-  public void setPositionMeters(double targetPositionInMeters) {
-    double targetPositionInFXUnits = UnitConversion.TargetPositionInMetersToFXUnits(targetPositionInMeters);
-
-    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-
-  }
-
-  public void setPositionFeet(double targetPositionInFeet) {
-    double targetPositionInMeters = 0;
-    targetPositionInMeters = UnitConversion.FeetToMeters(targetPositionInMeters);
-    double targetPositionInFXUnits = UnitConversion.TargetPositionInMetersToFXUnits(targetPositionInMeters);
-
-    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-
   }
 }
-
