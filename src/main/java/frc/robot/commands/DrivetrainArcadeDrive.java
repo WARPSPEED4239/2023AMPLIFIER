@@ -2,7 +2,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.tools.RobotMath;
 
 public class DrivetrainArcadeDrive extends CommandBase {
   
@@ -21,7 +23,8 @@ public class DrivetrainArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     double move = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
-    double rotate = (.533333 * Math.pow(mController.getLeftX(), 3) + .466666 * mController.getLeftX());
+    double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
+      Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, mController.getLeftX());
 
     mDrivetrain.DrivetrainArcadeDrive(move, rotate);
   }
