@@ -1,4 +1,4 @@
-package main.java.frc.robot.tools;
+package frc.robot.tools;
 
 public class RobotMath {
 

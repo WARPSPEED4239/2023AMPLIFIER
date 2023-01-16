@@ -5,13 +5,16 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DrivetrainArcadeDrive;
+import frc.robot.commands.DrivetrainShifterSetState;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DrivetrainShifter;
 
 public class RobotContainer {
 
   private final XboxController mController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Joystick mJoystick = new Joystick(Constants.JOYSTICK_PORT);
+  private final DrivetrainShifter mDrivetrainShifter = new DrivetrainShifter();
 
   public RobotContainer() {
     mDrivetrain.setDefaultCommand(new DrivetrainArcadeDrive(mDrivetrain, mController));
@@ -48,6 +51,10 @@ public class RobotContainer {
 		jButton9 = new JoystickButton(mJoystick, 9);
 		jButton10 = new JoystickButton(mJoystick, 10);
 		jButton11 = new JoystickButton(mJoystick, 11);
+
+		xButtonA.whenPressed(new DrivetrainShifterSetState(mDrivetrainShifter, false));
+		xButtonB.whenPressed(new DrivetrainShifterSetState(mDrivetrainShifter, true));
+
   }
 
   public Command getAutonomousCommand() {
