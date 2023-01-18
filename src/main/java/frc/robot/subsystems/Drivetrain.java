@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -44,6 +46,17 @@ public class Drivetrain extends SubsystemBase {
     Drivetrain.arcadeDrive(move, rotate);
   }
 
+  public void DriveStraightWithGyro(double speed, double startingYaw) {
+    double yaw = IMU.getYaw();
+    double rotate = 0.0;
+    if(yaw < startingYaw) {
+      rotate = 0.1889;
+    } else if(yaw > startingYaw) {
+      rotate = -0.1889;
+    }
+    Drivetrain.arcadeDrive(speed, rotate);
+  }
+
   public void resetEncoders() {
     LeftMotorOne.setSelectedSensorPosition(0);
     RightMotorOne.setSelectedSensorPosition(0);
@@ -63,6 +76,22 @@ public class Drivetrain extends SubsystemBase {
 
     LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
     RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+  }
+
+  public double getPitch() {
+    return IMU.getPitch();
+  }
+
+  public double getYaw() {
+    return IMU.getYaw();
+  }
+
+  public double getRoll() {
+    return IMU.getRoll();
+  }
+
+  public void calibratePigeon() { 
+    IMU.enterCalibrationMode(CalibrationMode.BootTareGyroAccel);
   }
 
   private void configureSettings() {
