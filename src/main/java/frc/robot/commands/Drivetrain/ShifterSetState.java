@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainShifter;
 
-public class DrivetrainShifterSetState extends CommandBase {
+public class ShifterSetState extends CommandBase {
   
   private final DrivetrainShifter mShifter;
   private final boolean mPistonState;
 
-  public DrivetrainShifterSetState(DrivetrainShifter shifter, boolean pistonState) {
+  public ShifterSetState(DrivetrainShifter shifter, boolean pistonState) {
     mShifter = shifter;
     mPistonState = pistonState;
     addRequirements(mShifter);

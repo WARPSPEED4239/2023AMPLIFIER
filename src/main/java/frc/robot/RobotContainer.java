@@ -3,9 +3,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.commands.DrivetrainArcadeDrive;
-import frc.robot.commands.DrivetrainDriveStraightWithAuto;
-import frc.robot.commands.DrivetrainShifterSetState;
+import frc.robot.commands.Drivetrain.ArcadeDrive;
+import frc.robot.commands.Drivetrain.StraightWithGyro;
+import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.DrivetrainShifter;
 import frc.robot.subsystems.DrivetrainShifter;
@@ -18,14 +18,14 @@ public class RobotContainer {
   private final DrivetrainShifter mDrivetrainShifter = new DrivetrainShifter();
 
   public RobotContainer() {
-    mDrivetrain.setDefaultCommand(new DrivetrainArcadeDrive(mDrivetrain, mController));
+    mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
 
     configureBindings();
   }
 
   private void configureBindings() {
-	  mController.a().onTrue(new DrivetrainShifterSetState(mDrivetrainShifter, false));
-	  mController.b().onTrue(new DrivetrainShifterSetState(mDrivetrainShifter, true));
+	  mController.a().onTrue(new ShifterSetState(mDrivetrainShifter, false));
+	  mController.b().onTrue(new ShifterSetState(mDrivetrainShifter, true));
   }
 
   public Command getAutonomousCommand() {
