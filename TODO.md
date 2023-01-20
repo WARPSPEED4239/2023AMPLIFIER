@@ -17,8 +17,8 @@ Then, Pre-code the Intake and Arm subsystems and Commands. (If you finish this o
 
 > Option 2. Keep working on Auto Balance for autonomous.
 
-> Option 3. (only do this option if you are done with Option 1 and are
-really, really stuck on Option 2)
+> Option 3. (only do this option if you are
+really, really stuck)
 Do a little bit of code academy or if you want you can work
 on your own coding project that you are interested in making.
 If you choose to do a coding project here is some places for inspiration.
