@@ -29,7 +29,7 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mDrivetrainShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mDrivetrainShifter, true));
 
-    mController.y().whileTrue(new AutoBalance(mDrivetrain));
+    mController.y().onTrue(new AutoBalance(mDrivetrain));
   }
 
   public Command getAutonomousCommand() {

@@ -1,5 +1,6 @@
 package frc.robot.commands.Drivetrain;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -26,6 +27,10 @@ public class StraightWithGyro extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putNumber("PITCH", mDrivetrain.getPitch());
+    SmartDashboard.putNumber("ROLL", mDrivetrain.getRoll());
+    SmartDashboard.putNumber("YAW", mDrivetrain.getYaw());
+
     double triggers = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
     double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
     Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());

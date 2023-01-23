@@ -2,14 +2,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.subsystems.Drivetrain;
 
 public class AutoBalance extends CommandBase {
 
   private final Drivetrain mDrivetrain;
   double pitch = 0.0;
-  boolean ascent = true;
   double StartYaw = 0.0;
   int Direction = 1;
 
@@ -27,27 +25,16 @@ public class AutoBalance extends CommandBase {
   
   @Override
   public void execute() {
-    pitch = mDrivetrain.getRoll();
+  pitch = mDrivetrain.getRoll();
 
-    if (ascent) {
-      if (pitch < -7) {
-        mDrivetrain.DriveStraightWithGyro(0.5 * Direction, StartYaw);
-        Direction = Direction * -1;
-      } else {
-        ascent = false;
-      }
+  if (pitch < -2) {
+    mDrivetrain.DriveStraightWithGyro(-Math.PI * 0.1, StartYaw);
+  } else if (pitch > 2) {
+    mDrivetrain.DriveStraightWithGyro(Math.PI * 0.1, StartYaw);
+  } else if(pitch < -2 && pitch > 2){
+    mDrivetrain.stopDrivetrainMotors();
+  }
 
-    } else {
-      if (pitch < -3) {
-        mDrivetrain.DriveStraightWithGyro(.25 * Direction, StartYaw);
-      } else if (pitch < -4) {
-        Direction = Direction * -1;
-        ascent = true;
-      } else if (pitch > -3) {
-        
-      }
-
-    }
   }
 
 

@@ -52,13 +52,6 @@ public class Drivetrain extends SubsystemBase {
     Drivetrain.arcadeDrive(move, rotate);
   }
 
-  public void StartDriveStraightWithGyro() {
-    isDriveStraightWithGyroRunning = true;
-  }
-
-  public void StopDriveStraightWithGyro() {
-    isDriveStraightWithGyroRunning = false;
-  }
 
   public void DriveStraightWithGyro(double speed, double startingYaw) {
     double yaw = IMU.getYaw();
@@ -69,6 +62,11 @@ public class Drivetrain extends SubsystemBase {
       rotate = -0.1889;
     }
     Drivetrain.arcadeDrive(speed, rotate);
+  }
+
+  public void stopDrivetrainMotors() {
+    RightMotorOne.stopMotor();
+    LeftMotorOne.stopMotor();
   }
 
   public void resetEncoders() {
