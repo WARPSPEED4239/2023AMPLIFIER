@@ -31,11 +31,9 @@ public class StraightWithGyro extends CommandBase {
     SmartDashboard.putNumber("ROLL", mDrivetrain.getRoll());
     SmartDashboard.putNumber("YAW", mDrivetrain.getYaw());
 
-    SmartDashboard.putNumber("Cubic", RobotMath.solveCubicEquationForY(0.00017, 0.0, 0.0, 0.0, mDrivetrain.getRoll()));
-
     double triggers = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
     double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
-    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());
+    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getRightX());
 
     if (mController.getRightX() > -0.1 && mController.getRightX() < 0.1) {
 
