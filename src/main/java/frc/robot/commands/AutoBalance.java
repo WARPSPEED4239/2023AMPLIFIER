@@ -27,15 +27,19 @@ public class AutoBalance extends CommandBase {
   public void execute() {
   pitch = mDrivetrain.getRoll();
 
-  if (pitch < -2) {
-    mDrivetrain.DriveStraightWithGyro(-Math.PI * 0.1, StartYaw);
-  } else if (pitch > 2) {
-    mDrivetrain.DriveStraightWithGyro(Math.PI * 0.1, StartYaw);
-  } else if(pitch < -2 && pitch > 2){
-    mDrivetrain.stopDrivetrainMotors();
+
+  if (pitch > -7) {
+    mDrivetrain.DriveStraightWithGyro(0.38, StartYaw);
+  } 
+    if (pitch < -3.1) {
+      mDrivetrain.DriveStraightWithGyro(-Math.PI * 0.102, StartYaw);
+    } else if (pitch > 3.1) {
+      mDrivetrain.DriveStraightWithGyro(Math.PI * 0.102, StartYaw);
+    } else if(pitch > -3.1 && pitch < 3.1){
+      mDrivetrain.stopDrivetrainMotors();
+    }
   }
 
-  }
 
 
   @Override
