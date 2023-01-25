@@ -32,7 +32,7 @@ public class ArcadeDrive extends CommandBase {
 
     double move = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
     double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
-    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getRightX());
+    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());
 
     mDrivetrain.DrivetrainArcadeDrive(move, rotate);
 

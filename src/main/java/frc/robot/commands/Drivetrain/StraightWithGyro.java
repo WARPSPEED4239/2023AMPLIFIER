@@ -33,9 +33,9 @@ public class StraightWithGyro extends CommandBase {
 
     double triggers = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
     double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
-    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getRightX());
+    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());
 
-    if (mController.getRightX() > -0.1 && mController.getRightX() < 0.1) {
+    if (mController.getLeftX() > -0.1 && mController.getLeftX() < 0.1) {
 
       if (triggers == 0.0) {
         triggerReset = true;

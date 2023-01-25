@@ -14,18 +14,17 @@ public class AutoBalance extends CommandBase {
   double speed = 0.0;
   double startingYaw = 0.0;
   boolean ascend = true;
-  boolean activatedVinceBalanceTestMode = false;
 
   public AutoBalance(Drivetrain drivetrain, DrivetrainShifter shifter) {
     mDrivetrain = drivetrain;
     mDrivetrainShifter = shifter;
-
     addRequirements(mDrivetrain, mDrivetrainShifter);
   }
 
   @Override
   public void initialize() {
     startingYaw = mDrivetrain.getYaw();
+    mDrivetrainShifter.setPistonState(true);
   }
 
   
@@ -35,25 +34,20 @@ public class AutoBalance extends CommandBase {
 
     if (ascend) {
       if (pitch > -12 && pitch < 12) {
-        mDrivetrain.DriveStraightWithGyro(1, startingYaw);
+        mDrivetrain.DriveStraightWithGyro(1.0, startingYaw);
       } else {
         ascend = false;
       }
 
     } else {
-      if (pitch > 0.0 && activatedVinceBalanceTestMode == false) {
+      if (pitch > 0.0) {
         speed = 0.00269 * Math.pow(pitch, 2);
-      } else if (pitch < 0.0 && activatedVinceBalanceTestMode == false) {
-        speed = -0.00269 * Math.pow(pitch, 2);
-      } else if (pitch > 0.0) {
-        speed = Math.pow((0.0111 * pitch), 0.5);
       } else if (pitch < 0.0) {
-        speed = -Math.pow((0.0111 * Math.abs(pitch)), 0.5);
+        speed = -0.00269 * Math.pow(pitch, 2);
       }
 
       if(pitch > -3.1 && pitch < 3.1) {
         mDrivetrain.stopDrivetrainMotors();
-        activatedVinceBalanceTestMode = true;
       } else {
         mDrivetrain.DriveStraightWithGyro(speed, startingYaw);
       }
