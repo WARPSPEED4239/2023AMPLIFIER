@@ -25,8 +25,8 @@ public final class Constants {
         GEARBOX_RATIO = 7.08,
         WHEEL_DIAMETER_INCHES = 6.0,
 
-        CONTROLLER_CUBIC_EQUATION_A = 8.0 / 15.0,
-        CONTROLLER_CUBIC_EQUATION_B = 0.0,
-        CONTROLLER_CUBIC_EQUATION_C = 7.0 / 15.0,
-        CONTROLLER_CUBIC_EQUATION_CONSTANT = 0.0;
+        CUBIC_A = 8.0 / 15.0,
+        CUBIC_B = 0.0,
+        CUBIC_C = 7.0 / 15.0,
+        CUBIC_CONSTANT = 0.0;
 }

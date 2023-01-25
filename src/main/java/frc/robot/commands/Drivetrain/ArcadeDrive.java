@@ -1,11 +1,12 @@
 package frc.robot.commands.Drivetrain;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Pigeon;
 import frc.robot.tools.RobotMath;
+import frc.robot.tools.XboxControllerTools;
 
 public class ArcadeDrive extends CommandBase {
   
@@ -19,23 +20,16 @@ public class ArcadeDrive extends CommandBase {
   }
 
   @Override
-  public void initialize() {
-    mDrivetrain.calibratePigeon();
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
-    
-    SmartDashboard.putNumber("PITCH", mDrivetrain.getPitch());
-    SmartDashboard.putNumber("ROLL", mDrivetrain.getRoll());
-    SmartDashboard.putNumber("YAW", mDrivetrain.getYaw());
+    Pigeon.outputGyroSensorsToDashboard();
 
-    double move = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
-    double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
-    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());
+    double triggersAxis = XboxControllerTools.triggersAxis();
+    double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
 
-    mDrivetrain.DrivetrainArcadeDrive(move, rotate);
-
+    mDrivetrain.arcadeDrive(triggersAxis, rotation);
   }
 
   @Override

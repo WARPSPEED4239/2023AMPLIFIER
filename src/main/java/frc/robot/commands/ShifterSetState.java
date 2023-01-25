@@ -16,7 +16,7 @@ public class ShifterSetState extends CommandBase {
 
   @Override
   public void initialize() {
-    mDrivetrainShifter.setPistonState(mPistonState);
+    mDrivetrainShifter.setShifterState(mPistonState);
   }
 
   @Override

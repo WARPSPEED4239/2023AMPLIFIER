@@ -5,35 +5,37 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
-import edu.wpi.first.math.util.Units;
 
 public class Drivetrain extends SubsystemBase {
-  private final int TIMEOUT_MS = 30; 
-  private final double kP = 0.05; // 0.464;//0.297;
-  private final double kI = 0.0;
-  private final double kD = 0.0;
-  private final double kF = 0.0;
-  // private final double driveMetersPerTick = (Math.PI * WHEEL_DIAMETER_METERS) / (Constants.COUNTS_PER_REVOLUTION_ENCODER * GEARBOX_RATIO);
   
-  //Left Leader
+  // Motors #1 are Leaders
   private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_ONE);
   private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_TWO);
   private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_THREE);
-
-  //Right Leader
+  
   private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_ONE);
   private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
   private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
   
-  private final DifferentialDrive Drivetrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
-  private final PigeonIMU IMU = new PigeonIMU(Constants.PIGEON_IMU);
+  private final DifferentialDrive DifferentialDrive = new DifferentialDrive(LeftMotorOne, RightMotorOne);
+  
+  private final DoubleSolenoid Shifter = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.SHIFTER_SOLENOID_FORWARD_PORT, Constants.SHIFTER_SOLENOID_REVERSE_PORT);
+  
+  // private final double driveMetersPerTick = (Math.PI * WHEEL_DIAMETER_METERS) / (Constants.COUNTS_PER_REVOLUTION_ENCODER * GEARBOX_RATIO);
+  private final int TIMEOUT_MS = 30; 
+
+  // 0.464; 0.297;
+  private final double kP = 0.05;
+  private final double kI = 0.0;
+  private final double kD = 0.0;
+  private final double kF = 0.0;
 
   public Drivetrain() {
     configureSettings();
@@ -42,25 +44,26 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public void DrivetrainArcadeDrive(double move, double rotate) {
-    Drivetrain.arcadeDrive(move, rotate);
+  public void arcadeDrive(double move, double rotation) {
+    DifferentialDrive.arcadeDrive(move, rotation);
   }
 
-
-  public void DriveStraightWithGyro(double speed, double startingYaw) {
-    double yaw = IMU.getYaw();
-    double rotate = 0.0;
-    if(yaw < startingYaw) {
-      rotate = 0.1889;
-    } else if(yaw > startingYaw) {
-      rotate = -0.1889;
+  public void moveStraightUsingGyro(double speed, double startingYaw) {
+    double currentYaw = Pigeon.getYaw();
+    double rotation = 0.0;
+    if(currentYaw < startingYaw) {
+      rotation = 0.1889;
+    } else if(currentYaw > startingYaw) {
+      rotation = -0.1889;
     }
-    Drivetrain.arcadeDrive(speed, rotate);
+    DifferentialDrive.arcadeDrive(speed, rotation);
   }
-
-  public void stopDrivetrainMotors() {
-    RightMotorOne.stopMotor();
-    LeftMotorOne.stopMotor();
+  
+  public void moveDistance(double distanceInMeters) {
+    double distanceInFXUnits = UnitConversion.targetPositionInMetersToFXUnits(distanceInMeters);
+    
+    LeftMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
+    RightMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
   }
 
   public void resetEncoders() {
@@ -68,38 +71,19 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.setSelectedSensorPosition(0);
   }
   
-  public void setPositionMeters(double targetPositionInMeters) {
-    double targetPositionInFXUnits = UnitConversion.targetPositionInMetersToFXUnits(targetPositionInMeters);
-
-    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+  public void stopAllMotors() {
+    RightMotorOne.stopMotor();
+    LeftMotorOne.stopMotor();
   }
 
-  public void setPositionFeet(double targetPositionInFeet) {
-    double targetPositionInMeters = 0;
-    targetPositionInMeters = Units.feetToMeters(targetPositionInFeet);
-    double targetPositionInFXUnits = UnitConversion.targetPositionInMetersToFXUnits(targetPositionInMeters);
-
-    LeftMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
-    RightMotorOne.set(ControlMode.MotionMagic, targetPositionInFXUnits);
+  public void setShifterState(boolean pistonState) {
+    if (pistonState) {
+      Shifter.set(Value.kReverse);
+    } else {
+      Shifter.set(Value.kForward);
+    }
   }
-
-  public double getPitch() {
-    return IMU.getPitch();
-  }
-
-  public double getYaw() {
-    return IMU.getYaw();
-  }
-
-  public double getRoll() {
-    return IMU.getRoll();
-  }
-
-  public void calibratePigeon() { 
-    IMU.enterCalibrationMode(CalibrationMode.BootTareGyroAccel);
-  }
-
+  
   private void configureSettings() {
     LeftMotorOne.configFactoryDefault();
     LeftMotorTwo.configFactoryDefault();
@@ -107,12 +91,12 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.configFactoryDefault();
     RightMotorTwo.configFactoryDefault();
     RightMotorThree.configFactoryDefault();
-
+    
     LeftMotorTwo.follow(LeftMotorOne);
     LeftMotorThree.follow(LeftMotorOne);
     RightMotorTwo.follow(RightMotorOne);
     RightMotorThree.follow(RightMotorOne);
-
+    
     LeftMotorOne.setInverted(true);
     LeftMotorTwo.setInverted(InvertType.FollowMaster);
     LeftMotorThree.setInverted(InvertType.FollowMaster);
@@ -157,7 +141,7 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.config_IntegralZone(0, 0, TIMEOUT_MS);
     RightMotorOne.selectProfileSlot(0, 0);
 
-    IMU.setYaw(0.0);
+    Pigeon.setYaw(0.0);
     LeftMotorOne.setSelectedSensorPosition(0);
     RightMotorOne.setSelectedSensorPosition(0);
   }

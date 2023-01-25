@@ -4,6 +4,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Pigeon;
 
 public class AutoBalance extends CommandBase {
 
@@ -22,21 +23,15 @@ public class AutoBalance extends CommandBase {
 
   @Override
   public void initialize() {
-    startingYaw = mDrivetrain.getYaw();
+    startingYaw = Pigeon.getYaw();
   }
 
-  
   @Override
   public void execute() {
-    pitch = mDrivetrain.getRoll();
+    pitch = Pigeon.getRoll();
 
     if (ascend) {
-      if (pitch > -12 && pitch < 12) {
-        mDrivetrain.DriveStraightWithGyro(1, startingYaw);
-      } else {
-        ascend = false;
-      }
-
+      ascend(pitch, startingYaw);
     } else {
       if (pitch > 0.0 && activatedVinceBalanceTestMode == false) {
         speed = 0.00269 * Math.pow(pitch, 2);
@@ -49,13 +44,21 @@ public class AutoBalance extends CommandBase {
       }
 
       if(pitch > -3.1 && pitch < 3.1) {
-        mDrivetrain.stopDrivetrainMotors();
+        mDrivetrain.stopAllMotors();
         activatedVinceBalanceTestMode = true;
       } else {
-        mDrivetrain.DriveStraightWithGyro(speed, startingYaw);
+        mDrivetrain.moveStraightUsingGyro(speed, startingYaw);
       }
 
       SmartDashboard.putNumber("Auto Balance Speed", speed);
+    }
+  }
+
+  public void ascend (double pitch, double startingYaw) {
+    if (pitch > -12 && pitch < 12) {
+      mDrivetrain.moveStraightUsingGyro(1, startingYaw);
+    } else {
+      ascend = false;
     }
   }
 
