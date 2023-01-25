@@ -4,23 +4,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.DrivetrainShifter;
 
 public class AutoBalance extends CommandBase {
 
   private final Drivetrain mDrivetrain;
-  private final DrivetrainShifter mDrivetrainShifter;
   double pitch = 0.0;
   double speed = 0.0;
   double startingYaw = 0.0;
   boolean ascend = true;
   boolean activatedVinceBalanceTestMode = false;
 
-  public AutoBalance(Drivetrain drivetrain, DrivetrainShifter shifter) {
+  public AutoBalance(Drivetrain drivetrain) {
     mDrivetrain = drivetrain;
-    mDrivetrainShifter = shifter;
 
-    addRequirements(mDrivetrain, mDrivetrainShifter);
+    addRequirements(mDrivetrain);
   }
 
   @Override

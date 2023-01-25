@@ -35,18 +35,12 @@ public class Drivetrain extends SubsystemBase {
   private final DifferentialDrive Drivetrain = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   private final PigeonIMU IMU = new PigeonIMU(Constants.PIGEON_IMU);
 
-  private boolean isDriveStraightWithGyroRunning = false;
-
   public Drivetrain() {
     configureSettings();
   }
 
   @Override
-  public void periodic() {
-    if(isDriveStraightWithGyroRunning) {
-      
-    }
-  }
+  public void periodic() {}
 
   public void DrivetrainArcadeDrive(double move, double rotate) {
     Drivetrain.arcadeDrive(move, rotate);
