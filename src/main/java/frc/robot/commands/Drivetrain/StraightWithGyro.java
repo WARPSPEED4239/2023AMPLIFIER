@@ -33,7 +33,7 @@ public class StraightWithGyro extends CommandBase {
     double triggersAxis = XboxControllerTools.triggersAxis();
     double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
 
-    if (mController.getLeftX() > -0.1 && mController.getLeftX() < 0.1) {
+    if (XboxControllerTools.isInDeadzone(mController.getLeftX(), 0.1)) {
 
       if (triggersAxis == 0.0) {
         triggerReset = true;
