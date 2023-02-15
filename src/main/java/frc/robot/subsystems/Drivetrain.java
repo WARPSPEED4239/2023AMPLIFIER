@@ -26,8 +26,6 @@ public class Drivetrain extends SubsystemBase {
   
   private final DifferentialDrive DifferentialDrive = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   
-  private final DoubleSolenoid Shifter = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.SHIFTER_SOLENOID_FORWARD_PORT, Constants.SHIFTER_SOLENOID_REVERSE_PORT);
-  
   // private final double driveMetersPerTick = (Math.PI * WHEEL_DIAMETER_METERS) / (Constants.COUNTS_PER_REVOLUTION_ENCODER * GEARBOX_RATIO);
   private final int TIMEOUT_MS = 30; 
 
@@ -66,6 +64,43 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
   }
 
+  public void moveUntilAngled(double speed, double currentAngle, double targetAngle) {
+    double startingYaw = Pigeon.getYaw();
+
+    if(targetAngle > 0.0) {
+      while(currentAngle < targetAngle) {
+        moveStraightUsingGyro(speed, startingYaw);
+      }//front
+    } else if(targetAngle < 0.0) {
+      while(currentAngle > targetAngle) {
+        moveStraightUsingGyro(speed, startingYaw);
+      }
+    } else {
+      while(currentAngle < targetAngle) {
+        moveStraightUsingGyro(speed, startingYaw);
+      }
+    }
+  }
+
+  // fix this
+  public void moveUntilAngledUp(double speed, double targetAngle) {
+    double startingYaw = Pigeon.getYaw();
+
+    while(Pigeon.getRoll() < targetAngle) {
+      moveStraightUsingGyro(speed, startingYaw);
+      System.out.println("0.0");
+    }
+  }
+
+  public void moveUntilAngledDown(double speed, double targetAngle) {
+    double startingYaw = Pigeon.getYaw();
+    
+    while(Pigeon.getRoll() > targetAngle) {
+      moveStraightUsingGyro(speed, startingYaw);
+      System.out.println("1.0");
+    }
+  }
+
   public void resetEncoders() {
     LeftMotorOne.setSelectedSensorPosition(0);
     RightMotorOne.setSelectedSensorPosition(0);
@@ -74,14 +109,6 @@ public class Drivetrain extends SubsystemBase {
   public void stopAllMotors() {
     RightMotorOne.stopMotor();
     LeftMotorOne.stopMotor();
-  }
-
-  public void setShifterState(boolean pistonState) {
-    if (pistonState) {
-      Shifter.set(Value.kReverse);
-    } else {
-      Shifter.set(Value.kForward);
-    }
   }
   
   private void configureSettings() {

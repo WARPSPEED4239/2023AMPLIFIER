@@ -26,8 +26,12 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     Pigeon.outputGyroSensorsToDashboard();
 
+    double rotation = 0.0;
     double triggersAxis = XboxControllerTools.triggersAxis();
-    double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
+    
+    if(XboxControllerTools.isInDeadzone(mController.getRightX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
+      rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getRightX());
+    }
 
     mDrivetrain.arcadeDrive(triggersAxis, rotation);
   }

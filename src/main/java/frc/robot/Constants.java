@@ -9,14 +9,22 @@ public final class Constants {
         RIGHT_MOTOR_PORT_ONE = 4,
         RIGHT_MOTOR_PORT_TWO = 5,
         RIGHT_MOTOR_PORT_THREE = 6,
-
-        SHIFTER_SOLENOID_FORWARD_PORT = 0,
-        SHIFTER_SOLENOID_REVERSE_PORT = 1,
+        ARM_MOTOR_PORT = 7,
+        SLIDER_MOTOR_PORT = 2,
+        CLAW_MOTOR_RIGHT_PORT = 3,
+        CLAW_MOTOR_LEFT_PORT = 4,
+        SHIFTER_SOLENOID_FORWARD_PORT = 3,
+        SHIFTER_SOLENOID_REVERSE_PORT = 4,
+        CLAW_SOLENOID_FORWARD_PORT = 6,
+        CLAW_SOLENOID_REVERSE_PORT = 7,
+        HOOK_SOLENOID_FORWARD_PORT = 8,
+        HOOK_SOLENOID_REVERSE_PORT = 9,
+        ARM_LIMIT_SWITCH = 1,
 
         XBOX_CONTROLLER_PORT = 0,
         JOYSTICK_PORT = 1,
 
-        PIGEON_IMU = 0,
+        PIGEON_IMU = 9,
 
         SRX_UNITS_PER_ROTATION = 4096;
         
@@ -24,6 +32,8 @@ public final class Constants {
         RAMP_RATE = 0.3,
         GEARBOX_RATIO = 7.08,
         WHEEL_DIAMETER_INCHES = 6.0,
+
+        XBOX_CONTROLLER_DEADZONE = 0.1,
 
         CUBIC_A = 8.0 / 15.0,
         CUBIC_B = 0.0,

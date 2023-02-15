@@ -1,5 +1,6 @@
 package frc.robot.commands.Drivetrain;
 
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -12,8 +13,8 @@ public class StraightWithGyro extends CommandBase {
   
   private final Drivetrain mDrivetrain;
   private final CommandXboxController mController;
-  private double startingYaw = 0.0;
   private boolean triggerReset = false;
+  private double startingYaw = 0.0;
 
   public StraightWithGyro(Drivetrain drivetrain, CommandXboxController commandXboxController) {
     mDrivetrain = drivetrain;
@@ -33,25 +34,20 @@ public class StraightWithGyro extends CommandBase {
     double triggersAxis = XboxControllerTools.triggersAxis();
     double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
 
-    if (XboxControllerTools.isInDeadzone(mController.getLeftX(), 0.1)) {
-
-      if (triggersAxis == 0.0) {
+    if (XboxControllerTools.isInDeadzone(mController.getLeftX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
+      if (XboxControllerTools.triggersAxis() == 0.0) {
         triggerReset = true;
-      }
-  
-      if (triggersAxis != 0.0) {
+      } else {
         if (triggerReset) {
           triggerReset = false;
           startingYaw = Pigeon.getYaw();
         }
-
+  
         mDrivetrain.moveStraightUsingGyro(triggersAxis, startingYaw);
-      
       }
     } else {
-        mDrivetrain.moveStraightUsingGyro(triggersAxis, rotation);
+        mDrivetrain.arcadeDrive(triggersAxis, rotation);
     }
-    
   }
 
   @Override

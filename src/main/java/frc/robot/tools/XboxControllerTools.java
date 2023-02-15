@@ -11,4 +11,13 @@ public class XboxControllerTools {
         double triggersAxis = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
         return triggersAxis;
     }
+
+    public static boolean isInDeadzone(double axis, double deadzone) {
+        if (axis > -deadzone && axis < deadzone) {
+            return true;
+        }
+        return false;
+    }
+
+   
 }

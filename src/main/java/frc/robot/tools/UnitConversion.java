@@ -16,7 +16,7 @@ public class UnitConversion {
     public static double rotationsToSRXUnits(double rotations) {
         return rotations * Constants.SRX_UNITS_PER_ROTATION;
     }
-
+      
     public static double rotationsToInches(double rotations, double pulleyDiameter) {
         return rotations * Math.PI * pulleyDiameter;
     }

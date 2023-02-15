@@ -1,29 +1,31 @@
-package frc.robot.commands;
+package frc.robot.commands.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shifter;
 
 public class ShifterSetState extends CommandBase {
   
-  private final Drivetrain mDrivetrainShifter;
+  private final Shifter mShifter;
   private final boolean mPistonState;
 
-  public ShifterSetState(Drivetrain drivetrainShifter, boolean pistonState) {
-    mDrivetrainShifter = drivetrainShifter;
+  public ShifterSetState(Shifter shifter, boolean pistonState) {
+    mShifter = shifter;
     mPistonState = pistonState;
-    addRequirements(mDrivetrainShifter);
+    addRequirements(mShifter);
   }
 
   @Override
   public void initialize() {
-    mDrivetrainShifter.setShifterState(mPistonState);
+    mShifter.setShifterState(mPistonState);
   }
 
   @Override
   public void execute() {}
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("shifter done");
+  }
 
   @Override
   public boolean isFinished() {
