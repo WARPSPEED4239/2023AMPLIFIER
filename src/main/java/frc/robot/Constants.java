@@ -19,7 +19,8 @@ public final class Constants {
         CLAW_SOLENOID_REVERSE_PORT = 7,
         HOOK_SOLENOID_FORWARD_PORT = 8,
         HOOK_SOLENOID_REVERSE_PORT = 9,
-        ARM_LIMIT_SWITCH = 1,
+        SLIDER_LIMIT_OUT = 1,
+        SLIDER_LIMIT_IN = 2,
 
         SPROCKET_GEARBOX_RATIO = 30,
 
