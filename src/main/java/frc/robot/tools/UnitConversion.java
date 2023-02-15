@@ -21,6 +21,14 @@ public class UnitConversion {
         return rotations * Math.PI * pulleyDiameter;
     }
 
+    public static double inchesToNeoUnits(double inches) {
+        return inches / (Constants.SPROCKET_CIRCUM / (Constants.GEARBOX_RATIO * Constants.NEO_UNITS_PER_ROTATION));
+    }
+
+    public static double neoUnitsToInches(double NeoUnits) {
+        return NeoUnits * (Constants.SPROCKET_CIRCUM / (Constants.GEARBOX_RATIO * Constants.NEO_UNITS_PER_ROTATION));
+    }
+
     public static double positionInInchesToRotations(double positionInInches, double pulleyDiameter) {
         return positionInInches / (pulleyDiameter * Math.PI);
     }
