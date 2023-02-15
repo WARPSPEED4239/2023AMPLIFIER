@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.Arm.SliderSetPosition;
+import frc.robot.commands.Arm.SliderSetSpeed;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
@@ -42,18 +44,25 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
 
+    mController.x().onTrue(new SliderSetPosition(mArm, 39.5));
+    mController.y().onTrue(new SliderSetPosition(mArm, -39.5));
+
     mJoystick.button(3).onTrue(new ClawMotorsSetSpeed(mIntake, 0.15));
     mJoystick.button(4).onTrue(new ClawMotorsSetSpeed(mIntake, -0.15));
     mJoystick.button(5).onTrue(new ClawPistonSetState(mIntake, true));
     mJoystick.button(6).onTrue(new ClawPistonSetState(mIntake, false));
     mJoystick.trigger().whileTrue(new HookSetState(mIntake, true));
 
-    // mJoystick.povCenter().whileTrue(new SliderSetSpeed(mArm, 0.0));
-    // mJoystick.povUp().whileTrue(new SliderSetSpeed(mArm, 0.-65));
-    // mJoystick.povDown().whileTrue(new SliderSetSpeed(mArm, 0.65));
+    mJoystick.povCenter().whileTrue(new SliderSetSpeed(mArm, 0.0));
+    mJoystick.povUp().whileTrue(new SliderSetSpeed(mArm, 0.2));
+    mJoystick.povDown().whileTrue(new SliderSetSpeed(mArm, -0.2));
   }
 
   public Command getAutonomousCommand() {
    return null;
+  }
+
+  public Arm getArm() {
+    return mArm;
   }
 }
