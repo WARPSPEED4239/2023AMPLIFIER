@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -18,8 +19,19 @@ public class Intake extends SubsystemBase {
   private final DoubleSolenoid Hook = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.HOOK_SOLENOID_FORWARD_PORT, Constants.HOOK_SOLENOID_REVERSE_PORT);
 
   public Intake() {
+    neoLeft.restoreFactoryDefaults();
     neoLeft.setInverted(false);
+    neoLeft.setIdleMode(IdleMode.kBrake);
+    neoLeft.setSmartCurrentLimit(45);
+    neoLeft.setOpenLoopRampRate(0.05);
+    neoLeft.burnFlash();
+
+    neoRight.restoreFactoryDefaults();
     neoRight.setInverted(true);
+    neoRight.setIdleMode(IdleMode.kBrake);
+    neoRight.setSmartCurrentLimit(45);
+    neoRight.setOpenLoopRampRate(0.05);
+    neoRight.burnFlash();
   }
 
   @Override

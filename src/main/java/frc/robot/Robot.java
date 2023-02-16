@@ -22,7 +22,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("SliderMotorEncoder", mArm.getSliderMotorEncoderPosition());
+    SmartDashboard.putNumber("SLIDER MOTOR ENCODER", mArm.getSliderPositionInches());
+    SmartDashboard.putBoolean("Slider Limit In", mArm.getLimitIn());
+    SmartDashboard.putBoolean("Slider Limit Out", mArm.getLimitOut());
 
     if(mArm.getLimitIn()) {
       mArm.setSliderEncoderPosition(0.0);

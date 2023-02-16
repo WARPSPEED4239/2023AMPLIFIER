@@ -3,15 +3,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.SliderSetPosition;
 import frc.robot.tools.UnitConversion;
 
 public class Arm extends SubsystemBase {
@@ -46,12 +45,12 @@ public class Arm extends SubsystemBase {
     SliderMotor.restoreFactoryDefaults();
     SliderMotor.setInverted(true);
     SliderMotor.setIdleMode(IdleMode.kBrake);
-    SliderMotor.setSmartCurrentLimit(40);
+    SliderMotor.setSmartCurrentLimit(45);
     SliderMotor.setOpenLoopRampRate(0.05);
     SliderMotor.burnFlash();
 
     SparkMaxPIDController sliderPID = SliderMotor.getPIDController();
-
+    sliderPID.setFeedbackDevice(SliderMotor.getEncoder());
     sliderPID.setP(0.0);
     sliderPID.setI(0.0);
     sliderPID.setD(0.0);
