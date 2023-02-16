@@ -13,11 +13,12 @@ import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.commands.Intake.ClawMotorsSetSpeed;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Intake.HookSetState;
-import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shifter;
+import frc.robot.subsystems.Slider;
 public class RobotContainer {
 
   private final CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER_PORT);
@@ -27,7 +28,8 @@ public class RobotContainer {
   private SendableChooser<TargetTask> targetChooser = new SendableChooser<>();
   private final Limelight mLimelight = new Limelight();
   private final Intake mIntake = new Intake();
-  private final Arm mArm = new Arm();
+  private final Lift mLift = new Lift();
+  private final Slider mSlider = new Slider();
 
   public RobotContainer() {
     mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
@@ -43,9 +45,7 @@ public class RobotContainer {
   private void configureBindings() {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
-
-    mController.x().onTrue(new SliderSetPosition(mArm, 39.5));
-    mController.y().onTrue(new SliderSetPosition(mArm, -39.5));
+    mController.x().onTrue(new SliderSetPosition(mSlider, 18.0));
 
     mJoystick.button(3).onTrue(new ClawMotorsSetSpeed(mIntake, 0.15));
     mJoystick.button(4).onTrue(new ClawMotorsSetSpeed(mIntake, -0.15));
@@ -53,16 +53,20 @@ public class RobotContainer {
     mJoystick.button(6).onTrue(new ClawPistonSetState(mIntake, false));
     mJoystick.trigger().whileTrue(new HookSetState(mIntake, true));
 
-    mJoystick.povCenter().whileTrue(new SliderSetSpeed(mArm, 0.0));
-    mJoystick.povUp().whileTrue(new SliderSetSpeed(mArm, 0.2));
-    mJoystick.povDown().whileTrue(new SliderSetSpeed(mArm, -0.2));
+    mJoystick.povCenter().whileTrue(new SliderSetSpeed(mSlider, 0.0));
+    mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
+    mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
   }
 
   public Command getAutonomousCommand() {
    return null;
   }
 
-  public Arm getArm() {
-    return mArm;
+  public Lift getLift() {
+    return mLift;
+  }
+
+  public Slider getSlider() {
+    return mSlider;
   }
 }

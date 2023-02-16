@@ -2,16 +2,16 @@ package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Lift;
 
 public class LiftSetSpeed extends CommandBase {
-  private final Arm mArm;
+  private final Lift mLift;
   private final CommandJoystick mJoystick;
 
-  public LiftSetSpeed(Arm arm, CommandJoystick joystick) {
-    mArm = arm;
+  public LiftSetSpeed(Lift lift, CommandJoystick joystick) {
+    mLift = lift;
     mJoystick = joystick;
-    addRequirements(mArm);
+    addRequirements(mLift);
   }
 
   @Override
@@ -19,7 +19,7 @@ public class LiftSetSpeed extends CommandBase {
 
   @Override
   public void execute() {
-    mArm.setLiftMotor(mJoystick.getY());
+    mLift.setLiftMotor(mJoystick.getY());
   }
 
   @Override

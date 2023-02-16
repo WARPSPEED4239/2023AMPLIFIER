@@ -29,8 +29,7 @@ public final class Constants {
 
         PIGEON_IMU = 9,
 
-        SRX_UNITS_PER_ROTATION = 4096,
-        NEO_UNITS_PER_ROTATION = 42;
+        SRX_UNITS_PER_ROTATION = 4096;
         
     public static final double
         RAMP_RATE = 0.3,

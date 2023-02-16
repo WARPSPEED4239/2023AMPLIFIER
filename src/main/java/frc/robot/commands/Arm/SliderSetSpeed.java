@@ -1,16 +1,16 @@
 package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Slider;
 
 public class SliderSetSpeed extends CommandBase {
-  private final Arm mArm;
+  private final Slider mSlider;
   private final double mSpeed;
 
-  public SliderSetSpeed(Arm arm, double speed) {
-    mArm = arm;
+  public SliderSetSpeed(Slider slider, double speed) {
+    mSlider = slider;
     mSpeed = speed;
-    addRequirements(mArm);
+    addRequirements(mSlider);
   }
 
   @Override
@@ -18,7 +18,7 @@ public class SliderSetSpeed extends CommandBase {
 
   @Override
   public void execute() {
-    mArm.setSliderSpeed(mSpeed);
+    mSlider.setSliderSpeed(mSpeed);
   }
 
   @Override
