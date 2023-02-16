@@ -49,12 +49,12 @@ public class Slider extends SubsystemBase {
   }
 
   public void setSliderPosition(double position) {
-    sliderPID.setReference(position, ControlType.kSmartMotion);
+    sliderPID.setReference(position, CANSparkMax.ControlType.kSmartMotion);
   }
   
   public void setSliderPositionInches(double inches) {
     System.out.println(inches);
-    sliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), ControlType.kSmartMotion);
+    sliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), CANSparkMax.ControlType.kSmartMotion);
   }
 
   public double getSliderPositionInches() {
