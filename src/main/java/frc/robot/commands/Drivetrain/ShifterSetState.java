@@ -8,9 +8,9 @@ public class ShifterSetState extends CommandBase {
   private final Shifter mShifter;
   private final boolean mPistonState;
 
-  public ShifterSetState(Shifter shifter, boolean pistonState) {
+  public ShifterSetState(Shifter shifter, boolean isHighGear) {
     mShifter = shifter;
-    mPistonState = pistonState;
+    mPistonState = isHighGear;
     addRequirements(mShifter);
   }
 

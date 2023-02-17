@@ -1,4 +1,4 @@
-package frc.robot.commands.Arm;
+package frc.robot.commands.Slider;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Slider;

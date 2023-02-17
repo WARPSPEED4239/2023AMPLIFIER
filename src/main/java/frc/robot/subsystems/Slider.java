@@ -5,15 +5,18 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
-
   private final CANSparkMax SliderMotor = new CANSparkMax(Constants.SLIDER_MOTOR_PORT, CANSparkMaxLowLevel.MotorType.kBrushless);
   private final SparkMaxPIDController sliderPID = SliderMotor.getPIDController();
+
+  private final DigitalInput limitIn = new DigitalInput(Constants.SLIDER_LIMIT_IN);
+  private final DigitalInput limitOut = new DigitalInput(Constants.SLIDER_LIMIT_OUT);
 
   private final double maxVelocity = 10257.143555;
   private final double maxAccel = maxVelocity * 3.0;
@@ -29,6 +32,14 @@ public class Slider extends SubsystemBase {
     SmartDashboard.putNumber("MAX VELO", maxVELO);
     SmartDashboard.putNumber("SLIDER TARGET POSITION", 18.0);
 
+  }
+
+  public boolean getLimitIn() {
+    return !limitIn.get();
+  }
+
+  public boolean getLimitOut() {
+    return !limitOut.get();
   }
 
   public void setSliderSpeed(double speed) {

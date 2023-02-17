@@ -37,7 +37,9 @@ public class Drivetrain extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    Pigeon.outputGyroSensorsToDashboard();
+  }
 
   public void arcadeDrive(double move, double rotation) {
     DifferentialDrive.arcadeDrive(move, rotation);

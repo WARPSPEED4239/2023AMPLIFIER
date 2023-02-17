@@ -3,17 +3,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Pigeon extends SubsystemBase {
-
+public class Pigeon {
   private final static PigeonIMU Pigeon = new PigeonIMU(Constants.PIGEON_IMU);
   
   public Pigeon() {}
-
-  @Override
-  public void periodic() {}
 
   public static double getPitch() {
     return Pigeon.getPitch();
