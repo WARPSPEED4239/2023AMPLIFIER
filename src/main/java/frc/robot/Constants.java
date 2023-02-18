@@ -14,12 +14,12 @@ public final class Constants {
         CLAW_MOTOR_RIGHT_PORT = 3,
         CLAW_MOTOR_LEFT_PORT = 4,
 
-        SHIFTER_SOLENOID_FORWARD_PORT = 3,
-        SHIFTER_SOLENOID_REVERSE_PORT = 4,
-        CLAW_SOLENOID_FORWARD_PORT = 6,
-        CLAW_SOLENOID_REVERSE_PORT = 7,
-        HOOK_SOLENOID_FORWARD_PORT = 8,
-        HOOK_SOLENOID_REVERSE_PORT = 9,
+        SHIFTER_SOLENOID_REVERSE_PORT = 3,
+        SHIFTER_SOLENOID_FORWARD_PORT = 4,
+        HOOK_SOLENOID_FORWARD_PORT = 6,
+        HOOK_SOLENOID_REVERSE_PORT = 7,
+        CLAW_SOLENOID_FORWARD_PORT = 8,
+        CLAW_SOLENOID_REVERSE_PORT = 9,
 
         SLIDER_LIMIT_OUT = 1,
         SLIDER_LIMIT_IN = 2,
@@ -34,7 +34,7 @@ public final class Constants {
         SRX_UNITS_PER_ROTATION = 4096;
         
     public static final double
-        RAMP_RATE = 0.3,
+        RAMP_RATE = 0.15,
         GEARBOX_RATIO = 7.08,
         WHEEL_DIAMETER_INCHES = 6.0,
         SPROCKET_DIAMETER_INCHES = 1.432,

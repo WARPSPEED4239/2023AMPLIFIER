@@ -59,8 +59,8 @@ public class RobotContainer {
     mJoystick.button(5).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_PINCHED));
     mJoystick.button(6).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_RELEASED));
 
-    mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
-    mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
+    mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 0.65));
+    mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -0.65));
   }
 
   public Command getAutonomousCommand() {

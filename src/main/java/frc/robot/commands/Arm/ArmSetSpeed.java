@@ -19,7 +19,7 @@ public class ArmSetSpeed extends CommandBase {
 
   @Override
   public void execute() {
-    double speed = mJoystick.getY();
+    double speed = -mJoystick.getY();
 
     if (Math.abs(speed) < 0.2) {
       speed = 0;
