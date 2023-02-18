@@ -13,7 +13,7 @@ import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
   private final CANSparkMax SliderMotor = new CANSparkMax(Constants.SLIDER_MOTOR_PORT, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final SparkMaxPIDController sliderPID = SliderMotor.getPIDController();
+  private final SparkMaxPIDController SliderPID = SliderMotor.getPIDController();
 
   private final DigitalInput limitIn = new DigitalInput(Constants.SLIDER_LIMIT_IN);
   private final DigitalInput limitOut = new DigitalInput(Constants.SLIDER_LIMIT_OUT);
@@ -59,12 +59,11 @@ public class Slider extends SubsystemBase {
   }
 
   public void setSliderPosition(double position) {
-    sliderPID.setReference(position, CANSparkMax.ControlType.kSmartMotion);
+    SliderPID.setReference(position, CANSparkMax.ControlType.kSmartMotion);
   }
   
   public void setSliderPositionInches(double inches) {
-    System.out.println(inches);
-    sliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), CANSparkMax.ControlType.kSmartMotion);
+    SliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), CANSparkMax.ControlType.kSmartMotion);
   }
 
   public double getSliderPositionInches() {

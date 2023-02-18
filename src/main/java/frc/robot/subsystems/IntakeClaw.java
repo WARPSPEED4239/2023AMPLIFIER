@@ -17,24 +17,25 @@ public class IntakeClaw extends SubsystemBase {
   public void periodic() {
   }
 
-  public void setClawState(boolean pistonState) {
-    if (pistonState) {
-      Claw.set(Value.kReverse);
-    } else {
-      Claw.set(Value.kForward);
+  public void setIntakeClawState(Constants.IntakeClawStates pistonState) {
+    switch (pistonState) {
+      case HOOK_UP_CLAW_PINCHED:
+        Claw.set(Value.kForward);
+        Hook.set(Value.kForward);
+        break;
+      case HOOK_UP_CLAW_RELEASED:
+        Claw.set(Value.kForward);
+        Hook.set(Value.kForward);
+        break;
+      case HOOK_DOWN_CLAW_RELEASED:
+        Claw.set(Value.kForward);
+        Hook.set(Value.kForward);
+        break;
     }
   }
 
   public boolean getClawState() {
     return Claw.get().equals(Value.kReverse);
-  }
-
-  public void setHookState(boolean dongState) {
-    if (dongState) {
-      Hook.set(Value.kReverse);
-    } else {
-      Hook.set(Value.kForward);
-    }
   }
 
   public boolean getHookState() {

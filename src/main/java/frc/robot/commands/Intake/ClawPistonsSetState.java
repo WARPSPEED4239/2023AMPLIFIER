@@ -1,23 +1,24 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeClaw;
 
-public class ClawPistonSetState extends CommandBase {
+public class ClawPistonsSetState extends CommandBase {
 
   private final IntakeClaw mIntakeClaw;
-  private final boolean mClawState;
+  private final Constants.IntakeClawStates mClawState;
 
-  public ClawPistonSetState(IntakeClaw intakeClaw, boolean isPinched) {
+  public ClawPistonsSetState(IntakeClaw intakeClaw, Constants.IntakeClawStates state) {
     mIntakeClaw = intakeClaw;
-    mClawState = isPinched;
+    mClawState = state;
     addRequirements(mIntakeClaw);
   }
 
 
   @Override
   public void initialize() {
-    mIntakeClaw.setClawState(mClawState);
+    mIntakeClaw.setIntakeClawState(mClawState);
   }
 
   @Override

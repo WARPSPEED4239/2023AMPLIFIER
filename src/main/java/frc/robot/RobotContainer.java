@@ -9,9 +9,8 @@ import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
-import frc.robot.commands.Intake.ClawMotorsSetSpeed;
-import frc.robot.commands.Intake.ClawPistonSetState;
-import frc.robot.commands.Intake.HookSetState;
+import frc.robot.commands.Intake.IntakeMotorsSetSpeed;
+import frc.robot.commands.Intake.ClawPistonsSetState;
 import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
@@ -36,8 +35,8 @@ public class RobotContainer {
   public RobotContainer() {
     mArm.setDefaultCommand(new ArmSetSpeed(mArm, mJoystick));
     mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
-    mIntake.setDefaultCommand(new ClawMotorsSetSpeed(mIntake, 0.0));
-    mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
+    mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
+    mIntakeClaw.setDefaultCommand(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_PINCHED));
     mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
 
@@ -50,13 +49,14 @@ public class RobotContainer {
   private void configureBindings() {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
+
     mController.x().onTrue(new SliderSetPosition(mSlider, 18.0));
 
-    mJoystick.button(1).whileTrue(new HookSetState(mIntakeClaw, true));
-    mJoystick.button(3).whileTrue(new ClawMotorsSetSpeed(mIntake, 0.15));
-    mJoystick.button(4).whileTrue(new ClawMotorsSetSpeed(mIntake, -0.15));
-    mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, true));
-    mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, false));
+    mJoystick.button(1).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_DOWN_CLAW_RELEASED));
+    mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.15));
+    mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.15));
+    mJoystick.button(5).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_PINCHED));
+    mJoystick.button(6).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_RELEASED));
 
     mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
     mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
