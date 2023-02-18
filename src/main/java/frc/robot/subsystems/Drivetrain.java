@@ -63,25 +63,6 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
   }
 
-  public void moveUntilAngled(double speed, double currentAngle, double targetAngle) {
-    double startingYaw = Pigeon.getYaw();
-
-    if(targetAngle > 0.0) {
-      while(currentAngle < targetAngle) {
-        moveStraightUsingGyro(speed, startingYaw);
-      }//front
-    } else if(targetAngle < 0.0) {
-      while(currentAngle > targetAngle) {
-        moveStraightUsingGyro(speed, startingYaw);
-      }
-    } else {
-      while(currentAngle < targetAngle) {
-        moveStraightUsingGyro(speed, startingYaw);
-      }
-    }
-  }
-
-  // fix this
   public void moveUntilAngledUp(double speed, double targetAngle) {
     double startingYaw = Pigeon.getYaw();
 

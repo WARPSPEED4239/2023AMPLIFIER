@@ -26,7 +26,7 @@ public class AutoBalance extends CommandBase {
     startingYaw = Pigeon.getYaw();
     mShifter.setShifterState(true);
     mDrivetrain.moveUntilAngledUp(1.0,  12.0);
-    mDrivetrain.moveUntilAngledDown(0.0035 * Math.pow(pitch, 2), 0.0);
+    mDrivetrain.moveUntilAngledDown(0.0035 * Math.pow(pitch, 2), 2.0);
     mDrivetrain.stopAllMotors();
     activatedVinceBalanceTestMode = true;
     System.out.println("started auto balance vince mode");
@@ -38,8 +38,10 @@ public class AutoBalance extends CommandBase {
 
     if (pitch > 0.0 && activatedVinceBalanceTestMode) {
       speed = Math.pow((0.0111 * pitch), 0.5);
+      mDrivetrain.moveStraightUsingGyro(speed, startingYaw);
     } else if (pitch < 0.0 && activatedVinceBalanceTestMode) {
       speed = -Math.pow((0.0111 * Math.abs(pitch)), 0.5);
+      mDrivetrain.moveStraightUsingGyro(speed, startingYaw);
     }
   }
 

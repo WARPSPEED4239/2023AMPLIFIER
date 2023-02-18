@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Arm.ArmSetSpeed;
+import frc.robot.commands.Autonomous.AutonomousCommand;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
@@ -42,6 +43,7 @@ public class RobotContainer {
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
 
     targetChooser.setDefaultOption("Do Nothing", TargetTask.DoNothing);
+    targetChooser.addOption("Drive Straight With Auto Balance", TargetTask.DriveStraightWithAutoBalance);
     SmartDashboard.putData(targetChooser);
 
     configureBindings();
@@ -64,7 +66,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-   return new InstantCommand();
+    TargetTask targetTask = targetChooser.getSelected();
+    return new AutonomousCommand(targetTask, mDrivetrain, mShifter);
   }
 
   public Slider getSlider() {

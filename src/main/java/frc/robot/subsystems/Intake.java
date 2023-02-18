@@ -8,9 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-
-  private final CANSparkMax neoLeft = new CANSparkMax(Constants.CLAW_MOTOR_LEFT_PORT, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final CANSparkMax neoRight = new CANSparkMax(Constants.CLAW_MOTOR_RIGHT_PORT, CANSparkMaxLowLevel.MotorType.kBrushless);
+  private final CANSparkMax neoLeft = new CANSparkMax(Constants.CLAW_MOTOR_LEFT_PORT, CANSparkMaxLowLevel.MotorType.kBrushed);
+  private final CANSparkMax neoRight = new CANSparkMax(Constants.CLAW_MOTOR_RIGHT_PORT, CANSparkMaxLowLevel.MotorType.kBrushed);
 
   public Intake() {
     neoLeft.restoreFactoryDefaults();
@@ -21,7 +20,7 @@ public class Intake extends SubsystemBase {
     neoLeft.burnFlash();
 
     neoRight.restoreFactoryDefaults();
-    neoRight.setInverted(true);
+    neoRight.setInverted(false);
     neoRight.setIdleMode(IdleMode.kBrake);
     neoRight.setSmartCurrentLimit(45);
     neoRight.setOpenLoopRampRate(0.05);
