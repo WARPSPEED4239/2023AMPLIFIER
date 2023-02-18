@@ -1,17 +1,20 @@
 package frc.robot.commands.Drivetrain;
 
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Pigeon;
 import frc.robot.tools.RobotMath;
+import frc.robot.tools.XboxControllerTools;
 
 public class StraightWithGyro extends CommandBase {
   
   private final Drivetrain mDrivetrain;
   private final CommandXboxController mController;
-  private double startingYaw = 0.0;
   private boolean triggerReset = false;
+  private double startingYaw = 0.0;
 
   public StraightWithGyro(Drivetrain drivetrain, CommandXboxController commandXboxController) {
     mDrivetrain = drivetrain;
@@ -21,34 +24,30 @@ public class StraightWithGyro extends CommandBase {
 
   @Override
   public void initialize() {
-    startingYaw = mDrivetrain.getYaw();
+    startingYaw = Pigeon.getYaw();
   }
 
   @Override
   public void execute() {
-    double triggers = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
-    double rotate = RobotMath.solveCubicEquationForY(Constants.CONTROLLER_CUBIC_EQUATION_A, Constants.CONTROLLER_CUBIC_EQUATION_B,
-    Constants.CONTROLLER_CUBIC_EQUATION_C, Constants.CONTROLLER_CUBIC_EQUATION_CONSTANT, -mController.getLeftX());
+    Pigeon.outputGyroSensorsToDashboard();
 
-    if (mController.getRightX() > -0.1 && mController.getRightX() < 0.1) {
+    double triggersAxis = XboxControllerTools.triggersAxis();
+    double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
 
-      if (triggers == 0.0) {
+    if (XboxControllerTools.isInDeadzone(mController.getLeftX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
+      if (XboxControllerTools.triggersAxis() == 0.0) {
         triggerReset = true;
-      }
-  
-      if (triggers != 0.0) {
+      } else {
         if (triggerReset) {
           triggerReset = false;
-          startingYaw = mDrivetrain.getYaw();
+          startingYaw = Pigeon.getYaw();
         }
-
-        mDrivetrain.DriveStraightWithGyro(mController.getRightTriggerAxis() - mController.getLeftTriggerAxis(), startingYaw);
-      
+  
+        mDrivetrain.moveStraightUsingGyro(triggersAxis, startingYaw);
       }
     } else {
-        mDrivetrain.DrivetrainArcadeDrive(triggers, rotate);
+        mDrivetrain.arcadeDrive(triggersAxis, rotation);
     }
-    
   }
 
   @Override

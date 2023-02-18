@@ -1,0 +1,24 @@
+SECTIONS-
+
+ Drivetrain:
+    XboxController{
+        Right Joystick(rotating)
+        Right trigger(drive forward)
+        Left trigger(drive backward)
+        Button A(shifter)
+        Button B(shifter)
+    }
+ Intake:
+    Joystick{
+        Face Button 3(spin intake wheels in)
+        Face Button 4(spin intake wheel out)
+        Face Button 5(open claw)
+        Face Button 6(close claw)
+        Trigger(hook up/down)
+    }
+
+ Lift:
+    Joystick{
+        Face Joystick(arm extending)
+        Joystick Y Axis(lift arm)
+    }

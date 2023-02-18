@@ -16,9 +16,17 @@ public class UnitConversion {
     public static double rotationsToSRXUnits(double rotations) {
         return rotations * Constants.SRX_UNITS_PER_ROTATION;
     }
-
+      
     public static double rotationsToInches(double rotations, double pulleyDiameter) {
         return rotations * Math.PI * pulleyDiameter;
+    }
+
+    public static double inchesToNeoUnits(double inches) {
+        return inches / (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
+    }
+
+    public static double neoUnitsToInches(double NeoUnits) {
+        return NeoUnits * (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
     }
 
     public static double positionInInchesToRotations(double positionInInches, double pulleyDiameter) {
