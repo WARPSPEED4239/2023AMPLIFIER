@@ -8,6 +8,7 @@ public class ClawPistonsSetState extends CommandBase {
 
   private final IntakeClaw mIntakeClaw;
   private final Constants.IntakeClawStates mClawState;
+  private double startTime;
 
   public ClawPistonsSetState(IntakeClaw intakeClaw, Constants.IntakeClawStates state) {
     mIntakeClaw = intakeClaw;
@@ -18,11 +19,18 @@ public class ClawPistonsSetState extends CommandBase {
 
   @Override
   public void initialize() {
-    mIntakeClaw.setIntakeClawState(mClawState);
+    startTime = System.currentTimeMillis();
+    mIntakeClaw.setFirstState(mClawState);
   }
 
   @Override
-  public void execute() {}
+  public void execute() {
+    double currTime = System.currentTimeMillis();
+
+    if (currTime - startTime > 500) {
+      mIntakeClaw.setSecondState(mClawState);
+    }
+  }
 
   @Override
   public void end(boolean interrupted) {}

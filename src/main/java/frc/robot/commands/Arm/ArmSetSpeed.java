@@ -19,7 +19,13 @@ public class ArmSetSpeed extends CommandBase {
 
   @Override
   public void execute() {
-    //mLift.setLiftMotor(mJoystick.getY());
+    double speed = mJoystick.getY();
+
+    if (Math.abs(speed) < 0.2) {
+      speed = 0;
+    }
+
+    mLift.setLiftMotor(speed);
   }
 
   @Override

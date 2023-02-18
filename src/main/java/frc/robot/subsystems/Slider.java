@@ -57,10 +57,6 @@ public class Slider extends SubsystemBase {
 
     SliderMotor.set(speed);
   }
-
-  public void setSliderPosition(double position) {
-    SliderPID.setReference(position, CANSparkMax.ControlType.kSmartMotion);
-  }
   
   public void setSliderPositionInches(double inches) {
     SliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), CANSparkMax.ControlType.kSmartMotion);
