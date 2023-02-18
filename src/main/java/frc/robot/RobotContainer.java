@@ -53,8 +53,8 @@ public class RobotContainer {
     mController.x().onTrue(new SliderSetPosition(mSlider, 18.0));
 
     mJoystick.button(1).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_DOWN_CLAW_RELEASED));
-    mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.15));
-    mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.15));
+    mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
+    mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(5).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_PINCHED));
     mJoystick.button(6).onTrue(new ClawPistonsSetState(mIntakeClaw, Constants.IntakeClawStates.HOOK_UP_CLAW_RELEASED));
 
