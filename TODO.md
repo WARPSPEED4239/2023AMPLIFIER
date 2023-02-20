@@ -1,14 +1,12 @@
-# TO DO ON FRIDAY
-Main Task;
+# TO DO ON LAST WEEK
+Main Task:
 
-MAIN OPTION: Finish the arm code
+Autonomous: Scoring, Movement, balancing
 
-OTHER OTHER OPTION: Start working on coding on the limelight and the camera.
+Manual: Silder preset position and Arm preset position, bug fixes
 
-> Option 2. Keep working on Auto Balance for autonomous.
 
-> Option 3. (only do this option if you are
-really, really stuck)
+ (only do this option if you are really, really stuck)
 Do a little bit of code academy or if you want you can work
 on your own coding project that you are interested in making.
 If you choose to do a coding project here is some places for inspiration.
