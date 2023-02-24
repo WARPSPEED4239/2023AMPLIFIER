@@ -1,26 +1,24 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxPIDController;
-
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
-  private final CANSparkMax SliderMotor = new CANSparkMax(Constants.SLIDER_MOTOR_PORT, CANSparkMaxLowLevel.MotorType.kBrushless);
-  private final SparkMaxPIDController SliderPID = SliderMotor.getPIDController();
+  private final WPI_TalonFX SliderMotor = new WPI_TalonFX(Constants.SLIDER_MOTOR_PORT);
 
   private final DigitalInput limitIn = new DigitalInput(Constants.SLIDER_LIMIT_IN);
   private final DigitalInput limitOut = new DigitalInput(Constants.SLIDER_LIMIT_OUT);
 
-  private final double maxVelocity = 10257.143555;
-  private final double maxAccel = maxVelocity * 3.0;
-  private double maxVELO = 0.0;
+  private final int TIMEOUT_MS = 30;
+
+  private double kP = 0.0;
+  private double kI = 0.0;
+  private double kD = 0.0;
+  private double kF = 0.0;
   
   public Slider() {
     configureSettings();
@@ -28,9 +26,6 @@ public class Slider extends SubsystemBase {
 
   @Override
   public void periodic() {
-    maxVELO = Math.max(maxVELO, Math.abs(SliderMotor.getEncoder().getVelocity()));
-    SmartDashboard.putNumber("MAX VELO", maxVELO);
-    SmartDashboard.putNumber("SLIDER TARGET POSITION", 18.0);
 
   }
 
@@ -49,9 +44,9 @@ public class Slider extends SubsystemBase {
       speed = -1.0;
     }
     
-    if(getSliderMotorEncoderPosition() >= Constants.LIMIT_POSITION_OUT && speed > 0.0) {
+    if(getSliderEncoderPosition() >= Constants.LIMIT_POSITION_OUT && speed > 0.0) {
       speed = 0.0;
-    } else if(getSliderMotorEncoderPosition() <= 0.0 && speed < 0.0) {
+    } else if(getSliderEncoderPosition() <= 0.0 && speed < 0.0) {
       speed = 0.0;
     }
 
@@ -59,45 +54,42 @@ public class Slider extends SubsystemBase {
   }
   
   public void setSliderPositionInches(double inches) {
-    SliderPID.setReference(UnitConversion.inchesToNeoUnits(inches), CANSparkMax.ControlType.kSmartMotion);
+    
   }
-
-  public double getSliderPositionInches() {
-    return UnitConversion.neoUnitsToInches(SliderMotor.getEncoder().getPosition());
-  }
-
+  
   public void setSliderEncoderPosition(double position) {
-    SliderMotor.getEncoder().setPosition(position);
-
+    SliderMotor.setSelectedSensorPosition(position);
+    
+  }
+  
+  // public void setSliderEncoderPositionInches(double inches) {
+  //   SliderMotor.
+  // }
+  
+  public double getSliderEncoderPosition() {
+    return SliderMotor.getSelectedSensorPosition();
   }
 
-  public void setSliderEncoderPositionInches(double inches) {
-    SliderMotor.getEncoder().setPosition(UnitConversion.inchesToNeoUnits(inches));
-  }
-
-  public double getSliderMotorEncoderPosition() {
-    return SliderMotor.getEncoder().getPosition();
-  }
+  // public double getSliderEncoderPositionInches() {
+  //   return UnitConversion.SliderMotor.getSelectedSensorPosition()
+  // }
 
   public void configureSettings() {
-    SliderMotor.restoreFactoryDefaults();
+    SliderMotor.configFactoryDefault();
     SliderMotor.setInverted(true);
-    SliderMotor.setIdleMode(IdleMode.kBrake);
-    SliderMotor.setSmartCurrentLimit(45);
-    SliderMotor.setOpenLoopRampRate(0.05);
-    SliderMotor.burnFlash();
+    SliderMotor.setNeutralMode(NeutralMode.Brake);
+    SliderMotor.configOpenloopRamp(Constants.RAMP_RATE);
+    SliderMotor.configVoltageCompSaturation(12.0);
+    SliderMotor.enableVoltageCompensation(true);
+    SliderMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    
+    SliderMotor.config_kP(0, kP, TIMEOUT_MS);
+    SliderMotor.config_kI(0, kI, TIMEOUT_MS);
+    SliderMotor.config_kD(0, kD, TIMEOUT_MS);
+    SliderMotor.config_kF(0, kF, TIMEOUT_MS);
+    SliderMotor.config_IntegralZone(0, 0, TIMEOUT_MS);
+    SliderMotor.selectProfileSlot(0, 0);
 
-    SparkMaxPIDController sliderPID = SliderMotor.getPIDController();
-    sliderPID.setFeedbackDevice(SliderMotor.getEncoder());
-    sliderPID.setP(100000000000.0);
-    sliderPID.setI(0.0);
-    sliderPID.setD(0.0);
-    sliderPID.setFF(0.0);
-    //number i found for f 0.000013
-
-    sliderPID.setOutputRange(-1.0, 1.0);
-
-    sliderPID.setSmartMotionMaxVelocity(maxVelocity, 0);
-    sliderPID.setSmartMotionMaxAccel(maxAccel, 0);
+    SliderMotor.setSelectedSensorPosition(0.0);
   }
 }

@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class IntakeClaw extends SubsystemBase {
   private final DoubleSolenoid Claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLAW_SOLENOID_FORWARD_PORT, Constants.CLAW_SOLENOID_REVERSE_PORT);
-  private final DoubleSolenoid Hook = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.HOOK_SOLENOID_FORWARD_PORT, Constants.HOOK_SOLENOID_REVERSE_PORT);
+
 
   public IntakeClaw() {
   }
@@ -17,41 +17,11 @@ public class IntakeClaw extends SubsystemBase {
   public void periodic() {
   }
 
-  public void setFirstState(Constants.IntakeClawStates pistonState) {
-    switch (pistonState) {
-      case HOOK_UP_CLAW_PINCHED:
-        Hook.set(Value.kForward);
-        break;
-      case HOOK_UP_CLAW_RELEASED:
-        Hook.set(Value.kForward);
-        Claw.set(Value.kReverse);
-        break;
-      case HOOK_DOWN_CLAW_RELEASED:
-        Claw.set(Value.kReverse);
-        break;
+  public void setClawState(boolean pistonState) {
+    if (pistonState) {
+      Claw.set(Value.kReverse);
+    } else {
+      Claw.set(Value.kForward);
     }
-  }
-
-  public void setSecondState(Constants.IntakeClawStates pistonState) {
-    switch (pistonState) {
-      case HOOK_UP_CLAW_PINCHED:
-        Claw.set(Value.kForward);
-        break;
-      case HOOK_UP_CLAW_RELEASED:
-        Hook.set(Value.kForward);
-        Claw.set(Value.kReverse);
-        break;
-      case HOOK_DOWN_CLAW_RELEASED:
-        Hook.set(Value.kReverse);
-        break;
-    }
-  }
-
-  public boolean getClawState() {
-    return Claw.get().equals(Value.kReverse);
-  }
-
-  public boolean getHookState() {
-    return Hook.get().equals(Value.kReverse);
   }
 }

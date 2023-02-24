@@ -10,7 +10,7 @@ public final class Constants {
         RIGHT_MOTOR_PORT_THREE = 6,
 
         ARM_MOTOR_PORT = 7,
-        SLIDER_MOTOR_PORT = 2,
+        SLIDER_MOTOR_PORT = 11,
         CLAW_MOTOR_RIGHT_PORT = 3,
         CLAW_MOTOR_LEFT_PORT = 4,
 
@@ -31,7 +31,7 @@ public final class Constants {
 
         PIGEON_IMU = 9,
 
-        SRX_UNITS_PER_ROTATION = 4096;
+        SRX_UNITS_PER_ROTATION = 2048;
         
     public static final double
         RAMP_RATE = 0.15,
@@ -40,7 +40,7 @@ public final class Constants {
         SPROCKET_DIAMETER_INCHES = 1.432,
         SPROCKET_CIRCUM = SPROCKET_DIAMETER_INCHES * Math.PI,
 
-        LIMIT_POSITION_OUT = 158.0,
+        LIMIT_POSITION_OUT = 1000000000.0,
 
         XBOX_CONTROLLER_DEADZONE = 0.1,
 
