@@ -24,7 +24,7 @@ public final class Constants {
         SLIDER_LIMIT_OUT = 1,
         SLIDER_LIMIT_IN = 2,
 
-        SPROCKET_GEARBOX_RATIO = 30,
+        SPROCKET_GEARBOX_RATIO = 20,
 
         XBOX_CONTROLLER_PORT = 0,
         JOYSTICK_PORT = 1,
@@ -40,7 +40,7 @@ public final class Constants {
         SPROCKET_DIAMETER_INCHES = 1.432,
         SPROCKET_CIRCUM = SPROCKET_DIAMETER_INCHES * Math.PI,
 
-        LIMIT_POSITION_OUT = 1000000000.0,
+        LIMIT_POSITION_OUT = 67100000.0,
 
         XBOX_CONTROLLER_DEADZONE = 0.1,
 

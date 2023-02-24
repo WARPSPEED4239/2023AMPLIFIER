@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
   private final WPI_TalonFX SliderMotor = new WPI_TalonFX(Constants.SLIDER_MOTOR_PORT);
@@ -70,9 +71,9 @@ public class Slider extends SubsystemBase {
     return SliderMotor.getSelectedSensorPosition();
   }
 
-  // public double getSliderEncoderPositionInches() {
-  //   return UnitConversion.SliderMotor.getSelectedSensorPosition()
-  // }
+  public double getSliderEncoderPositionInches() {
+    return UnitConversion.SRXUnitsToInches(getSliderEncoderPosition());
+  }
 
   public void configureSettings() {
     SliderMotor.configFactoryDefault();

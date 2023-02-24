@@ -21,12 +21,12 @@ public class UnitConversion {
         return rotations * Math.PI * pulleyDiameter;
     }
 
-    public static double inchesToNeoUnits(double inches) {
-        return inches / (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
+    public static double inchesToSRXUnits(double inches) {
+        return (inches * (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO)) * Constants.SRX_UNITS_PER_ROTATION;
     }
 
-    public static double neoUnitsToInches(double NeoUnits) {
-        return NeoUnits * (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
+    public static double SRXUnitsToInches(double units) {
+        return (units / Constants.SRX_UNITS_PER_ROTATION)/(Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
     }
 
     public static double positionInInchesToRotations(double positionInInches, double pulleyDiameter) {

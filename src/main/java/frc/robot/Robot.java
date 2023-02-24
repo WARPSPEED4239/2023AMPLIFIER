@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("SLIDER Position", mSlider.getSliderEncoderPosition());
+    SmartDashboard.putNumber("SLIDER Position Inches", mSlider.getSliderEncoderPositionInches());
     SmartDashboard.putNumber("ARM Position", mArm.getArmEncoderPosition());
     SmartDashboard.putBoolean("Slider Limit In", mSlider.getLimitIn());
     SmartDashboard.putBoolean("Slider Limit Out", mSlider.getLimitOut());
