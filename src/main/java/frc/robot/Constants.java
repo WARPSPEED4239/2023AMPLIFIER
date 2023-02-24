@@ -10,6 +10,7 @@ public final class Constants {
         RIGHT_MOTOR_PORT_THREE = 6,
 
         ARM_MOTOR_PORT = 7,
+        ARM_ENCODER_CONTROLLER = 8,
         SLIDER_MOTOR_PORT = 11,
         CLAW_MOTOR_RIGHT_PORT = 3,
         CLAW_MOTOR_LEFT_PORT = 4,

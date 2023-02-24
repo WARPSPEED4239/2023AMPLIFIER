@@ -2,14 +2,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
-
-  private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR_PORT); 
+  private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR_PORT);
+  private final WPI_TalonSRX ArmEncoderController = new WPI_TalonSRX(Constants.ARM_ENCODER_CONTROLLER);
 
   private final int TIMEOUT_MS = 30;
 
@@ -46,26 +49,22 @@ public class Arm extends SubsystemBase {
     
   }
   
-  // public void setSliderEncoderPositionInches(double inches) {
-  //   SliderMotor.
-  // }
-  
   public double getArmEncoderPosition() {
     return ArmMotor.getSelectedSensorPosition();
   }
 
-  // public double getSliderEncoderPositionInches() {
-  //   return UnitConversion.SliderMotor.getSelectedSensorPosition()
-  // }
-
   private void configureSettings() {
+    ArmEncoderController.configFactoryDefault();
+    ArmEncoderController.setSensorPhase(false);
+    ArmEncoderController.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute, 0, TIMEOUT_MS);
+
     ArmMotor.configFactoryDefault();
     ArmMotor.setInverted(true);
     ArmMotor.setNeutralMode(NeutralMode.Brake);
     ArmMotor.configOpenloopRamp(0.5);
     ArmMotor.configVoltageCompSaturation(12.0);
     ArmMotor.enableVoltageCompensation(true);
-    ArmMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+    ArmMotor.configRemoteFeedbackFilter(Constants.ARM_ENCODER_CONTROLLER, RemoteSensorSource.TalonSRX_SelectedSensor, 0);
     
     ArmMotor.config_kP(0, kP, TIMEOUT_MS);
     ArmMotor.config_kI(0, kI, TIMEOUT_MS);
