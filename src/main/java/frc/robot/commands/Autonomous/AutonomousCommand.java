@@ -23,7 +23,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
 
     switch (mTargetTask) {
       case DriveStraightWithAutoBalance:
-        addCommands(new ParallelRaceGroup(new AutoBalance(mDrivetrain, mShifter), new WaitCommand(15.0)));
+        addCommands(new ParallelRaceGroup(new AutoBalance(mDrivetrain, mShifter), new WaitCommand(7.0)));
         break;
       default:
         addCommands(new WaitCommand(15.0));

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
+import frc.robot.tools.UnitConversion;
 
 public class Robot extends TimedRobot {
 
@@ -34,7 +35,7 @@ public class Robot extends TimedRobot {
     if(mSlider.getLimitIn()) {
       mSlider.setSliderEncoderPosition(0.0);
     } else if(mSlider.getLimitOut()) {
-      mSlider.setSliderEncoderPosition(Constants.LIMIT_POSITION_OUT);
+      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(Constants.LIMIT_POSITION_OUT));
     }
   }
   

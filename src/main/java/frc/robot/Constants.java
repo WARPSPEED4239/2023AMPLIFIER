@@ -41,7 +41,7 @@ public final class Constants {
         SPROCKET_DIAMETER_INCHES = 1.432,
         SPROCKET_CIRCUM = SPROCKET_DIAMETER_INCHES * Math.PI,
 
-        LIMIT_POSITION_OUT = 219000.0,
+        LIMIT_POSITION_OUT = 23.9,
 
         XBOX_CONTROLLER_DEADZONE = 0.1,
 

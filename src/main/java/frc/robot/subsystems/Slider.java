@@ -45,9 +45,9 @@ public class Slider extends SubsystemBase {
       speed = -1.0;
     }
     
-    if(getSliderEncoderPosition() >= Constants.LIMIT_POSITION_OUT && speed > 0.0) {
+    if(getSliderEncoderPositionInches() >= Constants.LIMIT_POSITION_OUT && speed > 0.0) {
       speed = 0.0;
-    } else if(getSliderEncoderPosition() <= 0.0 && speed < 0.0) {
+    } else if(getSliderEncoderPositionInches() <= 0.0 && speed < 0.0) {
       speed = 0.0;
     }
 
