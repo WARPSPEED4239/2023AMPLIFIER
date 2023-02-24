@@ -3,45 +3,24 @@ package frc.robot.tools;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 
-public class UnitConversion {
-
-    public static double revolutionsPerMinuteToRadiansPerSecond(double rpm) {
-        return rpm * 2.0 * Math.PI / 60;
-    }
-
-    public static double SRXUnitsToRotations(double units) {
-        return units / Constants.SRX_UNITS_PER_ROTATION;
-    }
-
-    public static double rotationsToSRXUnits(double rotations) {
-        return rotations * Constants.SRX_UNITS_PER_ROTATION;
-    }
-      
-    public static double rotationsToInches(double rotations, double pulleyDiameter) {
-        return rotations * Math.PI * pulleyDiameter;
-    }
-
+public class UnitConversion {   
     public static double inchesToSRXUnits(double inches) {
-        return (inches * (Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO)) * Constants.SRX_UNITS_PER_ROTATION;
+        return inches / (Constants.SPROCKET_CIRCUM / Constants.SLIDER_GEARBOX_RATIO) * Constants.SRX_UNITS_PER_ROTATION;
     }
 
     public static double SRXUnitsToInches(double units) {
-        return (units / Constants.SRX_UNITS_PER_ROTATION)/(Constants.SPROCKET_CIRCUM / Constants.SPROCKET_GEARBOX_RATIO);
-    }
-
-    public static double positionInInchesToRotations(double positionInInches, double pulleyDiameter) {
-        return positionInInches / (pulleyDiameter * Math.PI);
-    }
-
-    public static double SRXUnitsToDegrees(double units) {
-        return (units / Constants.SRX_UNITS_PER_ROTATION) * 360;
+        return (units / Constants.SRX_UNITS_PER_ROTATION) * (Constants.SPROCKET_CIRCUM / Constants.SLIDER_GEARBOX_RATIO);
     }
 
     public static double positionInDegreesToSRXUnits(double positionInDegrees) {
-        return (positionInDegrees / 360) * Constants.SRX_UNITS_PER_ROTATION;
+        return positionInDegrees / 360 * Constants.ARM_RATIO * Constants.SRX_UNITS_PER_ROTATION;
+    }
+
+    public static double SRXUnitsToDegrees(double units) {
+        return units / Constants.SRX_UNITS_PER_ROTATION / Constants.ARM_RATIO * 360;
     }
 
     public static double targetPositionInMetersToFXUnits(double targetPositionInMeters) {
-        return (Math.PI * Units.inchesToMeters(Constants.WHEEL_DIAMETER_INCHES)) / (Constants.GEARBOX_RATIO * targetPositionInMeters);
+        return (Math.PI * Units.inchesToMeters(Constants.WHEEL_DIAMETER_INCHES)) / (Constants.DRIVETRAIN_GEARBOX_RATIO * targetPositionInMeters);
     }
 }

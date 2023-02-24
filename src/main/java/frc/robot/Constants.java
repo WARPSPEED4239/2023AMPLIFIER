@@ -24,7 +24,8 @@ public final class Constants {
         SLIDER_LIMIT_OUT = 1,
         SLIDER_LIMIT_IN = 2,
 
-        SPROCKET_GEARBOX_RATIO = 20,
+        ARM_RATIO = 4,
+        SLIDER_GEARBOX_RATIO = 20,
 
         XBOX_CONTROLLER_PORT = 0,
         JOYSTICK_PORT = 1,
@@ -35,12 +36,12 @@ public final class Constants {
         
     public static final double
         RAMP_RATE = 0.15,
-        GEARBOX_RATIO = 7.08,
+        DRIVETRAIN_GEARBOX_RATIO = 7.08,
         WHEEL_DIAMETER_INCHES = 6.0,
         SPROCKET_DIAMETER_INCHES = 1.432,
         SPROCKET_CIRCUM = SPROCKET_DIAMETER_INCHES * Math.PI,
 
-        LIMIT_POSITION_OUT = 67100000.0,
+        LIMIT_POSITION_OUT = 219000.0,
 
         XBOX_CONTROLLER_DEADZONE = 0.1,
 
@@ -48,10 +49,4 @@ public final class Constants {
         CUBIC_B = 0.0,
         CUBIC_C = 7.0 / 15.0,
         CUBIC_CONSTANT = 0.0;
-
-    public static enum IntakeClawStates{
-        HOOK_UP_CLAW_PINCHED,
-        HOOK_UP_CLAW_RELEASED,
-        HOOK_DOWN_CLAW_RELEASED
-    }
 }
