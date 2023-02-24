@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
@@ -65,6 +64,7 @@ public class Arm extends SubsystemBase {
     ArmMotor.configVoltageCompSaturation(12.0);
     ArmMotor.enableVoltageCompensation(true);
     ArmMotor.configRemoteFeedbackFilter(Constants.ARM_ENCODER_CONTROLLER, RemoteSensorSource.TalonSRX_SelectedSensor, 0);
+    ArmMotor.configFeedbackNotContinuous(true, TIMEOUT_MS); // 4095 -> 0
     
     ArmMotor.config_kP(0, kP, TIMEOUT_MS);
     ArmMotor.config_kI(0, kI, TIMEOUT_MS);

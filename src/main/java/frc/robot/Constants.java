@@ -33,7 +33,9 @@ public final class Constants {
 
         PIGEON_IMU = 9,
 
-        SRX_UNITS_PER_ROTATION = 2048;
+        SRX_UNITS_PER_ROTATION = 2048,
+        
+        ARM_ENCODER_OFFSET = 0; // TODO SET
         
     public static final double
         RAMP_RATE = 0.15,
