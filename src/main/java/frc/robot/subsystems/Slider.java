@@ -18,9 +18,9 @@ public class Slider extends SubsystemBase {
 
   private final int TIMEOUT_MS = 30;
 
-  private double maxVelocity = 14111.0;
+  private double maxVelocity = 21312.0;
   
-  private double maxAcceleration = 2 * maxVelocity;
+  private double maxAcceleration =  2 * maxVelocity;
 
   private double kP = 0.0731;
   private double kI = 0.0;
@@ -92,8 +92,8 @@ public class Slider extends SubsystemBase {
     SliderMotor.enableVoltageCompensation(true);
     SliderMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-    SliderMotor.configMotionCruiseVelocity(maxVelocity / 2);
-    SliderMotor.configMotionAcceleration(maxVelocity / 2);
+    SliderMotor.configMotionCruiseVelocity(maxVelocity);
+    SliderMotor.configMotionAcceleration(maxAcceleration);
 
     SliderMotor.config_kP(0, kP, TIMEOUT_MS);
     SliderMotor.config_kI(0, kI, TIMEOUT_MS);
