@@ -22,13 +22,13 @@ import frc.robot.tools.UnitConversion;
 public class Drivetrain extends SubsystemBase {
   
   // Motors #1 are Leaders
-  private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_ONE);
-  private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_TWO);
-  private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_THREE);
+  private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_ONE);
+  private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_TWO);
+  private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_THREE);
   
-  private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_ONE);
-  private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
-  private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
+  private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_ONE);
+  private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_TWO);
+  private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_THREE);
   
   private final DifferentialDrive DifferentialDrive = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   

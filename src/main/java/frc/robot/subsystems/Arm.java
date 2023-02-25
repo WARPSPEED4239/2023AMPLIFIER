@@ -6,14 +6,17 @@ import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
-  private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR_PORT);
+  private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR);
   private final WPI_TalonSRX ArmEncoderController = new WPI_TalonSRX(Constants.ARM_ENCODER_CONTROLLER);
 
   private final int TIMEOUT_MS = 30;
+
+  private double maxVelocity = 0.0;
 
   private double kP = 0.0;
   private double kI = 0.0;
@@ -26,7 +29,8 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-
+    // maxVelocity = Math.max(ArmMotor.getSelectedSensorVelocity(), maxVelocity);
+    // SmartDashboard.putNumber("Arm Motor Max Velocity", maxVelocity);
   }
   
   public void setLiftMotor (double speed){

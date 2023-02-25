@@ -1,5 +1,7 @@
 package frc.robot.commands.Slider;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Slider;
 
@@ -15,11 +17,14 @@ public class SliderSetPosition extends CommandBase {
 
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("Slider Motor Target Position In Inches", mTargetPositionInInches);
+    mSlider.setSliderPositionInches(mTargetPositionInInches);
   }
 
   @Override
   public void execute() {
-    mSlider.setSliderPositionInches(mTargetPositionInInches);
+    SmartDashboard.putNumber("Slider Motor Position In Inches", mSlider.getSliderEncoderPositionInches());
+    
   }
 
   @Override

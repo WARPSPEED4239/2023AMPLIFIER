@@ -5,7 +5,6 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Arm.ArmSetSpeed;
@@ -25,8 +24,8 @@ import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Slider;
 
 public class RobotContainer {
-  private final CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER_PORT);
-  private final CommandJoystick mJoystick = new CommandJoystick(Constants.JOYSTICK_PORT);
+  private final CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER);
+  private final CommandJoystick mJoystick = new CommandJoystick(Constants.JOYSTICK);
   private SendableChooser<TargetTask> targetChooser = new SendableChooser<>();
 
   private final Arm mArm = new Arm();
@@ -42,6 +41,7 @@ public class RobotContainer {
     mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
     mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
+    mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
 
     targetChooser.setDefaultOption("Do Nothing", TargetTask.DoNothing);
     targetChooser.addOption("Drive Straight With Auto Balance", TargetTask.DriveStraightWithAutoBalance);
@@ -60,6 +60,7 @@ public class RobotContainer {
 
     mController.x().onTrue(new SliderSetPosition(mSlider, 18.0));
 
+    mJoystick.button(1).toggleOnTrue(new ClawPistonSetState(mIntakeClaw, true));
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
     mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, true));

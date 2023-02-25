@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
     if(mSlider.getLimitIn()) {
       mSlider.setSliderEncoderPosition(0.0);
     } else if(mSlider.getLimitOut()) {
-      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(Constants.LIMIT_POSITION_OUT));
+      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(Constants.SLIDER_LIMIT_OUT_POSITION_INCHES));
     }
   }
   

@@ -1,25 +1,32 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
-  private final WPI_TalonFX SliderMotor = new WPI_TalonFX(Constants.SLIDER_MOTOR_PORT);
+  private final WPI_TalonFX SliderMotor = new WPI_TalonFX(Constants.SLIDER_MOTOR);
 
   private final DigitalInput limitIn = new DigitalInput(Constants.SLIDER_LIMIT_IN);
   private final DigitalInput limitOut = new DigitalInput(Constants.SLIDER_LIMIT_OUT);
 
   private final int TIMEOUT_MS = 30;
 
-  private double kP = 0.0;
+  private double maxVelocity = 14111.0;
+  
+  private double maxAcceleration = 2 * maxVelocity;
+
+  private double kP = 0.0731;
   private double kI = 0.0;
   private double kD = 0.0;
-  private double kF = 0.0;
+  private double kF = (767.25 / 14111);
+  //(1331.2 / 14111)
   
   public Slider() {
     configureSettings();
@@ -27,7 +34,8 @@ public class Slider extends SubsystemBase {
 
   @Override
   public void periodic() {
-
+    maxVelocity = Math.max(SliderMotor.getSelectedSensorVelocity(), maxVelocity);
+    SmartDashboard.putNumber("Slider Motor Max Velocity", maxVelocity);
   }
 
   public boolean getLimitIn() {
@@ -45,7 +53,7 @@ public class Slider extends SubsystemBase {
       speed = -1.0;
     }
     
-    if(getSliderEncoderPositionInches() >= Constants.LIMIT_POSITION_OUT && speed > 0.0) {
+    if(getSliderEncoderPositionInches() >= Constants.SLIDER_LIMIT_OUT_POSITION_INCHES && speed > 0.0) {
       speed = 0.0;
     } else if(getSliderEncoderPositionInches() <= 0.0 && speed < 0.0) {
       speed = 0.0;
@@ -55,7 +63,7 @@ public class Slider extends SubsystemBase {
   }
   
   public void setSliderPositionInches(double inches) {
-    
+    SliderMotor.set(ControlMode.MotionMagic, UnitConversion.inchesToSRXUnits(inches));
   }
   
   public void setSliderEncoderPosition(double position) {
@@ -63,9 +71,9 @@ public class Slider extends SubsystemBase {
     
   }
   
-  // public void setSliderEncoderPositionInches(double inches) {
-  //   SliderMotor.
-  // }
+  public void setSliderEncoderPositionInches(double inches) {
+    SliderMotor.setSelectedSensorPosition(UnitConversion.inchesToSRXUnits(inches));
+  }
   
   public double getSliderEncoderPosition() {
     return SliderMotor.getSelectedSensorPosition();
@@ -83,7 +91,10 @@ public class Slider extends SubsystemBase {
     SliderMotor.configVoltageCompSaturation(12.0);
     SliderMotor.enableVoltageCompensation(true);
     SliderMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    
+
+    SliderMotor.configMotionCruiseVelocity(maxVelocity / 2);
+    SliderMotor.configMotionAcceleration(maxVelocity / 2);
+
     SliderMotor.config_kP(0, kP, TIMEOUT_MS);
     SliderMotor.config_kI(0, kI, TIMEOUT_MS);
     SliderMotor.config_kD(0, kD, TIMEOUT_MS);

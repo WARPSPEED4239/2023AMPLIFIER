@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class Shifter extends SubsystemBase {
 
-  private final DoubleSolenoid Shifter = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.SHIFTER_SOLENOID_FORWARD_PORT, Constants.SHIFTER_SOLENOID_REVERSE_PORT);
+  private final DoubleSolenoid Shifter = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.SHIFTER_FORWARD_SOLENOID, Constants.SHIFTER_REVERSE_SOLENOID);
   
   public Shifter() {}
 

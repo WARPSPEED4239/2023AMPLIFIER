@@ -14,7 +14,6 @@ SECTIONS-
         Face Button 4(spin intake wheel out)
         Face Button 5(open claw)
         Face Button 6(close claw)
-        Trigger(hook up/down)
     }
 
  Lift:
