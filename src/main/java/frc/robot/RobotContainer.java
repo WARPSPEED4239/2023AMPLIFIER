@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Arm.ArmSetSpeed;
+import frc.robot.commands.Arm.ArmSetSpeedConstant;
 import frc.robot.commands.Autonomous.AutonomousCommand;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.commands.Drivetrain.ShifterSetState;
@@ -58,7 +60,10 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
 
-    mController.x().onTrue(new SliderSetPosition(mSlider, 18.0));
+    mController.x().onTrue(new SliderSetPosition(mSlider, 9.0));
+    mController.y().onTrue(new SliderSetPosition(mSlider, 25.0));
+
+    mJoystick.button(2).onTrue(new ArmSetPosition(mArm, 85));
 
     mJoystick.button(1).toggleOnTrue(new ClawPistonSetState(mIntakeClaw, true));
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));

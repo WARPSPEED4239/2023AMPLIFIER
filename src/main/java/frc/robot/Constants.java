@@ -48,6 +48,9 @@ public final class Constants {
 
         XBOX_CONTROLLER_DEADZONE = 0.1,
 
+        ARM_BOTTOM_DEGREES = 150.0,
+        ARM_TOP_DEGREES = 18.0,
+
         CUBIC_A = 8.0 / 15.0,
         CUBIC_B = 0.0,
         CUBIC_C = 7.0 / 15.0,

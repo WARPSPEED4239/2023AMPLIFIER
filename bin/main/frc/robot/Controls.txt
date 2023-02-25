@@ -21,3 +21,25 @@ SECTIONS-
         Face Joystick(arm extending)
         Joystick Y Axis(lift arm)
     }
+
+PRESETS-
+
+    Starting{
+        Arm Degrees(150.0)
+        Extender Position Inches(0.0)
+    }
+
+    Station Pick Up{
+        Arm Degrees(46.0)
+        Extender Position Inches(0.0)
+    }
+    
+    Low Scoring{
+        Arm Degrees(46.0)
+        Extender Position Inches(9.0)
+    }
+
+    High Scoring{
+        Arm Degrees(27.9)
+        Extender Position Inches(23.0)
+    }

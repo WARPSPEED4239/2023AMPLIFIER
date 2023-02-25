@@ -57,10 +57,11 @@ public class Drivetrain extends SubsystemBase {
   public void moveStraightUsingGyro(double speed, double startingYaw) {
     double currentYaw = Pigeon.getYaw();
     double rotation = 0.0;
+    //0.1889
     if(currentYaw < startingYaw) {
-      rotation = 0.1889;
+      rotation = Math.PI / 10;
     } else if(currentYaw > startingYaw) {
-      rotation = -0.1889;
+      rotation = -Math.PI / 10;
     }
     DifferentialDrive.arcadeDrive(speed, rotation);
   }
