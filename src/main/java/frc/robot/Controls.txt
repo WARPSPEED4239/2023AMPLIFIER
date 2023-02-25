@@ -29,6 +29,11 @@ PRESETS-
         Extender Position Inches(0.0)
     }
 
+    Intaking{
+        Arm Degrees(141.0)
+        Extender Position Inches(0.0)
+    }
+
     Station Pick Up{
         Arm Degrees(46.0)
         Extender Position Inches(0.0)
