@@ -55,4 +55,13 @@ public final class Constants {
         CUBIC_B = 0.0,
         CUBIC_C = 7.0 / 15.0,
         CUBIC_CONSTANT = 0.0;
+
+    public enum Positions {
+        Starting,
+        Intaking,
+        LowScoring,
+        HighScoring,
+        Station,
+        eStop
+    }
 }

@@ -63,7 +63,13 @@ public class Slider extends SubsystemBase {
   }
   
   public void setSliderPositionInches(double inches) {
-    SliderMotor.set(ControlMode.MotionMagic, UnitConversion.inchesToSRXUnits(inches));
+    if (getLimitOut() && SliderMotor.getMotorOutputVoltage() > 0.000001) {
+      setSliderSpeed(0.0);
+    } else if (getLimitIn() && SliderMotor.getMotorOutputVoltage() < -0.000001) {
+      setSliderSpeed(0.0);
+    } else {
+      SliderMotor.set(ControlMode.MotionMagic, UnitConversion.inchesToSRXUnits(inches));
+    }
   }
   
   public void setSliderEncoderPosition(double position) {
