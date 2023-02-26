@@ -10,7 +10,7 @@ import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
 
-public class GoToPosition extends SequentialCommandGroup{
+public class GoToPosition extends SequentialCommandGroup {
     public static boolean mArmFirst = true;
 
     public GoToPosition(Arm arm, Slider slider, Constants.Positions positions) {
