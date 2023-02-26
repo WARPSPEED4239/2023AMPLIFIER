@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Arm.ArmSetSpeed;
+import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.commands.Drivetrain.ShifterSetState;
@@ -35,6 +37,7 @@ public class RobotContainer {
   private final IntakeClaw mIntakeClaw = new IntakeClaw();
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
+  private final GoToPosition mGoToPosition = new GoToPosition();
 
   public RobotContainer() {
     mArm.setDefaultCommand(new ArmSetSpeed(mArm, mJoystick));
@@ -70,13 +73,20 @@ public class RobotContainer {
     mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, true));
     mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, false));
 
+    mJoystick.button(7).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.Station));
+    mJoystick.button(8).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.eStop));
+    mJoystick.button(9).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.LowScoring));
+    mJoystick.button(10).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.HighScoring));
+    mJoystick.button(11).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.Starting));
+    mJoystick.button(12).onTrue(mGoToPosition.runCommand(mArm, mSlider, Positions.Intaking));
+
     mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
     mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
   }
 
   public Command getAutonomousCommand() {
     TargetTask targetTask = targetChooser.getSelected();
-    return new AutonomousCommand(targetTask, mDrivetrain, mShifter);
+    return new AutonomousCommand(targetTask, mDrivetrain, mShifter, mGoToPosition);
   }
 
   public Slider getSlider() {
