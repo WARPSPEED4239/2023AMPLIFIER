@@ -34,13 +34,13 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     maxVelocity = Math.max(Math.abs(ArmMotor.getSelectedSensorVelocity()), maxVelocity);
+
     SmartDashboard.putNumber("Arm Motor Max Velocity", maxVelocity);
-    
     SmartDashboard.putNumber("ARM ENCODER VAL", getArmEncoderPosition());
     SmartDashboard.putNumber("ARM PERCENT OUT", ArmMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ARM VELO", ArmMotor.getSelectedSensorVelocity());
-
     SmartDashboard.putNumber("ARM DEG", getArmEncoderDeg());
+    SmartDashboard.putString("Arm Command", getCurrentCommand().getName());
   }
   
   public void setLiftMotor (double speed){
