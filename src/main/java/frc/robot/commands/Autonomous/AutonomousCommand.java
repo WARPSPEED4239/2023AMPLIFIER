@@ -3,7 +3,6 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.SendableChoosers.TargetTask;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shifter;
@@ -13,15 +12,13 @@ public class AutonomousCommand extends SequentialCommandGroup {
   private final TargetTask mTargetTask;
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
-  private final GoToPosition mGoToPosition;
 
-  public AutonomousCommand(TargetTask targetTask, Drivetrain drivetrain, Shifter shifter, GoToPosition goToPosition) {
+  public AutonomousCommand(TargetTask targetTask, Drivetrain drivetrain, Shifter shifter) {
     super();
 
     mTargetTask = targetTask;
     mDrivetrain = drivetrain;
     mShifter = shifter;
-    mGoToPosition = goToPosition;
 
     switch (mTargetTask) {
       case DriveStraightWithAutoBalance:

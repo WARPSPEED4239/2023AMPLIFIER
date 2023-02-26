@@ -1,6 +1,5 @@
 package frc.robot.commands.Automated;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
@@ -11,10 +10,10 @@ import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
 
-public class GoToPosition {
+public class GoToPosition extends SequentialCommandGroup{
     public static boolean mArmFirst = true;
 
-    public Command runCommand(Arm arm, Slider slider, Constants.Positions positions) {
+    public GoToPosition(Arm arm, Slider slider, Constants.Positions positions) {
         Arm mArm = arm;
         Slider mSlider = slider;
 
@@ -54,25 +53,29 @@ public class GoToPosition {
                 break;
         }
 
-        Command mCommand;
         if (eStop) {
-            mCommand = new ParallelCommandGroup(
+            addCommands(
+                new ParallelCommandGroup(
                     new ArmSetSpeedConstant(mArm, 0.0),
-                    new SliderSetSpeed(mSlider, 0.0)).withTimeout(0.1);
+                    new SliderSetSpeed(mSlider, 0.0)
+                ).withTimeout(0.1)
+            );
         } else if (prevArmFirst) {
-            mCommand = new SequentialCommandGroup(
-                    new ArmSetPosition(mArm, mArmTargetInches).withTimeout(1.0),
-                    new ParallelCommandGroup(
-                            new ArmSetPosition(mArm, mArmTargetInches),
-                            new SliderSetPosition(mSlider, mSliderTargetDegrees)));
+            addCommands(
+                new ArmSetPosition(mArm, mArmTargetInches).withTimeout(1.0),
+                new ParallelCommandGroup(
+                    new ArmSetPosition(mArm, mArmTargetInches),
+                    new SliderSetPosition(mSlider, mSliderTargetDegrees)
+                )
+            );
         } else {
-            mCommand = new SequentialCommandGroup(
-                    new SliderSetPosition(mSlider, mSliderTargetDegrees).withTimeout(1.0),
-                    new ParallelCommandGroup(
-                            new SliderSetPosition(mSlider, mSliderTargetDegrees),
-                            new ArmSetPosition(mArm, mArmTargetInches)));
+            addCommands(
+                new SliderSetPosition(mSlider, mSliderTargetDegrees).withTimeout(1.0),
+                new ParallelCommandGroup(
+                    new SliderSetPosition(mSlider, mSliderTargetDegrees),
+                    new ArmSetPosition(mArm, mArmTargetInches)
+                )
+            );
         }
-
-        return mCommand;
     }
 }
