@@ -14,30 +14,30 @@ public class GoToPosition extends SequentialCommandGroup {
         Arm mArm = arm;
         Slider mSlider = slider;
 
-        double mArmTargetInches = 150.0;
-        double mSliderTargetDegrees = 0.0;
+        double mArmTargetDegrees = 150.0;
+        double mSliderTargetInches = 0.0;
         boolean eStop = false;
         
         switch (positions) {
             case Starting: // Arm HAS to Move First Leaving this State
-                mArmTargetInches = 150.0;
-                mSliderTargetDegrees = 0.0;
+                mArmTargetDegrees = 150.0;
+                mSliderTargetInches = 0.0;
                 break;
             case Intaking: // Arm HAS to Move First Leaving this State
-                mArmTargetInches = 141.0;
-                mSliderTargetDegrees = 0.0;
+                mArmTargetDegrees = 141.0;
+                mSliderTargetInches = 0.0;
                 break;
             case LowScoring: // Slider Maybe has to Move First Leaving this State
-                mArmTargetInches = 46.0;
-                mSliderTargetDegrees = 9.0;
+                mArmTargetDegrees = 46.0;
+                mSliderTargetInches = 9.0;
                 break;
             case HighScoring: // Slider HAS to Move First Leaving this State
-                mArmTargetInches = 27.9;
-                mSliderTargetDegrees = 23.0;
+                mArmTargetDegrees = 27.9;
+                mSliderTargetInches = 23.0;
                 break;
             case Station: // Arm May Move First Leaving this State
-                mArmTargetInches = 46.0;
-                mSliderTargetDegrees = 0.0;
+                mArmTargetDegrees = 46.0;
+                mSliderTargetInches = 0.0;
                 break;
             case eStop:
                 eStop = true;
@@ -53,7 +53,7 @@ public class GoToPosition extends SequentialCommandGroup {
             );
         } else {
             addCommands(
-                new ArmSliderSetPosition(mArm, mSlider, mArmTargetInches, mSliderTargetDegrees)
+                new ArmSliderSetPosition(mArm, mSlider, mArmTargetDegrees, mSliderTargetInches)
             );
         }
     }
