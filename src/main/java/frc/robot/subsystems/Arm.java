@@ -40,7 +40,10 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("ARM PERCENT OUT", ArmMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ARM VELO", ArmMotor.getSelectedSensorVelocity());
     SmartDashboard.putNumber("ARM DEG", getArmEncoderDeg());
-    SmartDashboard.putString("Arm Command", getCurrentCommand().getName());
+
+    try {
+      SmartDashboard.putString("Arm Command", getCurrentCommand().getName());
+    } catch (NullPointerException e) {}
   }
   
   public void setLiftMotor (double speed){
