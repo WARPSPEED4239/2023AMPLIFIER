@@ -34,9 +34,10 @@ public class Slider extends SubsystemBase {
 
   @Override
   public void periodic() {
-    maxVelocity = Math.max(SliderMotor.getSelectedSensorVelocity(), maxVelocity);
-    SmartDashboard.putNumber("Slider Motor Max Velocity", maxVelocity);
-
+    SmartDashboard.putNumber("SLIDER ENCODER VAL", getSliderEncoderPosition());
+    SmartDashboard.putNumber("SLIDER PERCENT OUT", SliderMotor.getMotorOutputPercent());
+    SmartDashboard.putNumber("SLIDER VELO", SliderMotor.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("SLIDER INCHES", getSliderEncoderPositionInches());
     try {
       SmartDashboard.putString("Slider Command", getCurrentCommand().getName());
     } catch (NullPointerException e) {}

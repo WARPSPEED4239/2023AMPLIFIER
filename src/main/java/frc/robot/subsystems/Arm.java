@@ -33,20 +33,17 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    maxVelocity = Math.max(Math.abs(ArmMotor.getSelectedSensorVelocity()), maxVelocity);
-
-    SmartDashboard.putNumber("Arm Motor Max Velocity", maxVelocity);
     SmartDashboard.putNumber("ARM ENCODER VAL", getArmEncoderPosition());
     SmartDashboard.putNumber("ARM PERCENT OUT", ArmMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("ARM VELO", ArmMotor.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("ARM DEG", getArmEncoderDeg());
+    SmartDashboard.putNumber("ARM POSITION DEGREES", getArmEncoderDeg());
 
     try {
       SmartDashboard.putString("Arm Command", getCurrentCommand().getName());
     } catch (NullPointerException e) {}
   }
   
-  public void setLiftMotor (double speed){
+  public void setArmMotor (double speed){
     if (speed > 1.0){
       speed = 1.0;
     } else if (speed <-1.0){

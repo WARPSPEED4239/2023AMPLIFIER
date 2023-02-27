@@ -18,11 +18,11 @@ public class SliderSetPosition extends CommandBase {
   @Override
   public void initialize() {
     SmartDashboard.putNumber("Slider Motor Target Position", UnitConversion.inchesToSRXUnits(mTargetPositionInInches));
-    mSlider.setSliderPositionInches(mTargetPositionInInches);
   }
 
   @Override
   public void execute() {
+    mSlider.setSliderPositionInches(mTargetPositionInInches);
   }
 
   @Override

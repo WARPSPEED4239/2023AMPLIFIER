@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 public class ArmSetSpeedConstant extends CommandBase {
-  private final Arm mLift;
+  private final Arm mArm;
   private double mSpeed;
 
-  public ArmSetSpeedConstant(Arm lift, double speed) {
-    mLift = lift;
+  public ArmSetSpeedConstant(Arm arm, double speed) {
+    mArm = arm;
     mSpeed = speed;
-    addRequirements(mLift);
+    addRequirements(mArm);
   }
 
   @Override
@@ -18,7 +18,7 @@ public class ArmSetSpeedConstant extends CommandBase {
 
   @Override
   public void execute() {
-    mLift.setLiftMotor(mSpeed);
+    mArm.setArmMotor(mSpeed);
   }
 
   @Override
