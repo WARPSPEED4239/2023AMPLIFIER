@@ -1,5 +1,6 @@
 package frc.robot.commands.Automated;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
@@ -52,6 +53,8 @@ public class GoToPosition extends SequentialCommandGroup {
                 eStop = true;
                 break;
         }
+
+        SmartDashboard.putBoolean("Next ArmFirst Value", mArmFirst);
 
         if (eStop) {
             addCommands(
