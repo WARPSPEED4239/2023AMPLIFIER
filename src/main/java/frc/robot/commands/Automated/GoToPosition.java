@@ -65,7 +65,7 @@ public class GoToPosition extends SequentialCommandGroup {
             );
         } else if (!prevSliderFirst) {
             addCommands(
-                new ArmSetPosition(mArm, mArmTargetInches).withTimeout(1.0),
+                new ArmSetPosition(mArm, mArmTargetInches).withTimeout(3.0),
                 new ParallelCommandGroup(
                     new ArmSetPosition(mArm, mArmTargetInches),
                     new SliderSetPosition(mSlider, mSliderTargetDegrees)
@@ -73,7 +73,7 @@ public class GoToPosition extends SequentialCommandGroup {
             );
         } else {
             addCommands(
-                new SliderSetPosition(mSlider, mSliderTargetDegrees).withTimeout(1.0),
+                new SliderSetPosition(mSlider, mSliderTargetDegrees).withTimeout(3.0),
                 new ParallelCommandGroup(
                     new SliderSetPosition(mSlider, mSliderTargetDegrees),
                     new ArmSetPosition(mArm, mArmTargetInches)
