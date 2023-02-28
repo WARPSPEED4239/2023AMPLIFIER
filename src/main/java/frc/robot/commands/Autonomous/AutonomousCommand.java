@@ -8,8 +8,8 @@ import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Drivetrain.DrivetrainNoSensors;
+import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
-import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IntakeClaw;
@@ -40,32 +40,46 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(new WaitCommand(15.0));
         break;
       case DriveForward:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, 0.3).withTimeout(5.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
+          ).withTimeout(3.0)
+        );
         break;
       case DriveBackward:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, -0.3).withTimeout(5.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)
+          ).withTimeout(3.0)
+        );
         break;
       case ScoreConeDriveBackwards:
         addCommands(
-          new ArmSetPosition(mArm, 27.9).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, 15.0).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
             new ClawPistonSetState(mIntakeClaw, true)
           ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
           new ParallelCommandGroup(
-            new ArmSetPosition(mArm, 27.9),
-            new SliderSetPosition(mSlider, 0.0)
-          ).withTimeout(2.0),                                                       // Arm hold, Slider in for 2 seconds
-          new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.Starting),
             new ClawPistonSetState(mIntakeClaw, false)
           ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
-          new DrivetrainNoSensors(mDrivetrain, -0.3).withTimeout(5.0)               // Drivetrain backwards for 5 seconds
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
+          ).withTimeout(3.0)
         );
         break;
       case DriveForwardTouchCharge:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, 0.3).withTimeout(2.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
+          ).withTimeout(1.0)
+        );
         break;
       case DriveForwardAutoBalance:
         addCommands(new AutoBalance(mDrivetrain, mShifter).withTimeout(7.0));
