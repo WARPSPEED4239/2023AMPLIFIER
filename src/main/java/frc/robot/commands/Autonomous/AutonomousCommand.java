@@ -8,6 +8,7 @@ import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Drivetrain.DrivetrainNoSensors;
+import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.subsystems.Arm;
@@ -40,10 +41,20 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(new WaitCommand(15.0));
         break;
       case DriveForward:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, 0.3).withTimeout(5.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7)
+          ).withTimeout(4.0)
+        );
         break;
       case DriveBackward:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, -0.3).withTimeout(5.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7)
+          ).withTimeout(4.0)
+        );
         break;
       case ScoreConeDriveBackwards:
         addCommands(
@@ -61,11 +72,19 @@ public class AutonomousCommand extends SequentialCommandGroup {
             new GoToPosition(mArm, mSlider, Positions.Starting),
             new ClawPistonSetState(mIntakeClaw, false)
           ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
-          new DrivetrainNoSensors(mDrivetrain, -0.3).withTimeout(5.0)               // Drivetrain backwards for 5 seconds
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7)                                 // Drivetrain backwards for 5 seconds
+          ).withTimeout(4.0)
         );
         break;
       case DriveForwardTouchCharge:
-        addCommands(new DrivetrainNoSensors(mDrivetrain, 0.3).withTimeout(2.0));
+        addCommands(
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7)
+          ).withTimeout(2.0)
+        );
         break;
       case DriveForwardAutoBalance:
         addCommands(new AutoBalance(mDrivetrain, mShifter).withTimeout(7.0));
