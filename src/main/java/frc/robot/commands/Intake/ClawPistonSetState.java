@@ -8,9 +8,9 @@ public class ClawPistonSetState extends CommandBase {
   private final IntakeClaw mIntakeClaw;
   private final boolean mState;
 
-  public ClawPistonSetState(IntakeClaw intakeClaw, boolean state) {
+  public ClawPistonSetState(IntakeClaw intakeClaw, boolean open) {
     mIntakeClaw = intakeClaw;
-    mState = state;
+    mState = open;
     addRequirements(mIntakeClaw);
   }
 

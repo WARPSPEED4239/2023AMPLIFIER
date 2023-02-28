@@ -64,4 +64,9 @@ public final class Constants {
         Station,
         eStop
     }
+
+    public static enum TargetTask {
+        DoNothing, DriveForward, DriveBackward, 
+        ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance
+    }
 }
