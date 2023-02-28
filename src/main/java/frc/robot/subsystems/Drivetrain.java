@@ -91,8 +91,7 @@ public class Drivetrain extends SubsystemBase {
     }
   }
 
-  public void generateTragectory(float[] start, float[] end, float[] interiorPointA, float[] interiorPointB, boolean reverse){
-
+  public void generateTragectory(float[] start, float[] end, float[] interiorPointA, float[] interiorPointB, boolean reverse) {
     var startPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
     var endPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
 
