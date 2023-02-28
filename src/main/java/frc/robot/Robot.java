@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Slider;
+import frc.robot.tools.UnitConversion;
 
 public class Robot extends TimedRobot {
 
@@ -22,14 +23,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("SLIDER Inches", mSlider.getSliderPositionInches());
     SmartDashboard.putBoolean("Slider Limit In", mSlider.getLimitIn());
     SmartDashboard.putBoolean("Slider Limit Out", mSlider.getLimitOut());
 
     if(mSlider.getLimitIn()) {
       mSlider.setSliderEncoderPosition(0.0);
     } else if(mSlider.getLimitOut()) {
-      mSlider.setSliderEncoderPosition(Constants.LIMIT_POSITION_OUT);
+      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(Constants.SLIDER_LIMIT_OUT_POSITION_INCHES));
     }
   }
   

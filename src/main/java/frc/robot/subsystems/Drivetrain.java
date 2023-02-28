@@ -1,10 +1,19 @@
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -13,13 +22,13 @@ import frc.robot.tools.UnitConversion;
 public class Drivetrain extends SubsystemBase {
   
   // Motors #1 are Leaders
-  private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_ONE);
-  private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_TWO);
-  private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.LEFT_MOTOR_PORT_THREE);
+  private final WPI_TalonFX LeftMotorOne = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_ONE);
+  private final WPI_TalonFX LeftMotorTwo = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_TWO);
+  private final WPI_TalonFX LeftMotorThree = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_MOTOR_THREE);
   
-  private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_ONE);
-  private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_TWO);
-  private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.RIGHT_MOTOR_PORT_THREE);
+  private final WPI_TalonFX RightMotorOne = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_ONE);
+  private final WPI_TalonFX RightMotorTwo = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_TWO);
+  private final WPI_TalonFX RightMotorThree = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_MOTOR_THREE);
   
   private final DifferentialDrive DifferentialDrive = new DifferentialDrive(LeftMotorOne, RightMotorOne);
   
@@ -48,6 +57,7 @@ public class Drivetrain extends SubsystemBase {
   public void moveStraightUsingGyro(double speed, double startingYaw) {
     double currentYaw = Pigeon.getYaw();
     double rotation = 0.0;
+    //0.1889
     if(currentYaw < startingYaw) {
       rotation = 0.1889;
     } else if(currentYaw > startingYaw) {
@@ -79,6 +89,20 @@ public class Drivetrain extends SubsystemBase {
       moveStraightUsingGyro(speed, startingYaw);
       System.out.println("1.0");
     }
+  }
+
+  public void generateTragectory(float[] start, float[] end, float[] interiorPointA, float[] interiorPointB, boolean reverse) {
+    var startPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
+    var endPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
+
+    var interiorPoints = new ArrayList<Translation2d>();
+    interiorPoints.add(new Translation2d(Units.feetToMeters(interiorPointA[0]), Units.feetToMeters(interiorPointA[1])));
+    interiorPoints.add(new Translation2d(Units.feetToMeters(interiorPointB[0]), Units.feetToMeters(interiorPointB[1])));
+
+    TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(12), Units.feetToMeters(12));
+    config.setReversed(reverse);
+
+    var trajectory = TrajectoryGenerator.generateTrajectory(startPos, interiorPoints, endPos, config);
   }
 
   public void resetEncoders() {
@@ -149,7 +173,7 @@ public class Drivetrain extends SubsystemBase {
     RightMotorOne.selectProfileSlot(0, 0);
 
     Pigeon.setYaw(0.0);
-    LeftMotorOne.setSelectedSensorPosition(0);
-    RightMotorOne.setSelectedSensorPosition(0);
+    LeftMotorOne.setSelectedSensorPosition(0.0);
+    RightMotorOne.setSelectedSensorPosition(0.0);
   }
 }

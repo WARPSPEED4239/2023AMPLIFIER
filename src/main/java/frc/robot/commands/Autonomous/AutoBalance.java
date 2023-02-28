@@ -1,4 +1,3 @@
-
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -25,7 +24,7 @@ public class AutoBalance extends CommandBase {
   public void initialize() {
     startingYaw = Pigeon.getYaw();
     mShifter.setShifterState(true);
-    mDrivetrain.moveUntilAngledUp(1.0,  12.0);
+    mDrivetrain.moveUntilAngledUp(0.43,  12.0);
     mDrivetrain.moveUntilAngledDown(0.0035 * Math.pow(pitch, 2), 2.0);
     mDrivetrain.stopAllMotors();
     activatedVinceBalanceTestMode = true;

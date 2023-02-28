@@ -1,7 +1,9 @@
 package frc.robot.commands.Slider;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Slider;
+import frc.robot.tools.UnitConversion;
 
 public class SliderSetPosition extends CommandBase {
   private final Slider mSlider;
@@ -15,6 +17,7 @@ public class SliderSetPosition extends CommandBase {
 
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("Slider Motor Target Position", UnitConversion.inchesToSRXUnits(mTargetPositionInInches));
   }
 
   @Override
