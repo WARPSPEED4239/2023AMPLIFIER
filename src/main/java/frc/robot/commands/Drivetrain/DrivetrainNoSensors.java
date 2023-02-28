@@ -6,10 +6,13 @@ import frc.robot.subsystems.Drivetrain;
 public class DrivetrainNoSensors extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final double mSpeed;
+  private final double mRotate;
 
-  public DrivetrainNoSensors(Drivetrain drivetrain, double speed) {
+  public DrivetrainNoSensors(Drivetrain drivetrain, double speed, double rotate) {
     mDrivetrain = drivetrain;
     mSpeed = speed;
+    mRotate = rotate;
+    
     addRequirements(mDrivetrain);
   }
 
@@ -18,7 +21,7 @@ public class DrivetrainNoSensors extends CommandBase {
 
   @Override
   public void execute() {
-    mDrivetrain.arcadeDrive(mSpeed, 0.0);
+    mDrivetrain.arcadeDrive(mSpeed, mRotate);
   }
 
   @Override
