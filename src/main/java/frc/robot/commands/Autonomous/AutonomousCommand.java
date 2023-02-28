@@ -44,7 +44,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, 0.7, -0.1)
+            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
           ).withTimeout(3.0)
         );
         break;
@@ -52,7 +52,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, -0.7, 0.1)
+            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)
           ).withTimeout(3.0)
         );
         break;
@@ -74,7 +74,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
           ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, -0.7, 0.1)                                       // Drivetrain backwards for 5 seconds
+            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)                          // Drivetrain backwards for 5 seconds
           ).withTimeout(3.0)
         );
         break;
@@ -82,7 +82,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, 0.7, -0.1)
+            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
           ).withTimeout(1.0)
         );
         break;
