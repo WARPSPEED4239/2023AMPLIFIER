@@ -10,7 +10,6 @@ import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Drivetrain.DrivetrainNoSensors;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
-import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IntakeClaw;
@@ -64,10 +63,6 @@ public class AutonomousCommand extends SequentialCommandGroup {
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
             new ClawPistonSetState(mIntakeClaw, true)
           ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
-          new ParallelCommandGroup(
-            new ArmSetPosition(mArm, 15.0),
-            new SliderSetPosition(mSlider, 0.0)
-          ).withTimeout(2.0),                                                       // Arm hold, Slider in for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.Starting),
             new ClawPistonSetState(mIntakeClaw, false)
