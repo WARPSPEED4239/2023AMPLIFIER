@@ -52,9 +52,7 @@ public class GoToPosition extends SequentialCommandGroup {
                 ).withTimeout(0.1)
             );
         } else {
-            addCommands(
-                new ArmSliderSetPosition(mArm, mSlider, mArmTargetDegrees, mSliderTargetInches)
-            );
+            addCommands(new ArmSliderSetPosition(mArm, mSlider, mArmTargetDegrees, mSliderTargetInches));
         }
     }
 }
