@@ -58,14 +58,14 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case ScoreConeDriveBackwards:
         addCommands(
-          new ArmSetPosition(mArm, 21.0).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, 18.0).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
             new ClawPistonSetState(mIntakeClaw, true)
           ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
           new ParallelCommandGroup(
-            new ArmSetPosition(mArm, 21.0),
+            new ArmSetPosition(mArm, 18.0),
             new SliderSetPosition(mSlider, 0.0)
           ).withTimeout(2.0),                                                       // Arm hold, Slider in for 2 seconds
           new ParallelCommandGroup(
