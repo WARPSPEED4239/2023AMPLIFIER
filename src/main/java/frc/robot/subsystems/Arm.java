@@ -22,7 +22,7 @@ public class Arm extends SubsystemBase {
   private double maxVelocity = 465.0;
   private double maxAcceleration = maxVelocity;
 
-  private double kP = 0.9;
+  private double kP = 1.0;
   private double kI = 0.0;
   private double kD = 0.0;
   private double kF = 2.08;
