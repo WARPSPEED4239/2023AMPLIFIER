@@ -32,9 +32,9 @@ public class StraightWithGyro extends CommandBase {
     Pigeon.outputGyroSensorsToDashboard();
 
     double triggersAxis = XboxControllerTools.triggersAxis();
-    double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getRightX());
+    double rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
 
-    if (XboxControllerTools.isInDeadzone(mController.getRightX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
+    if (XboxControllerTools.isInDeadzone(mController.getLeftX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
       if (XboxControllerTools.triggersAxis() == 0.0) {
         triggerReset = true;
       } else {

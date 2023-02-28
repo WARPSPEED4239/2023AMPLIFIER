@@ -24,7 +24,7 @@ public class GoToPosition extends SequentialCommandGroup {
                 mSliderTargetInches = 0.0;
                 break;
             case Intaking: // Arm HAS to Move First Leaving this State
-                mArmTargetDegrees = 141.0;
+                mArmTargetDegrees = 135.0;
                 mSliderTargetInches = 0.0;
                 break;
             case LowScoring: // Slider Maybe has to Move First Leaving this State
@@ -36,7 +36,7 @@ public class GoToPosition extends SequentialCommandGroup {
                 mSliderTargetInches = 23.0;
                 break;
             case Station: // Arm May Move First Leaving this State
-                mArmTargetDegrees = 46.0;
+                mArmTargetDegrees = 40.0;
                 mSliderTargetInches = 0.0;
                 break;
             case eStop:

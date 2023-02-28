@@ -69,8 +69,8 @@ public class RobotContainer {
     mJoystick.button(1).toggleOnTrue(new ClawPistonSetState(mIntakeClaw, true));
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
-    mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, true));
-    mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, false));
+    mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, false));
+    mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, true));
 
     mJoystick.button(7).onTrue(new GoToPosition(mArm, mSlider, Positions.Station));
     mJoystick.button(8).onTrue(new GoToPosition(mArm, mSlider, Positions.eStop));

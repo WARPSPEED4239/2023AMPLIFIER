@@ -59,9 +59,9 @@ public class Drivetrain extends SubsystemBase {
     double rotation = 0.0;
     //0.1889
     if(currentYaw < startingYaw) {
-      rotation = Math.PI / 10;
+      rotation = 0.1889;
     } else if(currentYaw > startingYaw) {
-      rotation = -Math.PI / 10;
+      rotation = -0.1889;
     }
     DifferentialDrive.arcadeDrive(speed, rotation);
   }

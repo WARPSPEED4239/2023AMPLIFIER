@@ -29,8 +29,8 @@ public class ArcadeDrive extends CommandBase {
     double rotation = 0.0;
     double triggersAxis = XboxControllerTools.triggersAxis();
     
-    if(XboxControllerTools.isInDeadzone(mController.getRightX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
-      rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getRightX());
+    if(XboxControllerTools.isInDeadzone(mController.getLeftX(), Constants.XBOX_CONTROLLER_DEADZONE)) {
+      rotation = RobotMath.solveEquation(Constants.CUBIC_A, Constants.CUBIC_B, Constants.CUBIC_C, Constants.CUBIC_CONSTANT, -mController.getLeftX());
     }
 
     mDrivetrain.arcadeDrive(triggersAxis, rotation);
