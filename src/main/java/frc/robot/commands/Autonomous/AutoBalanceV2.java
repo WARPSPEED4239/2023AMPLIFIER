@@ -11,7 +11,7 @@ public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
   private final double kPDrive = -0.04; // TODO TUNE
-  private final double kPRotate = 0.01; // TODO TUNE
+  private final double kPRotate = 0.005; // TODO TUNE
   private final double mDriveForwardSpeed;
   private final double mRotateSpeed;
   private final double mDriveForwardTime;
@@ -59,7 +59,8 @@ public class AutoBalanceV2 extends CommandBase {
       rotate = 0;
     }
 
-    SmartDashboard.putNumber("DRIVE PERCENT OUT", speed);
+    SmartDashboard.putNumber("DRIVE SPEED PERCENT", speed);
+    SmartDashboard.putNumber("DRIVE ROTATE PERCENT", rotate);
     mDrivetrain.arcadeDrive(speed, rotate);
   }
 
