@@ -8,6 +8,7 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
+  private final double kP = 0.05;
   private double pitch;
   private double speed;
 
@@ -28,14 +29,9 @@ public class AutoBalanceV2 extends CommandBase {
   @Override
   public void execute() {
     pitch = Pigeon.getRoll();
+    speed = kP * pitch;
 
-    if (pitch > 0.0) {
-      speed = Math.pow((0.0111 * pitch), 0.5);
-      mDrivetrain.arcadeDrive(speed, 0.0);
-    } else if (pitch < 0.0) {
-      speed = -Math.pow((0.0111 * Math.abs(pitch)), 0.5);
-      mDrivetrain.arcadeDrive(speed, 0.0);
-    }
+    mDrivetrain.arcadeDrive(speed, 0.0);
   }
 
   // Called once the command ends or is interrupted.

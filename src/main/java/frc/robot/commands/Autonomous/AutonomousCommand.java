@@ -87,7 +87,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
             new ShifterSetState(mShifter, false),
             new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
           ).withTimeout(2.0),
-          new AutoBalanceV2(mDrivetrain, mShifter).withTimeout(5.0));
+          new AutoBalanceV2(mDrivetrain, mShifter));
         break;
       }
     }
