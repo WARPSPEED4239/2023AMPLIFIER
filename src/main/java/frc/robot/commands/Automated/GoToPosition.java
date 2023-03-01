@@ -36,7 +36,7 @@ public class GoToPosition extends SequentialCommandGroup {
                 mSliderTargetInches = 23.0;
                 break;
             case Station: // Arm May Move First Leaving this State
-                mArmTargetDegrees = 45.5;
+                mArmTargetDegrees = 45.0;
                 mSliderTargetInches = 0.0;
                 break;
             case eStop:
