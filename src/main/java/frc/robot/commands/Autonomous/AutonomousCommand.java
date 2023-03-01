@@ -83,7 +83,10 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case DriveForwardAutoBalance:
         addCommands(
-          new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15).withTimeout(1.5),
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
+          ),
           new AutoBalanceV2(mDrivetrain, mShifter).withTimeout(5.0));
         break;
       }

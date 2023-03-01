@@ -17,8 +17,8 @@ public class Shifter extends SubsystemBase {
     
   }
 
-  public void setShifterState(boolean pistonState) {
-    if (pistonState) {
+  public void setShifterState(boolean isHighGear) {
+    if (isHighGear) {
       Shifter.set(Value.kReverse);
     } else {
       Shifter.set(Value.kForward);
