@@ -5,13 +5,13 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pigeon;
 import frc.robot.subsystems.Shifter;
 
-public class AutoBalance2 extends CommandBase {
+public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
   private double pitch;
   private double speed;
 
-  public AutoBalance2(Drivetrain drivetrain, Shifter shifter) {
+  public AutoBalanceV2(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
 
@@ -21,7 +21,7 @@ public class AutoBalance2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    mShifter.setShifterState(false);
+    mShifter.setShifterState(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

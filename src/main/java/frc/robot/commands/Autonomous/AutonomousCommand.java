@@ -84,7 +84,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
       case DriveForwardAutoBalance:
         addCommands(
           new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15).withTimeout(1.5),
-          new AutoBalance2(mDrivetrain, mShifter).withTimeout(5.0));
+          new AutoBalanceV2(mDrivetrain, mShifter).withTimeout(5.0));
         break;
       }
     }
