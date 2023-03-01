@@ -14,8 +14,8 @@ public class GoToPosition extends SequentialCommandGroup {
         Arm mArm = arm;
         Slider mSlider = slider;
 
-        double mArmTargetDegrees = 150.0;
-        double mSliderTargetInches = 0.0;
+        double mArmTargetDegrees = 150.0; // Bigger number = down
+        double mSliderTargetInches = 0.0; // Bigger number = extend
         boolean eStop = false;
         
         switch (positions) {
@@ -28,11 +28,11 @@ public class GoToPosition extends SequentialCommandGroup {
                 mSliderTargetInches = 0.0;
                 break;
             case LowScoring: // Slider Maybe has to Move First Leaving this State
-                mArmTargetDegrees = 46.0;
+                mArmTargetDegrees = 40.0;
                 mSliderTargetInches = 9.0;
                 break;
             case HighScoring: // Slider HAS to Move First Leaving this State
-                mArmTargetDegrees = 15.0;
+                mArmTargetDegrees = 13.0;
                 mSliderTargetInches = 23.0;
                 break;
             case Station: // Arm May Move First Leaving this State
@@ -52,9 +52,7 @@ public class GoToPosition extends SequentialCommandGroup {
                 ).withTimeout(0.1)
             );
         } else {
-            addCommands(
-                new ArmSliderSetPosition(mArm, mSlider, mArmTargetDegrees, mSliderTargetInches)
-            );
+            addCommands(new ArmSliderSetPosition(mArm, mSlider, mArmTargetDegrees, mSliderTargetInches));
         }
     }
 }
