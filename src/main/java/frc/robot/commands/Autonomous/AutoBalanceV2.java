@@ -12,21 +12,24 @@ public class AutoBalanceV2 extends CommandBase {
   private final Shifter mShifter;
   private final double kPDrive = -0.04; // TODO TUNE
   private final double kPRotate = 0.005; // TODO TUNE
-  private final double mDriveForwardSpeed;
+  private final double mMaxMoveSpeed = 0.4; // Can also tune these if you want
+  private final double mMaxRotateSpeed = 0.3; // Can also tune these if you want
+  private final double mMoveSpeed;
   private final double mRotateSpeed;
-  private final double mDriveForwardTime;
+  private final double mMoveTime;
   private final double mRotateTime;
+
   private double startTime;
   private double initalHeading;
-  private double speed;
+  private double move;
   private double rotate;
 
-  public AutoBalanceV2(Drivetrain drivetrain, Shifter shifter, double driveForwardSpeed, double rotateSpeed, double driveForwardTime, double rotateTime) {
+  public AutoBalanceV2(Drivetrain drivetrain, Shifter shifter, double moveSpeed, double rotateSpeed, double moveTime, double rotateTime) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
-    mDriveForwardSpeed = driveForwardSpeed;
+    mMoveSpeed = moveSpeed;
     mRotateSpeed = rotateSpeed;
-    mDriveForwardTime = driveForwardTime;
+    mMoveTime = moveTime;
     mRotateTime = rotateTime;
 
     addRequirements(mDrivetrain, mShifter);
@@ -46,22 +49,34 @@ public class AutoBalanceV2 extends CommandBase {
   public void execute() {
     double currTime = System.currentTimeMillis();
 
-    if (currTime - startTime < Units.secondsToMilliseconds(mDriveForwardTime)) { // Drive Forward Time
-      speed = mDriveForwardSpeed;
+    if (currTime - startTime < Units.secondsToMilliseconds(mMoveTime)) { // Drive Forward Time
+      move = mMoveSpeed;
       rotate = mRotateSpeed;
-    } else if (currTime - startTime > Units.secondsToMilliseconds(mDriveForwardTime) && currTime - startTime < Units.secondsToMilliseconds(mDriveForwardTime + mRotateTime)) { // Rotate Time
+    } else if (currTime - startTime > Units.secondsToMilliseconds(mMoveTime) && currTime - startTime < Units.secondsToMilliseconds(mMoveTime + mRotateTime)) { // Rotate Time
       double heading = Pigeon.getYaw();
-      speed = 0;
-      rotate = kPRotate * (initalHeading - heading); 
+      move = 0;
+      rotate = kPRotate * (initalHeading - heading);
+
+      if (rotate >= 0) { // Rotate is positve or 0
+        rotate = Math.min(rotate, mMaxRotateSpeed);
+      } else { // Rotate is negative
+        rotate = Math.max(rotate, -mMaxRotateSpeed);
+      }
     } else { // After Rotate Time
       double pitch = Pigeon.getRoll();
-      speed = kPDrive * pitch;
+      move = kPDrive * pitch;
       rotate = 0;
+
+      if (move >= 0) { // Move is positive or 0
+        move = Math.min(move, mMaxMoveSpeed);
+      } else { // Move is negative
+        move = Math.max(move, -mMaxMoveSpeed);
+      }
     }
 
-    SmartDashboard.putNumber("DRIVE SPEED PERCENT", speed);
+    SmartDashboard.putNumber("DRIVE SPEED PERCENT", move);
     SmartDashboard.putNumber("DRIVE ROTATE PERCENT", rotate);
-    mDrivetrain.arcadeDrive(speed, rotate);
+    mDrivetrain.arcadeDrive(move, rotate);
   }
 
   // Called once the command ends or is interrupted.
