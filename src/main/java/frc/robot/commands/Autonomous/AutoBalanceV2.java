@@ -9,7 +9,7 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
-  private final double kP = -0.025;
+  private final double kP = -0.04;
   private double pitch;
   private double speed;
 
