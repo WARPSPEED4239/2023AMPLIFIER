@@ -7,6 +7,10 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pigeon;
 import frc.robot.subsystems.Shifter;
 
+/***
+ * This command drives to the top of the charge station for time, Rotates the robot on top of the drive station for time using
+ * the gyro, and then tries to balance the robot using the gyro
+ */
 public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
