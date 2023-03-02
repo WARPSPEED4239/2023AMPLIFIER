@@ -15,7 +15,7 @@ public class AutoBalanceV2 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
   private final double kPDrive = -0.04; // TODO TUNE
-  private final double kPRotate = 0.005; // TODO TUNE
+  private final double kPRotate = 1.0; // TODO TUNE
   private final double mMaxMoveSpeed = 0.4; // Can also tune these if you want
   private final double mMaxRotateSpeed = 0.3; // Can also tune these if you want
   private final double mMoveSpeed;

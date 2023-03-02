@@ -21,8 +21,8 @@ public class ArmSetSpeed extends CommandBase {
   public void execute() {
     double speed = -mJoystick.getY();
 
-    if (Math.abs(speed) < 0.2) {
-      speed = 0;
+    if (Math.abs(speed) < 0.3) {
+      speed = 0.0;
     }
 
     mArm.setArmMotor(speed);

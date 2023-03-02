@@ -44,7 +44,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
-          ).withTimeout(3.0)
+          ).withTimeout(3.25)
         );
         break;
       case DriveBackward:
@@ -52,7 +52,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)
-          ).withTimeout(3.0)
+          ).withTimeout(3.25)
         );
         break;
       case ScoreConeDriveBackwards:
@@ -70,7 +70,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
-          ).withTimeout(3.0)
+          ).withTimeout(3.25)
         );
         break;
       case DriveForwardTouchCharge:
