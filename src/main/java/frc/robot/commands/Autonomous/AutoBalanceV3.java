@@ -53,7 +53,7 @@ public class AutoBalanceV3 extends CommandBase {
     if(mTimer.get() < time) {
       mDrivetrain.moveStraightUsingGyro(speed, mStartingYaw);
     } else {
-      sequence++;
+      mSequence++;
     }
   }
 
