@@ -83,7 +83,8 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case DriveForwardAutoBalance:
         addCommands(
-          new AutoBalanceV2(mDrivetrain, mShifter, 0.7, 0.15, 2.0, 1.5));
+          // new AutoBalanceV2(mDrivetrain, mShifter, 0.7, 0.15, 2.0, 1.5));
+          new AutoBalanceV3(mDrivetrain, mShifter));
         break;
       }
     }
