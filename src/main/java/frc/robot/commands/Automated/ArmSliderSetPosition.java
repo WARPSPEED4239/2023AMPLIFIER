@@ -6,6 +6,7 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
 
 public class ArmSliderSetPosition extends CommandBase {
+  
   private final Arm mArm;
   private final Slider mSlider;
   private final double mArmTargetPosition;
@@ -16,7 +17,6 @@ public class ArmSliderSetPosition extends CommandBase {
     mSlider = slider;
     mArmTargetPosition = armPosition;
     mSliderTargetPosition = sliderPosition;
-
     addRequirements(mArm, mSlider);
   }
 
@@ -28,7 +28,7 @@ public class ArmSliderSetPosition extends CommandBase {
 
   @Override
   public void execute() {
-    // Trying to move slider beyond 2 inches
+    
     // Slider can't move out if arm is down and slider is being set out
     if (mArm.getArmEncoderDeg() >= 100.0 && 2.0 < mSliderTargetPosition) {
       mSlider.setSliderSpeed(0.0);
@@ -36,14 +36,12 @@ public class ArmSliderSetPosition extends CommandBase {
       mSlider.setSliderPositionInches(mSliderTargetPosition);
     }
     
-    // Trying to move arm below 100
     // Arm can't move down if target is > 100 and if slider is not less or equal to 2 inches
     if (mSlider.getSliderEncoderPositionInches() >= 2.0 && 100.0 < mArmTargetPosition) {
       mArm.setArmMotor(0.0);
     } else { // Arm can move
       mArm.setArmPositionDeg(mArmTargetPosition);
     }
-
   }
 
   @Override

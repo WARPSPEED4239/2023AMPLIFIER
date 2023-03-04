@@ -7,6 +7,7 @@ import frc.robot.subsystems.Pigeon;
 import frc.robot.subsystems.Shifter;
 
 public class AutoBalanceV3 extends CommandBase {
+  
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
   private final Timer mTimer = new Timer();
@@ -63,8 +64,6 @@ public class AutoBalanceV3 extends CommandBase {
       mDrivetrain.moveStraightUsingGyro(adjustingSpeed, mStartingYaw);
     } else if(mRoll > levelZone) {
       mDrivetrain.moveStraightUsingGyro(-adjustingSpeed, mStartingYaw);
-    } else {
-      mDrivetrain.stopAllMotors();
     }
   }
 }
