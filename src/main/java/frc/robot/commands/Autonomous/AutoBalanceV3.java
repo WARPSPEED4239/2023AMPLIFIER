@@ -32,18 +32,18 @@ public class AutoBalanceV3 extends CommandBase {
   @Override
   public void execute() {
     mRoll = Pigeon.getRoll();
-
+    
     if(mSequence == 0) {
       moveStraightForTime(0.7, 2.5);
-    } else if(mSequence == 1) {
-      levelRobot(3.0, 0.18);
+    } else {
+      levelRobot(3.1, 0.18);
     }
     //impliment safety for flying off / going to fast here
   }
 
   @Override
   public void end(boolean interrupted) {}
-
+  
   @Override
   public boolean isFinished() {
     return false;
@@ -57,11 +57,12 @@ public class AutoBalanceV3 extends CommandBase {
     }
   }
 
-  private void levelRobot(double levelZone, double kP) {
+  private void levelRobot(double levelZone, double adjustingSpeed) {
+    System.out.println(mRoll);
     if(mRoll < -levelZone) {
-      mDrivetrain.moveStraightUsingGyro(kP, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(adjustingSpeed, mStartingYaw);
     } else if(mRoll > levelZone) {
-      mDrivetrain.moveStraightUsingGyro(kP, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(-adjustingSpeed, mStartingYaw);
     } else {
       mDrivetrain.stopAllMotors();
     }
