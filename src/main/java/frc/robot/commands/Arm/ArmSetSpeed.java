@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import frc.robot.subsystems.Arm;
 
 public class ArmSetSpeed extends CommandBase {
+  
   private final Arm mArm;
   private final CommandJoystick mJoystick;
 
@@ -30,7 +31,6 @@ public class ArmSetSpeed extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {}
-
 
   @Override
   public boolean isFinished() {
