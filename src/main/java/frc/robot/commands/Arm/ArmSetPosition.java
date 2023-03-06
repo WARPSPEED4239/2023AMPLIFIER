@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 public class ArmSetPosition extends CommandBase {
+  
   private final Arm mArm;
   private final double mTargetPositionInDegrees;
 
@@ -21,8 +22,7 @@ public class ArmSetPosition extends CommandBase {
   }
 
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   @Override
   public void end(boolean interrupted) {}

@@ -23,9 +23,7 @@ public class ShifterSetState extends CommandBase {
   public void execute() {}
 
   @Override
-  public void end(boolean interrupted) {
-    System.out.println("shifter done");
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {

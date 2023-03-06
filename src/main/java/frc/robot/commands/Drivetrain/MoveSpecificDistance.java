@@ -21,7 +21,6 @@ public class MoveSpecificDistance extends CommandBase {
   @Override
   public void execute() {
     mDrivetrain.moveDistance(mDistanceInMeters);
-    
   }
 
   @Override

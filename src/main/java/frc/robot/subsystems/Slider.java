@@ -11,6 +11,7 @@ import frc.robot.Constants;
 import frc.robot.tools.UnitConversion;
 
 public class Slider extends SubsystemBase {
+  
   private final WPI_TalonFX SliderMotor = new WPI_TalonFX(Constants.SLIDER_MOTOR);
 
   private final DigitalInput limitIn = new DigitalInput(Constants.SLIDER_LIMIT_IN);

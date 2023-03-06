@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Slider;
 
 public class SliderSetSpeed extends CommandBase {
+
   private final Slider mSlider;
   private final double mSpeed;
 

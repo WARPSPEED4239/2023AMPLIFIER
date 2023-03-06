@@ -14,15 +14,13 @@ public class ClawPistonSetState extends CommandBase {
     addRequirements(mIntakeClaw);
   }
 
-
   @Override
   public void initialize() {
     mIntakeClaw.setClawState(mState);
   }
 
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   @Override
   public void end(boolean interrupted) {}

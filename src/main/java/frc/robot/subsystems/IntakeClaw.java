@@ -7,14 +7,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeClaw extends SubsystemBase {
+  
   private final DoubleSolenoid Claw = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.CLAW_FORWARD_SOLENOID, Constants.CLAW_REVERSE_SOLENOID);
 
-  public IntakeClaw() {
-  }
+  public IntakeClaw() {}
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public void setClawState(boolean pistonState) {
     if (pistonState) {

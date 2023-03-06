@@ -5,19 +5,18 @@ import frc.robot.Constants;
 
 public class XboxControllerTools {
 
-    private final static CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER);
+  private final static CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER);
 
-    public static double triggersAxis() {
-        double triggersAxis = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
-        return triggersAxis;
+  public static double triggersAxis() {
+    double triggersAxis = mController.getRightTriggerAxis() - mController.getLeftTriggerAxis();
+    return triggersAxis;
+  }
+
+  public static boolean isInDeadzone(double axis, double deadzone) {
+    if (axis > -deadzone && axis < deadzone) {
+      return true;
     }
-
-    public static boolean isInDeadzone(double axis, double deadzone) {
-        if (axis > -deadzone && axis < deadzone) {
-            return true;
-        }
-        return false;
-    }
-
-   
+    
+    return false;
+  }
 }

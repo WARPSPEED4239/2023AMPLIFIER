@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 public class ArmSetSpeedConstant extends CommandBase {
+  
   private final Arm mArm;
   private double mSpeed;
 
