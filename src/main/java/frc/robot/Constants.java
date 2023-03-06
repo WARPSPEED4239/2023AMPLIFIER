@@ -26,7 +26,6 @@ public final class Constants {
     SLIDER_LIMIT_OUT = 1,
     SLIDER_LIMIT_IN = 2,
 
-    ARM_MOTOR_GEARBOX_RATIO = 4,
     SLIDER_MOTOR_GEARBOX_RATIO = 20,
 
     XBOX_CONTROLLER = 0,

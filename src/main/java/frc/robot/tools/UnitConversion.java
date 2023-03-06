@@ -13,11 +13,11 @@ public class UnitConversion {
   }
 
   public static double positionInDegreesToSRXUnits(double positionInDegrees) {
-    return positionInDegrees / 360 * Constants.ARM_MOTOR_GEARBOX_RATIO * Constants.SRX_UNITS_PER_ROTATION;
+    return positionInDegrees / 360 * Constants.SRX_UNITS_PER_ROTATION;
   }
 
   public static double SRXUnitsToDegrees(double units) {
-    return units / Constants.SRX_UNITS_PER_ROTATION / Constants.ARM_MOTOR_GEARBOX_RATIO * 360;
+    return units / Constants.SRX_UNITS_PER_ROTATION * 360;
   }
 
   public static double targetPositionInMetersToFXUnits(double targetPositionInMeters) {
