@@ -6,6 +6,7 @@ import frc.robot.subsystems.Slider;
 import frc.robot.tools.UnitConversion;
 
 public class SliderSetPosition extends CommandBase {
+
   private final Slider mSlider;
   private final double mTargetPositionInInches;
 

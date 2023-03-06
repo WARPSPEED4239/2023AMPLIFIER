@@ -1,13 +1,11 @@
 package frc.robot.subsystems;
 
 import java.util.ArrayList;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -71,38 +69,6 @@ public class Drivetrain extends SubsystemBase {
     
     LeftMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
     RightMotorOne.set(ControlMode.MotionMagic, distanceInFXUnits);
-  }
-
-  public void moveUntilAngledUp(double speed, double targetAngle) {
-    double startingYaw = Pigeon.getYaw();
-
-    while(Pigeon.getRoll() < targetAngle) {
-      moveStraightUsingGyro(speed, startingYaw);
-      System.out.println("0.0");
-    }
-  }
-
-  public void moveUntilAngledDown(double speed, double targetAngle) {
-    double startingYaw = Pigeon.getYaw();
-    
-    while(Pigeon.getRoll() > targetAngle) {
-      moveStraightUsingGyro(speed, startingYaw);
-      System.out.println("1.0");
-    }
-  }
-
-  public void generateTragectory(float[] start, float[] end, float[] interiorPointA, float[] interiorPointB, boolean reverse) {
-    var startPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
-    var endPos = new Pose2d(Units.feetToMeters(start[0]), Units.feetToMeters(start[1]), Rotation2d.fromDegrees(start[2]));
-
-    var interiorPoints = new ArrayList<Translation2d>();
-    interiorPoints.add(new Translation2d(Units.feetToMeters(interiorPointA[0]), Units.feetToMeters(interiorPointA[1])));
-    interiorPoints.add(new Translation2d(Units.feetToMeters(interiorPointB[0]), Units.feetToMeters(interiorPointB[1])));
-
-    TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(12), Units.feetToMeters(12));
-    config.setReversed(reverse);
-
-    var trajectory = TrajectoryGenerator.generateTrajectory(startPos, interiorPoints, endPos, config);
   }
 
   public void resetEncoders() {

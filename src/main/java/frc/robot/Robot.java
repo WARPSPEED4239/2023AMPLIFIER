@@ -9,8 +9,7 @@ import frc.robot.tools.UnitConversion;
 
 public class Robot extends TimedRobot {
 
-  private Command m_autonomousCommand;
-
+  private Command mAutonomousCommand;
   private RobotContainer mRobotContainer;
   private Slider mSlider;
 
@@ -41,10 +40,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = mRobotContainer.getAutonomousCommand();
+    mAutonomousCommand = mRobotContainer.getAutonomousCommand();
 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (mAutonomousCommand != null) {
+      mAutonomousCommand.schedule();
     }
   }
 
@@ -53,8 +52,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (mAutonomousCommand != null) {
+      mAutonomousCommand.cancel();
     }
   }
 

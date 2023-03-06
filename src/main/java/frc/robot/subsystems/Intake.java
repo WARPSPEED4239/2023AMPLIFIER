@@ -3,11 +3,11 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
+
   private final CANSparkMax neoLeft = new CANSparkMax(Constants.CLAW_LEFT_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushed);
   private final CANSparkMax neoRight = new CANSparkMax(Constants.CLAW_RIGHT_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushed);
 
@@ -28,8 +28,7 @@ public class Intake extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public void setMotorsSpeed(double speed) {
     if (speed > 1.0) {

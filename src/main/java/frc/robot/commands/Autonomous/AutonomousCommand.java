@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Automated.GoToPosition;
-import frc.robot.commands.Drivetrain.DrivetrainNoSensors;
+import frc.robot.commands.Drivetrain.MoveWithNoSensors;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.subsystems.Arm;
@@ -42,14 +42,14 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
+            new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
         ).withTimeout(3.25));
         break;
       case DriveBackward:
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)
+            new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)
         ).withTimeout(3.25));
         break;
       case ScoreConeDriveBackwards:
@@ -66,14 +66,14 @@ public class AutonomousCommand extends SequentialCommandGroup {
         ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
+            new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
         ).withTimeout(3.25));
         break;
       case DriveForwardTouchCharge:
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new DrivetrainNoSensors(mDrivetrain, 0.7, 0.15)
+            new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
         ).withTimeout(1.0));
         break;
       case DriveForwardAutoBalance:
@@ -81,7 +81,6 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new AutoBalanceV3(mDrivetrain, mShifter));
         break;
-      }
     }
   }
 }

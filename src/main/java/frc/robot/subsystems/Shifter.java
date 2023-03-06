@@ -13,9 +13,7 @@ public class Shifter extends SubsystemBase {
   public Shifter() {}
 
   @Override
-  public void periodic() {
-    
-  }
+  public void periodic() {}
 
   public void setShifterState(boolean isHighGear) {
     if (isHighGear) {
