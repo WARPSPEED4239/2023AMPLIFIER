@@ -9,7 +9,7 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV4 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
-  private final double mMoveSpeed = 0.1;
+  private final double mMoveSpeed = 0.1; // TODO TUNE
   private boolean mOnStation = false;
   private boolean mEnd = false;
 
@@ -31,13 +31,13 @@ public class AutoBalanceV4 extends CommandBase {
   public void execute() {
     double pitch = Pigeon.getRoll();
 
-    if (Math.abs(pitch) > 15.0 && !mOnStation) {
+    if (Math.abs(pitch) > 15.0 && !mOnStation) { // TODO TUNE 15.0
       mOnStation = true;
     }
 
     mDrivetrain.arcadeDrive(mMoveSpeed, 0.0);
 
-    if (Math.abs(pitch) < 5.0 && mOnStation) {
+    if (Math.abs(pitch) < 5.0 && mOnStation) { // TODO TUNE 5.0
       mEnd = true;
     }
 
