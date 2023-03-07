@@ -42,7 +42,7 @@ public class AutoBalanceV4 extends CommandBase {
     }
 
     SmartDashboard.putNumber("Robot Angle", pitch);
-    SmartDashboard.putBoolean("Auto Balance On Station", mOnStation);
+    SmartDashboard.putBoolean("AutoBalance OnStation", mOnStation);
   }
 
   // Called once the command ends or is interrupted.
