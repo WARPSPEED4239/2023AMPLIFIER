@@ -7,15 +7,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.Positions;
+import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Arm.ArmSetSpeed;
-import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Intake.IntakeMotorsSetSpeed;
-import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
@@ -64,20 +62,19 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
 
-    mController.x().onTrue(new SliderSetPosition(mSlider, 9.0));
-    mController.y().onTrue(new SliderSetPosition(mSlider, 25.0));
+    mController.x().onTrue(new ArmSetPosition(mArm, 123.0));
 
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
     mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, false));
     mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, true));
 
-    mJoystick.button(7).onTrue(new GoToPosition(mArm, mSlider, Positions.Station));
-    mJoystick.button(8).onTrue(new GoToPosition(mArm, mSlider, Positions.eStop));
-    mJoystick.button(9).onTrue(new GoToPosition(mArm, mSlider, Positions.LowScoring));
-    mJoystick.button(10).onTrue(new GoToPosition(mArm, mSlider, Positions.HighScoring));
-    mJoystick.button(11).onTrue(new GoToPosition(mArm, mSlider, Positions.Starting));
-    mJoystick.button(12).onTrue(new GoToPosition(mArm, mSlider, Positions.Intaking));
+    //mJoystick.button(7).onTrue(new GoToPosition(mArm, mSlider, Positions.Station));
+    //mJoystick.button(8).onTrue(new GoToPosition(mArm, mSlider, Positions.eStop));
+    //mJoystick.button(9).onTrue(new GoToPosition(mArm, mSlider, Positions.LowScoring));
+    //mJoystick.button(10).onTrue(new GoToPosition(mArm, mSlider, Positions.HighScoring));
+    //mJoystick.button(11).onTrue(new GoToPosition(mArm, mSlider, Positions.Starting));
+    //mJoystick.button(12).onTrue(new GoToPosition(mArm, mSlider, Positions.Intaking));
 
     mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
     mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));

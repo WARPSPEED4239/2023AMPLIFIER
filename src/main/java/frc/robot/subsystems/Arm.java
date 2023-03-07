@@ -19,13 +19,13 @@ public class Arm extends SubsystemBase {
 
   private final int TIMEOUT_MS = 30;
 
-  private double maxVelocity = 465.0;
-  private double maxAcceleration = maxVelocity;
+  private double maxVelocity = 131.0;
+  private double maxAcceleration = maxVelocity * 1.5;
 
-  private double kP = 1.0;
+  private double kP = 2.63;
   private double kI = 0.0;
-  private double kD = 0.0;
-  private double kF = 2.08;
+  private double kD = 0.15;
+  private double kF = 7.81;
 
   public Arm() {
     configureSettings();
@@ -71,12 +71,12 @@ public class Arm extends SubsystemBase {
 
   private void configureSettings() {
     ArmEncoderController.configFactoryDefault();
-    ArmEncoderController.setSensorPhase(true);
+    ArmEncoderController.setSensorPhase(false);
     ArmEncoderController.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute, 0, TIMEOUT_MS);
     ArmEncoderController.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
 
     ArmMotor.configFactoryDefault();
-    ArmMotor.setInverted(true);
+    ArmMotor.setInverted(false);
     ArmMotor.setNeutralMode(NeutralMode.Brake);
     ArmMotor.configOpenloopRamp(0.5);
     ArmMotor.configVoltageCompSaturation(12.0);
