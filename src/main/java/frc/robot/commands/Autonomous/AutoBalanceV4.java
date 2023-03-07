@@ -9,9 +9,9 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV4 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
+  private boolean mOnStation;
+  private boolean mEnd;
   private final double mMoveSpeed = 0.1;
-  private boolean mOnStation = false;
-  private boolean mEnd = false;
 
   public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
@@ -23,6 +23,8 @@ public class AutoBalanceV4 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    mOnStation = false;
+    mEnd = false;
     mShifter.setShifterState(false);
   }
 
