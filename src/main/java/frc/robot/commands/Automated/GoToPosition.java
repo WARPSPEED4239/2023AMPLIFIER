@@ -15,7 +15,7 @@ public class GoToPosition extends SequentialCommandGroup {
     Arm mArm = arm;
     Slider mSlider = slider;
 
-    double mArmTargetDegrees = 150.0; // Bigger number = down
+    double mArmTargetDegrees = 162.0; // Bigger number = down
     double mSliderTargetInches = 0.0; // Bigger number = extend
     boolean eStop = false;
         
