@@ -11,7 +11,7 @@ public class AutoBalanceV4 extends CommandBase {
   private final Shifter mShifter;
   private boolean mOnStation;
   private boolean mEnd; 
-  private final double mMoveSpeed = 0.2; // TODO TUNE
+  private final double mMoveSpeed = 0.4; // TODO TUNE
 
   public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
