@@ -17,18 +17,41 @@ public class Arm extends SubsystemBase {
   private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR);
   private final WPI_TalonSRX ArmEncoderController = new WPI_TalonSRX(Constants.ARM_ENCODER_CONTROLLER);
 
-  private final int TIMEOUT_MS = 30;
+  private final int TIMEOUT_MS = 70;
 
-  private double maxVelocity = 131.0;
-  private double maxAcceleration = maxVelocity * 1.5;
+  private double maxVelocity = 130.0;
+  private double maxAcceleration = 80.0;
 
-  private double kP = 2.63;
+  private double kP = 2.6;
   private double kI = 0.0;
-  private double kD = 0.15;
-  private double kF = 7.81;
+  private double kD = 0.0;
+  private double kF = 6.0;
 
   public Arm() {
-    configureSettings();
+    ArmEncoderController.configFactoryDefault();
+    ArmEncoderController.setSensorPhase(false);
+    ArmEncoderController.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute, 0, TIMEOUT_MS);
+    ArmEncoderController.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
+
+    ArmMotor.configFactoryDefault();
+    ArmMotor.setInverted(false);
+    ArmMotor.setNeutralMode(NeutralMode.Brake);
+    ArmMotor.configOpenloopRamp(0.5);
+    ArmMotor.configVoltageCompSaturation(12.0);
+    ArmMotor.enableVoltageCompensation(true);
+    ArmMotor.configRemoteFeedbackFilter(Constants.ARM_ENCODER_CONTROLLER, RemoteSensorSource.TalonSRX_SelectedSensor, 0);
+    ArmMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.RemoteSensor0, 0, TIMEOUT_MS);
+    ArmMotor.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
+
+    ArmMotor.configMotionCruiseVelocity(maxVelocity);
+    ArmMotor.configMotionAcceleration(maxAcceleration);
+
+    ArmMotor.config_kP(0, kP, TIMEOUT_MS);
+    ArmMotor.config_kI(0, kI, TIMEOUT_MS);
+    ArmMotor.config_kD(0, kD, TIMEOUT_MS);
+    ArmMotor.config_kF(0, kF, TIMEOUT_MS);
+    ArmMotor.config_IntegralZone(0, 0, TIMEOUT_MS);
+    ArmMotor.selectProfileSlot(0, 0);
   }
 
   @Override
@@ -67,32 +90,5 @@ public class Arm extends SubsystemBase {
 
   public double getArmEncoderDeg() {
     return UnitConversion.SRXUnitsToDegrees(ArmMotor.getSelectedSensorPosition());
-  }
-
-  private void configureSettings() {
-    ArmEncoderController.configFactoryDefault();
-    ArmEncoderController.setSensorPhase(false);
-    ArmEncoderController.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute, 0, TIMEOUT_MS);
-    ArmEncoderController.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
-
-    ArmMotor.configFactoryDefault();
-    ArmMotor.setInverted(false);
-    ArmMotor.setNeutralMode(NeutralMode.Brake);
-    ArmMotor.configOpenloopRamp(0.5);
-    ArmMotor.configVoltageCompSaturation(12.0);
-    ArmMotor.enableVoltageCompensation(true);
-    ArmMotor.configRemoteFeedbackFilter(Constants.ARM_ENCODER_CONTROLLER, RemoteSensorSource.TalonSRX_SelectedSensor, 0);
-    ArmMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.RemoteSensor0, 0, TIMEOUT_MS);
-    ArmMotor.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
-
-    ArmMotor.configMotionCruiseVelocity(maxVelocity);
-    ArmMotor.configMotionAcceleration(maxAcceleration);
-
-    ArmMotor.config_kP(0, kP, TIMEOUT_MS);
-    ArmMotor.config_kI(0, kI, TIMEOUT_MS);
-    ArmMotor.config_kD(0, kD, TIMEOUT_MS);
-    ArmMotor.config_kF(0, kF, TIMEOUT_MS);
-    ArmMotor.config_IntegralZone(0, 0, TIMEOUT_MS);
-    ArmMotor.selectProfileSlot(0, 0);
   }
 }
