@@ -33,7 +33,7 @@ public class AutoBalanceV4 extends CommandBase {
   public void execute() {
     double pitch = Pigeon.getRoll();
 
-    if (Math.abs(pitch) > 10.0 && !mOnStation) { // TODO TUNE 15.0
+    if (Math.abs(pitch) > 10.0 && !mOnStation) { // TODO TUNE 10.0
       mOnStation = true;
     }
 
