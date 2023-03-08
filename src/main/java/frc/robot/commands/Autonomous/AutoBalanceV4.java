@@ -11,7 +11,7 @@ public class AutoBalanceV4 extends CommandBase {
   private final Shifter mShifter;
   private boolean mOnStation;
   private boolean mEnd; 
-  private final double mMoveSpeed = 0.1; // TODO TUNE
+  private final double mMoveSpeed = 0.2; // TODO TUNE
 
   public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
@@ -33,7 +33,7 @@ public class AutoBalanceV4 extends CommandBase {
   public void execute() {
     double pitch = Pigeon.getRoll();
 
-    if (Math.abs(pitch) > 15.0 && !mOnStation) { // TODO TUNE 15.0
+    if (Math.abs(pitch) > 10.0 && !mOnStation) { // TODO TUNE 15.0
       mOnStation = true;
     }
 
@@ -45,6 +45,7 @@ public class AutoBalanceV4 extends CommandBase {
 
     SmartDashboard.putNumber("Robot Angle", pitch);
     SmartDashboard.putBoolean("AutoBalance OnStation", mOnStation);
+    SmartDashboard.putBoolean("mEnd", mEnd);
   }
 
   // Called once the command ends or is interrupted.
