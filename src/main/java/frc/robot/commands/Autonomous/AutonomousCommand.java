@@ -43,43 +43,51 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
-        ).withTimeout(3.25));
+          ).withTimeout(3.25)
+        );
         break;
       case DriveBackward:
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)
-        ).withTimeout(3.25));
+          ).withTimeout(3.25)
+        );
         break;
       case ScoreConeDriveBackwards:
         addCommands(
-          new ArmSetPosition(mArm, 14.0).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, 153.0).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
             new ClawPistonSetState(mIntakeClaw, true)
-        ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
+          ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.Starting),
             new ClawPistonSetState(mIntakeClaw, false)
-        ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
+          ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
-        ).withTimeout(3.25));
+          ).withTimeout(3.25)
+        );
         break;
       case DriveForwardTouchCharge:
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
             new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
-        ).withTimeout(1.0));
+          ).withTimeout(1.0)
+        );
         break;
       case DriveForwardAutoBalance:
-        // new AutoBalanceV2(mDrivetrain, mShifter, 0.7, 0.15, 2.0, 1.5));
         addCommands(
-          new AutoBalanceV3(mDrivetrain, mShifter));
+          new ParallelCommandGroup(
+            new ShifterSetState(mShifter, false),
+            new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
+          ).withTimeout(1.5),
+          new AutoBalanceV4(mDrivetrain, mShifter)
+        );
         break;
     }
   }

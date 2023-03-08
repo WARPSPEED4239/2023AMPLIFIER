@@ -15,7 +15,6 @@ import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Intake.IntakeMotorsSetSpeed;
-import frc.robot.commands.Slider.SliderSetPosition;
 import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
@@ -63,9 +62,6 @@ public class RobotContainer {
   private void configureBindings() {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
-
-    mController.x().onTrue(new SliderSetPosition(mSlider, 9.0));
-    mController.y().onTrue(new SliderSetPosition(mSlider, 25.0));
 
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));

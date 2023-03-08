@@ -26,7 +26,6 @@ public final class Constants {
     SLIDER_LIMIT_OUT = 1,
     SLIDER_LIMIT_IN = 2,
 
-    ARM_MOTOR_GEARBOX_RATIO = 4,
     SLIDER_MOTOR_GEARBOX_RATIO = 20,
 
     XBOX_CONTROLLER = 0,
@@ -34,7 +33,8 @@ public final class Constants {
 
     PIGEON_IMU = 9,
 
-    SRX_UNITS_PER_ROTATION = 2048;
+    INTEGRATED_SRX_UNITS_PER_ROTATION = 2048,
+    SRX_UNITS_PER_ROTATION = 4096;
         
   public static final double
     RAMP_RATE = 0.15,
@@ -46,9 +46,6 @@ public final class Constants {
     SLIDER_LIMIT_OUT_POSITION_INCHES = 23.9,
 
     XBOX_CONTROLLER_DEADZONE = 0.1,
-
-    ARM_BOTTOM_DEGREES = 150.0,
-    ARM_TOP_DEGREES = 18.0,
 
     CUBIC_A = 8.0 / 15.0,
     CUBIC_B = 0.0,
