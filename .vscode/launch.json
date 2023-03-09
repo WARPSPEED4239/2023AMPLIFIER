@@ -9,6 +9,13 @@
       "name": "Launch Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",
+      "projectName": "2023AMPLIFIER"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "frc.robot.Main",
       "projectName": "2023Robot"
     },
     {
