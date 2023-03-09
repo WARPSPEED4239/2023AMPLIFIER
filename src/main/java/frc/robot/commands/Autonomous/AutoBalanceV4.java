@@ -11,7 +11,8 @@ public class AutoBalanceV4 extends CommandBase {
   private final Shifter mShifter;
   private boolean mOnStation;
   private boolean mEnd; 
-  private final double mMoveSpeed = 0.4; // TODO TUNE
+  private final double mMoveSpeed = -0.34; // TODO TUNE
+  private double mStartingYaw;
 
   public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
@@ -20,26 +21,21 @@ public class AutoBalanceV4 extends CommandBase {
     addRequirements(mDrivetrain, mShifter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     mOnStation = false;
     mEnd = false;
     mShifter.setShifterState(false);
+    mStartingYaw = Pigeon.getYaw();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double pitch = Pigeon.getRoll();
 
-    if (Math.abs(pitch) > 10.0 && !mOnStation) { // TODO TUNE 10.0
-      mOnStation = true;
-    }
+    mDrivetrain.moveStraightUsingGyro(mMoveSpeed, mStartingYaw);
 
-    mDrivetrain.arcadeDrive(mMoveSpeed, 0.0);
-
-    if (Math.abs(pitch) < 5.0 && mOnStation) { // TODO TUNE 5.0
+    if (Math.abs(pitch) < 8 && mOnStation) { // TODO TUNE 5.0
       mEnd = true;
     }
 

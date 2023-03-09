@@ -61,8 +61,8 @@ public final class Constants {
     eStop
   }
 
-    public static enum TargetTask {
-        DoNothing, DriveForward, DriveBackward, 
-        ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance
-    }
+  public static enum TargetTask {
+      DoNothing, DriveForward, DriveBackward, 
+      ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance
+  }
 }

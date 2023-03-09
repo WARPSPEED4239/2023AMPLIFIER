@@ -1,5 +1,9 @@
 package frc.robot;
 
+import java.io.File;
+
+import com.pathplanner.lib.auto.RamseteAutoBuilder;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,6 +39,8 @@ public class RobotContainer {
   private final IntakeClaw mIntakeClaw = new IntakeClaw();
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
+
+  private RamseteAutoBuilder mAutoBuilder;
 
   public RobotContainer() {
     mArm.setDefaultCommand(new ArmSetSpeed(mArm, mJoystick));
@@ -78,6 +84,26 @@ public class RobotContainer {
     mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
     mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
   }
+
+  // private void configureAutoCommands() {
+  //   try {
+  //     // Create a file object
+  //     File PathPlannerFolder = new File("/home/lvuser/deploy/pathplanner");
+
+  //     File[] PathPlannerFiles = PathPlannerFolder.listFiles();
+  //     System.out.println("Files are:");
+  //     for (int i = 0; i < PathPlannerFiles.length; i++) {
+  //       String file_name = PathPlannerFiles[i].getName();
+  //       String file_extention = file_name.substring(file_name.length() - 5, file_name.length());
+  //       String path_name = file_name.substring(0, file_name.length() - 5);
+  //       if (file_extention.equals(".path")) {
+  //         autoChooser.addOption(path_name, path_name);
+  //       }
+  //     }
+  //   } catch (Exception e) {
+  //     System.err.println(e.getMessage());
+  //   }
+  // }
 
   public Command getAutonomousCommand() {
     Constants.TargetTask targetTask = targetChooser.getSelected();

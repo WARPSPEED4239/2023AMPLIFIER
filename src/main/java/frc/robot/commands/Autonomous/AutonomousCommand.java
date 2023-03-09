@@ -84,8 +84,9 @@ public class AutonomousCommand extends SequentialCommandGroup {
         addCommands(
           new ParallelCommandGroup(
             new ShifterSetState(mShifter, false),
-            new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
+            new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)
           ).withTimeout(1.5),
+          // new AutoBalanceV4(mDrivetrain, mShifter)
           new AutoBalanceV4(mDrivetrain, mShifter)
         );
         break;
