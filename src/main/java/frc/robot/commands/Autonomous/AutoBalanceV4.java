@@ -12,7 +12,7 @@ public class AutoBalanceV4 extends CommandBase {
   private final boolean mBackwards;
   private boolean mOnStation;
   private boolean mEnd; 
-  private double mMoveSpeed = 0.34; // TODO TUNE
+  private double mMoveSpeed = 0.31; // TODO TUNE
   private double mStartingYaw;
 
   public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter, boolean backwards) {

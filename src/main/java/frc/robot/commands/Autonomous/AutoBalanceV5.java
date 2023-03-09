@@ -65,18 +65,18 @@ public class AutoBalanceV5 extends CommandBase {
   private void moveStraightForTime(double speed, double time) {
     if(mTimer.get() < time) {
       mDrivetrain.moveStraightUsingGyro(speed, mStartingYaw);
-    } else {
+    } else if(mTimer.get() > time) {
       mSequence++;
     }
   }
 
   private void levelRobot(double adjustingSpeed) {
-    if(mRoll < -3.0) {
+    if(mRoll < -2.0) {
+      System.out.println("moving forward");
       mDrivetrain.moveStraightUsingGyro(adjustingSpeed, mStartingYaw);
-    } else if(mRoll > 3.0) {
+    } else if(mRoll > 2.0) {
+      System.out.println("moving backward");
       mDrivetrain.moveStraightUsingGyro(-adjustingSpeed, mStartingYaw);
-    } else {
-      mDrivetrain.stopAllMotors();
     }
   }
 }

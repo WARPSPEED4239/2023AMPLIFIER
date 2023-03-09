@@ -89,6 +89,8 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new AutoBalanceV4(mDrivetrain, mShifter, false)
         );
         break;
+      case BestOne:
+        addCommands(new AutoBalanceV5(mDrivetrain, mShifter));
       case ScoreConeBackwardAutoBalance:
         addCommands(
           new ArmSetPosition(mArm, 153.0).withTimeout(2.0), // Arm moves up for 2 seconds
