@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.io.File;
-
 import com.pathplanner.lib.auto.RamseteAutoBuilder;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -56,6 +54,7 @@ public class RobotContainer {
     targetChooser.addOption("Drive Forward, Touch Charge", Constants.TargetTask.DriveForwardTouchCharge);
     targetChooser.addOption("Score Cone, Drive Backward", Constants.TargetTask.ScoreConeDriveBackwards);
     targetChooser.addOption("Drive Forward Auto Balance", Constants.TargetTask.DriveForwardAutoBalance);
+    targetChooser.addOption("Score Cone, Backwards Auto Balance", Constants.TargetTask.ScoreConeBackwardAutoBalance);
     SmartDashboard.putData(targetChooser);
 
     UsbCamera mainCamera = CameraServer.startAutomaticCapture();

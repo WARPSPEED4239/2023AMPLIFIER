@@ -9,14 +9,16 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV4 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
+  private final boolean mBackwards;
   private boolean mOnStation;
   private boolean mEnd; 
-  private final double mMoveSpeed = -0.34; // TODO TUNE
+  private double mMoveSpeed = 0.34; // TODO TUNE
   private double mStartingYaw;
 
-  public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
+  public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter, boolean backwards) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
+    mBackwards = backwards;
 
     addRequirements(mDrivetrain, mShifter);
   }
@@ -25,6 +27,10 @@ public class AutoBalanceV4 extends CommandBase {
   public void initialize() {
     mOnStation = false;
     mEnd = false;
+    if (mBackwards) {
+      mMoveSpeed = -mMoveSpeed;
+    }
+
     mShifter.setShifterState(false);
     mStartingYaw = Pigeon.getYaw();
   }
