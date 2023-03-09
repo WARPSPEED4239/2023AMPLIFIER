@@ -33,9 +33,13 @@ public class AutoBalanceV4 extends CommandBase {
   public void execute() {
     double pitch = Pigeon.getRoll();
 
+    if (Math.abs(pitch) > 10.0 && !mOnStation) { // TODO TUNE 10.0
+      mOnStation = true;
+    }
+
     mDrivetrain.moveStraightUsingGyro(mMoveSpeed, mStartingYaw);
 
-    if (Math.abs(pitch) < 8 && mOnStation) { // TODO TUNE 5.0
+    if (Math.abs(pitch) < 8.0 && mOnStation) { // TODO TUNE 5.0
       mEnd = true;
     }
 
