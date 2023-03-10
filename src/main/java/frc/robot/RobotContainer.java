@@ -1,5 +1,9 @@
 package frc.robot;
 
+import java.io.File;
+import java.util.HashMap;
+
+import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.RamseteAutoBuilder;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -10,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Positions;
+import frc.robot.Constants.TargetTask;
 import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
@@ -53,9 +58,11 @@ public class RobotContainer {
     targetChooser.addOption("Drive Backward", Constants.TargetTask.DriveBackward);
     targetChooser.addOption("Drive Forward, Touch Charge", Constants.TargetTask.DriveForwardTouchCharge);
     targetChooser.addOption("Score Cone, Drive Backward", Constants.TargetTask.ScoreConeDriveBackwards);
-    targetChooser.addOption("Drive Forward Auto Balance", Constants.TargetTask.DriveForwardAutoBalance);
+    targetChooser.addOption("Drive Forward Auto Balance V4", Constants.TargetTask.DriveForwardAutoBalanceV4);
+    targetChooser.addOption("Drive Forward Auto Balance V5", Constants.TargetTask.DriveForwardAutoBalanceV5);
+    targetChooser.addOption("Drive Backward Auto Balance V5", Constants.TargetTask.DriveBackwardAutoBalanceV5);
     targetChooser.addOption("Score Cone, Backwards Auto Balance", Constants.TargetTask.ScoreConeBackwardAutoBalance);
-    targetChooser.addOption("BestOneRunThis", Constants.TargetTask.BestOne);
+    targetChooser.addOption("Score Cone, Backwards Auto Balance but better aiufinaga", Constants.TargetTask.ScoreConeAutoBalanceV5);
     SmartDashboard.putData(targetChooser);
 
     UsbCamera mainCamera = CameraServer.startAutomaticCapture();
@@ -97,12 +104,27 @@ public class RobotContainer {
   //       String file_extention = file_name.substring(file_name.length() - 5, file_name.length());
   //       String path_name = file_name.substring(0, file_name.length() - 5);
   //       if (file_extention.equals(".path")) {
-  //         autoChooser.addOption(path_name, path_name);
+  //         targetChooser.addOption(path_name, TargetTask.valueOf(path_name));
   //       }
   //     }
   //   } catch (Exception e) {
   //     System.err.println(e.getMessage());
   //   }
+  //   SmartDashboard.putData(targetChooser);
+
+  //   HashMap<String, Command> eventMap = new HashMap<>();
+
+  //   mAutoBuilder = new RamseteAutoBuilder(
+  //     mDrivetrain::getPose, // Pose2d supplier
+  //     mDrivetrain::resetPose, // Pose2d consumer, used to reset odometry at the beginning of auto
+  //     mDrivetrain.kinematics, // SwerveDriveKinematics
+  //     new PIDConstants(0.0, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers) TUNE
+  //     new PIDConstants(0.0, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller) TUNE
+  //     mDrivetrain::setModuleStates, // Module states consumer used to output to the drive subsystem
+  //     eventMap,
+  //     true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+  //     mDrivetrain // The drive subsystem. Used to properly set the requirements of path following commands
+  //   )
   // }
 
   public Command getAutonomousCommand() {

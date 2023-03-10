@@ -6,7 +6,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pigeon;
 import frc.robot.subsystems.Shifter;
 
-public class AutoBalanceV5 extends CommandBase {
+public class AutoBalanceV5Backward extends CommandBase {
   
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
@@ -15,7 +15,7 @@ public class AutoBalanceV5 extends CommandBase {
   private double mRoll;
   private int mSequence = -1;
 
-  public AutoBalanceV5(Drivetrain drivetrain, Shifter shifter) {
+  public AutoBalanceV5Backward(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
     addRequirements(mDrivetrain);
@@ -31,16 +31,14 @@ public class AutoBalanceV5 extends CommandBase {
   @Override
   public void execute() {
     mRoll = Pigeon.getRoll();
-    System.out.println(mSequence);
     
     if(mSequence == 0) {
-      moveUntilAngledUp(0.4);
+      moveUntilAngledUp(-0.75);
     } else if(mSequence == 1) {
-      moveStraightForTime(0.35, 1.5);
+      moveStraightForTime(-0.5, 1.9);
     } else if(mSequence == 2) {
-      levelRobot(0.18);
+      levelRobot();
     }
-    //impliment safety for flying off / going to fast here
   }
 
   @Override
@@ -67,16 +65,20 @@ public class AutoBalanceV5 extends CommandBase {
       mDrivetrain.moveStraightUsingGyro(speed, mStartingYaw);
     } else if(mTimer.get() > time) {
       mSequence++;
+
     }
   }
 
-  private void levelRobot(double adjustingSpeed) {
+  private void levelRobot() {
     if(mRoll < -2.0) {
       System.out.println("moving forward");
-      mDrivetrain.moveStraightUsingGyro(adjustingSpeed, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(0.31, mStartingYaw);
     } else if(mRoll > 2.0) {
       System.out.println("moving backward");
-      mDrivetrain.moveStraightUsingGyro(-adjustingSpeed, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(-0.31, mStartingYaw);
+    } else {
+      System.out.println("balanced");
     }
   }
+
 }

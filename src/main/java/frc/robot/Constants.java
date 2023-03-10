@@ -63,6 +63,7 @@ public final class Constants {
 
   public static enum TargetTask {
       DoNothing, DriveForward, DriveBackward, 
-      ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance, ScoreConeBackwardAutoBalance, BestOne
+      ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalanceV4, DriveForwardAutoBalanceV5, 
+      ScoreConeBackwardAutoBalance, DriveBackwardAutoBalanceV5, ScoreConeAutoBalanceV5
   }
 }
