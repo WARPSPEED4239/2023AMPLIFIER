@@ -106,7 +106,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
           new ParallelCommandGroup(
             new ArmSetSpeed(mArm, 0.0),
             new SliderSetSpeed(mSlider, 0.0),
-            new AutoBalanceV5Backward(mDrivetrain, mShifter)
+            new AutoBalanceV5TunedForCone(mDrivetrain, mShifter)
           ).withTimeout(8.0)
         );
         break;
