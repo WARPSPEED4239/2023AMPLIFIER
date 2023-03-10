@@ -35,7 +35,7 @@ public class AutoBalanceV5Backward extends CommandBase {
     if(mSequence == 0) {
       moveUntilAngledUp(-0.75);
     } else if(mSequence == 1) {
-      moveStraightForTime(-0.5, 1.9);
+      moveStraightForTime(-0.5, 2.0);
     } else if(mSequence == 2) {
       levelRobot();
     }
@@ -72,10 +72,10 @@ public class AutoBalanceV5Backward extends CommandBase {
   private void levelRobot() {
     if(mRoll < -2.0) {
       System.out.println("moving forward");
-      mDrivetrain.moveStraightUsingGyro(0.31, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(0.30, mStartingYaw);
     } else if(mRoll > 2.0) {
       System.out.println("moving backward");
-      mDrivetrain.moveStraightUsingGyro(-0.31, mStartingYaw);
+      mDrivetrain.moveStraightUsingGyro(-0.30, mStartingYaw);
     } else {
       System.out.println("balanced");
     }
