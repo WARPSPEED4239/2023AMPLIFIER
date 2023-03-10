@@ -35,7 +35,7 @@ public class AutoBalanceV5TunedForCone extends CommandBase {
     if(mSequence == 0) {
       moveUntilAngledUp(-0.75);
     } else if(mSequence == 1) {
-      moveStraightForTime(-0.5, 2.0);
+      moveStraightForTime(-0.5, 2.08);
     } else if(mSequence == 2) {
       levelRobot();
     }
