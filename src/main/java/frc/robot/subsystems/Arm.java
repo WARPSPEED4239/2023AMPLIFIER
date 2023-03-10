@@ -20,7 +20,7 @@ public class Arm extends SubsystemBase {
   private final WPI_TalonSRX ArmEncoderController = new WPI_TalonSRX(Constants.ARM_ENCODER_CONTROLLER);
   private final DigitalInput limitDown = new DigitalInput(Constants.ARM_LIMIT_DOWN);
 
-  private final int TIMEOUT_MS = 70;
+  private final int TIMEOUT_MS = 100;
 
   private double maxVelocity = 130.0;
   private double maxAcceleration = 80.0;
