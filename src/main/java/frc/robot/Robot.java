@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
     }
 
     if(mArm.getLimitDown()) {
-      mArm.setArmEncoderPosition(UnitConversion.positionInDegreesToSRXUnits(PositionValues.STARTING_ARM));
+      mArm.setArmEncoderPosition(UnitConversion.positionInDegreesToSRXUnits(PositionValues.ARM_FULL_DOWN));
     }
   }
   
