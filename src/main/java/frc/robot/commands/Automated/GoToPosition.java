@@ -15,29 +15,29 @@ public class GoToPosition extends SequentialCommandGroup {
     Arm mArm = arm;
     Slider mSlider = slider;
 
-    double mArmTargetDegrees = 84.0; // Bigger number = up
+    double mArmTargetDegrees = 145.0; // Bigger number = up
     double mSliderTargetInches = 0.0; // Bigger number = extend
     boolean eStop = false;
         
     switch (positions) {
       case Starting: // Arm HAS to Move First Leaving this State
-        mArmTargetDegrees = 86.0;
+        mArmTargetDegrees = 145.0;
         mSliderTargetInches = 0.0;
         break;
       case Intaking: // Arm HAS to Move First Leaving this State
-        mArmTargetDegrees = 94.0;
+        mArmTargetDegrees = 153.0;
         mSliderTargetInches = 0.0;
         break;
       case LowScoring: // Slider Maybe has to Move First Leaving this State
-        mArmTargetDegrees = 138.0;
+        mArmTargetDegrees = 197.0;
         mSliderTargetInches = 9.0;
         break;
       case HighScoring: // Slider HAS to Move First Leaving this State
-        mArmTargetDegrees = 153.0;
+        mArmTargetDegrees = 214.0;
         mSliderTargetInches = 23.0;
         break;
       case Station: // Arm May Move First Leaving this State
-        mArmTargetDegrees = 137.5;
+        mArmTargetDegrees = 196.5;
         mSliderTargetInches = 0.0;
         break;
       case eStop:

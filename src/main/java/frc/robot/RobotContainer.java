@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Positions;
-import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Arm.ArmSetSpeedJoystick;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
@@ -40,7 +39,7 @@ public class RobotContainer {
   // private RamseteAutoBuilder mAutoBuilder;
 
   public RobotContainer() {
-    mArm.setDefaultCommand(new ArmSetSpeed(mArm, 0.0));
+    mArm.setDefaultCommand(new ArmSetSpeedJoystick(mArm, mJoystick));
     mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
     mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
     mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
@@ -68,8 +67,8 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
 
-    mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
-    mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
+    // mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
+    // mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
 
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
