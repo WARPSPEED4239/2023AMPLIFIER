@@ -88,7 +88,7 @@ public class Arm extends SubsystemBase {
   }
   
   public double getArmEncoderPosition() {
-    return ArmEncoderController.getSelectedSensorPosition();
+    return ArmMotor.getSelectedSensorPosition();
   }
 
   public void setArmEncoderPosition(double position) {
@@ -96,6 +96,6 @@ public class Arm extends SubsystemBase {
   }
 
   public double getArmEncoderDeg() {
-    return UnitConversion.SRXUnitsToDegrees(ArmEncoderController.getSelectedSensorPosition());
+    return UnitConversion.SRXUnitsToDegrees(ArmMotor.getSelectedSensorPosition());
   }
 }

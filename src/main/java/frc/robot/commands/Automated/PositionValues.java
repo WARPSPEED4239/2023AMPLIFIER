@@ -16,7 +16,7 @@ public final class PositionValues {
                                STATION_ARM = 196.5,
                                STATION_SLIDER = 0.0,
 
-                               ARM_FULL_DOWN = 143.0,
+                               ARM_FULL_DOWN = 142.0,
                                SLIDER_FULL_IN = 0.0,
                                SLIDER_FULL_EXTEND = 23.9,
 
