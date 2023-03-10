@@ -36,7 +36,7 @@ public class ArmSliderSetPosition extends CommandBase {
       mSlider.setSliderPositionInches(mSliderTargetPosition);
     }
     
-    // Arm can't move down if target is < 125 and if slider is not less or equal to 2 inches
+    // Arm can't move down if target is > 170 and if slider is not less or equal to 2 inches
     if (mSlider.getSliderEncoderPositionInches() >= 2.0 && 170.0 > mArmTargetPosition) {
       mArm.setArmMotor(0.0);
     } else { // Arm can move
