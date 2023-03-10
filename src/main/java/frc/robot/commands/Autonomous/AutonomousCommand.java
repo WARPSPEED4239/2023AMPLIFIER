@@ -8,6 +8,7 @@ import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
 import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Automated.GoToPosition;
+import frc.robot.commands.Automated.PositionValues;
 import frc.robot.commands.Drivetrain.MoveWithNoSensors;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
@@ -58,7 +59,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case ScoreConeDriveBackwards:
         addCommands(
-          new ArmSetPosition(mArm, 214.0).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, PositionValues.HIGH_SCORING_ARM).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
@@ -92,7 +93,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case ScoreConeBackwardAutoBalance:
         addCommands(
-          new ArmSetPosition(mArm, 214.0).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, PositionValues.HIGH_SCORING_ARM).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),

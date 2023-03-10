@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Automated.PositionValues;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
 import frc.robot.tools.UnitConversion;
@@ -30,13 +31,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Arm Limit Down", mArm.getLimitDown());
 
     if(mSlider.getLimitIn()) {
-      mSlider.setSliderEncoderPosition(0.0);
+      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(PositionValues.SLIDER_FULL_IN));
     } else if(mSlider.getLimitOut()) {
-      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(Constants.SLIDER_LIMIT_OUT_POSITION_INCHES));
+      mSlider.setSliderEncoderPosition(UnitConversion.inchesToSRXUnits(PositionValues.SLIDER_FULL_EXTEND));
     }
 
     if(mArm.getLimitDown()) {
-      mArm.setArmEncoderPosition(UnitConversion.positionInDegreesToSRXUnits(145.0));
+      mArm.setArmEncoderPosition(UnitConversion.positionInDegreesToSRXUnits(PositionValues.STARTING_ARM));
     }
   }
   
