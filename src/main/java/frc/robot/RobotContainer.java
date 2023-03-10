@@ -1,7 +1,5 @@
 package frc.robot;
 
-import com.pathplanner.lib.auto.RamseteAutoBuilder;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -11,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetSpeed;
+import frc.robot.commands.Arm.ArmSetSpeedJoystick;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
 import frc.robot.commands.Drivetrain.ShifterSetState;
@@ -38,10 +37,10 @@ public class RobotContainer {
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
 
-  private RamseteAutoBuilder mAutoBuilder;
+  // private RamseteAutoBuilder mAutoBuilder;
 
   public RobotContainer() {
-    mArm.setDefaultCommand(new ArmSetSpeed(mArm, mJoystick));
+    mArm.setDefaultCommand(new ArmSetSpeed(mArm, 0.0));
     mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
     mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
     mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
@@ -53,11 +52,9 @@ public class RobotContainer {
     targetChooser.addOption("Drive Backward", Constants.TargetTask.DriveBackward);
     targetChooser.addOption("Drive Forward, Touch Charge", Constants.TargetTask.DriveForwardTouchCharge);
     targetChooser.addOption("Score Cone, Drive Backward", Constants.TargetTask.ScoreConeDriveBackwards);
-    targetChooser.addOption("Drive Forward Auto Balance V4", Constants.TargetTask.DriveForwardAutoBalanceV4);
-    targetChooser.addOption("Drive Forward Auto Balance V5", Constants.TargetTask.DriveForwardAutoBalanceV5);
-    targetChooser.addOption("Drive Backward Auto Balance V5", Constants.TargetTask.DriveBackwardAutoBalanceV5);
-    targetChooser.addOption("Score Cone, Backwards Auto Balance", Constants.TargetTask.ScoreConeBackwardAutoBalance);
-    targetChooser.addOption("Score Cone, Backwards Auto Balance but better hopefully", Constants.TargetTask.ScoreConeAutoBalanceV5);
+    targetChooser.addOption("Drive Forward Auto Balance", Constants.TargetTask.DriveForwardAutoBalance);
+    targetChooser.addOption("Drive Backward Auto Balance", Constants.TargetTask.DriveBackwardAutoBalance);
+    targetChooser.addOption("Score Cone, Drive Backward Auto Balance", Constants.TargetTask.ScoreConeBackwardAutoBalance);
     SmartDashboard.putData(targetChooser);
 
     UsbCamera mainCamera = CameraServer.startAutomaticCapture();
@@ -71,8 +68,8 @@ public class RobotContainer {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
 
-    mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeed(mArm, mJoystick));
-    mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeed(mArm, mJoystick));
+    mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
+    mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
 
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
