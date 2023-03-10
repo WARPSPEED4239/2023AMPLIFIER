@@ -129,4 +129,8 @@ public class RobotContainer {
   public Slider getSlider() {
     return mSlider;
   }
+
+  public Arm getArm() {
+    return mArm;
+  }
 }
