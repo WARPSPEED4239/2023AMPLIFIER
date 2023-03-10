@@ -62,7 +62,7 @@ public class RobotContainer {
     targetChooser.addOption("Drive Forward Auto Balance V5", Constants.TargetTask.DriveForwardAutoBalanceV5);
     targetChooser.addOption("Drive Backward Auto Balance V5", Constants.TargetTask.DriveBackwardAutoBalanceV5);
     targetChooser.addOption("Score Cone, Backwards Auto Balance", Constants.TargetTask.ScoreConeBackwardAutoBalance);
-    targetChooser.addOption("Score Cone, Backwards Auto Balance but better aiufinaga", Constants.TargetTask.ScoreConeAutoBalanceV5);
+    targetChooser.addOption("Score Cone, Backwards Auto Balance but better hopefully", Constants.TargetTask.ScoreConeAutoBalanceV5);
     SmartDashboard.putData(targetChooser);
 
     UsbCamera mainCamera = CameraServer.startAutomaticCapture();
