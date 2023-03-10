@@ -18,7 +18,7 @@ public class AutoBalanceV5Backward extends CommandBase {
   public AutoBalanceV5Backward(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
-    addRequirements(mDrivetrain);
+    addRequirements(mDrivetrain, mShifter);
   }
 
   @Override

@@ -18,7 +18,7 @@ public class AutoBalanceV5Forward extends CommandBase {
   public AutoBalanceV5Forward(Drivetrain drivetrain, Shifter shifter) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
-    addRequirements(mDrivetrain);
+    addRequirements(mDrivetrain, mShifter);
   }
 
   @Override
