@@ -7,6 +7,8 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,8 +18,9 @@ public class Arm extends SubsystemBase {
 
   private final WPI_TalonFX ArmMotor = new WPI_TalonFX(Constants.ARM_MOTOR);
   private final WPI_TalonSRX ArmEncoderController = new WPI_TalonSRX(Constants.ARM_ENCODER_CONTROLLER);
+  private final DigitalInput limitDown = new DigitalInput(Constants.ARM_LIMIT_DOWN);
 
-  private final int TIMEOUT_MS = 70;
+  private final int TIMEOUT_MS = 100;
 
   private double maxVelocity = 130.0;
   private double maxAcceleration = 80.0;
@@ -65,6 +68,10 @@ public class Arm extends SubsystemBase {
       SmartDashboard.putString("Arm Command", getCurrentCommand().getName());
     } catch (NullPointerException e) {}
   }
+
+  public boolean getLimitDown() {
+    return !limitDown.get();
+  }
   
   public void setArmMotor (double speed){
     if (speed > 1.0){
@@ -80,12 +87,12 @@ public class Arm extends SubsystemBase {
     ArmMotor.set(ControlMode.MotionMagic, UnitConversion.positionInDegreesToSRXUnits(deg));
   }
   
-  public void setArmEncoderPosition(double position) {
-    ArmMotor.setSelectedSensorPosition(position);
-  }
-  
   public double getArmEncoderPosition() {
     return ArmMotor.getSelectedSensorPosition();
+  }
+
+  public void setArmEncoderPosition(double position) {
+    ArmEncoderController.setSelectedSensorPosition(position);
   }
 
   public double getArmEncoderDeg() {

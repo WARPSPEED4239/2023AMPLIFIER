@@ -30,14 +30,14 @@ public class ArmSliderSetPosition extends CommandBase {
   public void execute() {
     
     // Slider can't move out if arm is down and slider is being set out
-    if (mArm.getArmEncoderDeg() <= 125.0 && 2.0 < mSliderTargetPosition) {
+    if (mArm.getArmEncoderDeg() <= PositionValues.ARM_SAFETY_VALUE && 2.0 < mSliderTargetPosition) {
       mSlider.setSliderSpeed(0.0);
     } else { // Slider can Move
       mSlider.setSliderPositionInches(mSliderTargetPosition);
     }
     
-    // Arm can't move down if target is < 125 and if slider is not less or equal to 2 inches
-    if (mSlider.getSliderEncoderPositionInches() >= 2.0 && 125.0 > mArmTargetPosition) {
+    // Arm can't move down if target is > 170 and if slider is not less or equal to 2 inches
+    if (mSlider.getSliderEncoderPositionInches() >= 2.0 && PositionValues.ARM_SAFETY_VALUE > mArmTargetPosition) {
       mArm.setArmMotor(0.0);
     } else { // Arm can move
       mArm.setArmPositionDeg(mArmTargetPosition);

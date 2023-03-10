@@ -9,26 +9,32 @@ import frc.robot.subsystems.Shifter;
 public class AutoBalanceV4 extends CommandBase {
   private final Drivetrain mDrivetrain;
   private final Shifter mShifter;
+  private final boolean mBackwards;
   private boolean mOnStation;
   private boolean mEnd; 
-  private final double mMoveSpeed = 0.4; // TODO TUNE
+  private double mMoveSpeed = 0.31; // TODO TUNE
+  private double mStartingYaw;
 
-  public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter) {
+  public AutoBalanceV4(Drivetrain drivetrain, Shifter shifter, boolean backwards) {
     mDrivetrain = drivetrain;
     mShifter = shifter;
+    mBackwards = backwards;
 
     addRequirements(mDrivetrain, mShifter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     mOnStation = false;
     mEnd = false;
+    if (mBackwards) {
+      mMoveSpeed = -mMoveSpeed;
+    }
+
     mShifter.setShifterState(false);
+    mStartingYaw = Pigeon.getYaw();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double pitch = Pigeon.getRoll();
@@ -37,9 +43,9 @@ public class AutoBalanceV4 extends CommandBase {
       mOnStation = true;
     }
 
-    mDrivetrain.arcadeDrive(mMoveSpeed, 0.0);
+    mDrivetrain.moveStraightUsingGyro(mMoveSpeed, mStartingYaw);
 
-    if (Math.abs(pitch) < 5.0 && mOnStation) { // TODO TUNE 5.0
+    if (Math.abs(pitch) < 8.0 && mOnStation) { // TODO TUNE 5.0
       mEnd = true;
     }
 

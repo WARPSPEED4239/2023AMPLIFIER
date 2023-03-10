@@ -15,30 +15,30 @@ public class GoToPosition extends SequentialCommandGroup {
     Arm mArm = arm;
     Slider mSlider = slider;
 
-    double mArmTargetDegrees = 84.0; // Bigger number = up
+    double mArmTargetDegrees = 145.0; // Bigger number = up
     double mSliderTargetInches = 0.0; // Bigger number = extend
     boolean eStop = false;
         
     switch (positions) {
       case Starting: // Arm HAS to Move First Leaving this State
-        mArmTargetDegrees = 86.0;
-        mSliderTargetInches = 0.0;
+        mArmTargetDegrees = PositionValues.STARTING_ARM;
+        mSliderTargetInches = PositionValues.STARTING_SLIDER;
         break;
       case Intaking: // Arm HAS to Move First Leaving this State
-        mArmTargetDegrees = 95.0;
-        mSliderTargetInches = 0.0;
+        mArmTargetDegrees = PositionValues.INTAKING_ARM;
+        mSliderTargetInches = PositionValues.INTAKING_SLIDER;
         break;
       case LowScoring: // Slider Maybe has to Move First Leaving this State
-        mArmTargetDegrees = 138.0;
-        mSliderTargetInches = 9.0;
+        mArmTargetDegrees = PositionValues.LOW_SCORING_ARM;
+        mSliderTargetInches = PositionValues.LOW_SCORING_SLIDER;
         break;
       case HighScoring: // Slider HAS to Move First Leaving this State
-        mArmTargetDegrees = 153.0;
-        mSliderTargetInches = 23.0;
+        mArmTargetDegrees = PositionValues.HIGH_SCORING_ARM;
+        mSliderTargetInches = PositionValues.HIGH_SCORING_SLIDER;
         break;
       case Station: // Arm May Move First Leaving this State
-        mArmTargetDegrees = 137.5;
-        mSliderTargetInches = 0.0;
+        mArmTargetDegrees = PositionValues.STATION_ARM;
+        mSliderTargetInches = PositionValues.STATION_SLIDER;
         break;
       case eStop:
         eStop = true;

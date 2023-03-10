@@ -6,10 +6,13 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetPosition;
+import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Automated.GoToPosition;
+import frc.robot.commands.Automated.PositionValues;
 import frc.robot.commands.Drivetrain.MoveWithNoSensors;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Intake.ClawPistonSetState;
+import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IntakeClaw;
@@ -56,7 +59,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
         break;
       case ScoreConeDriveBackwards:
         addCommands(
-          new ArmSetPosition(mArm, 153.0).withTimeout(2.0), // Arm moves up for 2 seconds
+          new ArmSetPosition(mArm, PositionValues.HIGH_SCORING_ARM).withTimeout(2.0), // Arm moves up for 2 seconds
           new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
             new GoToPosition(mArm, mSlider, Positions.HighScoring),
@@ -67,6 +70,8 @@ public class AutonomousCommand extends SequentialCommandGroup {
             new ClawPistonSetState(mIntakeClaw, false)
           ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
           new ParallelCommandGroup(
+            new ArmSetSpeed(mArm, 0.0),
+            new SliderSetSpeed(mSlider, 0.0),
             new ShifterSetState(mShifter, false),
             new MoveWithNoSensors(mDrivetrain, -0.7, -0.15)                                // Drivetrain backwards for 5 seconds
           ).withTimeout(3.25)
@@ -81,12 +86,28 @@ public class AutonomousCommand extends SequentialCommandGroup {
         );
         break;
       case DriveForwardAutoBalance:
+        addCommands(new AutoBalanceV5Forward(mDrivetrain, mShifter));
+        break;
+      case DriveBackwardAutoBalance:
+        addCommands(new AutoBalanceV5Backward(mDrivetrain, mShifter));
+        break;
+      case ScoreConeBackwardAutoBalance:
         addCommands(
+          new ArmSetPosition(mArm, PositionValues.HIGH_SCORING_ARM).withTimeout(2.0), // Arm moves up for 2 seconds
+          new GoToPosition(mArm, mSlider, Positions.HighScoring).withTimeout(2.0),  // Arm up and Slider out for 2 seconds
           new ParallelCommandGroup(
-            new ShifterSetState(mShifter, false),
-            new MoveWithNoSensors(mDrivetrain, 0.7, 0.15)
-          ).withTimeout(1.5),
-          new AutoBalanceV4(mDrivetrain, mShifter)
+            new GoToPosition(mArm, mSlider, Positions.HighScoring),
+            new ClawPistonSetState(mIntakeClaw, true)
+          ).withTimeout(1.0),                                                       // Arm and Slider hold, claw release for 1 second
+          new ParallelCommandGroup(
+            new GoToPosition(mArm, mSlider, Positions.Starting),
+            new ClawPistonSetState(mIntakeClaw, false)
+          ).withTimeout(2.0),                                                       // Arm down, Slider in, claw grab for 2 seconds
+          new ParallelCommandGroup(
+            new ArmSetSpeed(mArm, 0.0),
+            new SliderSetSpeed(mSlider, 0.0),
+            new AutoBalanceV5TunedForCone(mDrivetrain, mShifter)
+          ).withTimeout(8.0)
         );
         break;
     }

@@ -25,6 +25,7 @@ public final class Constants {
 
     SLIDER_LIMIT_OUT = 1,
     SLIDER_LIMIT_IN = 2,
+    ARM_LIMIT_DOWN = 3,
 
     SLIDER_MOTOR_GEARBOX_RATIO = 20,
 
@@ -61,8 +62,9 @@ public final class Constants {
     eStop
   }
 
-    public static enum TargetTask {
-        DoNothing, DriveForward, DriveBackward, 
-        ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance
-    }
+  public static enum TargetTask {
+      DoNothing, DriveForward, DriveBackward, 
+      ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance, 
+      ScoreConeBackwardAutoBalance, DriveBackwardAutoBalance
+  }
 }
