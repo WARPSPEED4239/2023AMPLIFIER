@@ -21,6 +21,4 @@ public final class PositionValues {
                                SLIDER_FULL_EXTEND = 23.9,
 
                                ARM_SAFETY_VALUE = 170.0;
-
-                               
 }
