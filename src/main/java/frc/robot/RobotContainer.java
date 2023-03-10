@@ -34,6 +34,7 @@ public class RobotContainer {
   private final IntakeClaw mIntakeClaw = new IntakeClaw();
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
+  private final Music mMusic = new Music();
 
   // private RamseteAutoBuilder mAutoBuilder;
 
@@ -44,6 +45,7 @@ public class RobotContainer {
     mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
     mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
+    mMusic.setDefaultCommand(new PlayMusic());
 
     targetChooser.setDefaultOption("Do Nothing", Constants.TargetTask.DoNothing);
     targetChooser.addOption("Drive Forward", Constants.TargetTask.DriveForward);

@@ -98,4 +98,8 @@ public class Arm extends SubsystemBase {
   public double getArmEncoderDeg() {
     return UnitConversion.SRXUnitsToDegrees(ArmMotor.getSelectedSensorPosition());
   }
+
+  public WPI_TalonFX getArmMotor() {
+    return ArmMotor;
+  }
 }
