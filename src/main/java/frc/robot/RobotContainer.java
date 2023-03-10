@@ -15,11 +15,13 @@ import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Intake.IntakeMotorsSetSpeed;
+import frc.robot.commands.Music.PlayMusic;
 import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeClaw;
+import frc.robot.subsystems.Music;
 import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Slider;
 
@@ -45,7 +47,7 @@ public class RobotContainer {
     mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
     mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
-    mMusic.setDefaultCommand(new PlayMusic());
+    mMusic.setDefaultCommand(new PlayMusic(mMusic));
 
     targetChooser.setDefaultOption("Do Nothing", Constants.TargetTask.DoNothing);
     targetChooser.addOption("Drive Forward", Constants.TargetTask.DriveForward);

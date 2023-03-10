@@ -1,4 +1,4 @@
-package frc.robot.commands.Arm;
+package frc.robot.commands.Music;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Music;
@@ -9,11 +9,12 @@ public class PlayMusic extends CommandBase {
 
   public PlayMusic(Music music) {
     mMusic = music;
+    addRequirements(mMusic);
   }
 
   @Override
   public void initialize() {
-    mMusic.loadMusic("WiiChannel.chrp");
+    mMusic.loadMusic("Wii Channel.chrp");
     mMusic.play();
   }
 
