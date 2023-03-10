@@ -14,6 +14,7 @@ public class Music extends SubsystemBase {
     
     mOrchestra.clearInstruments();
     mOrchestra.addInstrument(new WPI_TalonFX(Constants.ARM_MOTOR));
+    mOrchestra.addInstrument(new WPI_TalonFX(Constants.SLIDER_MOTOR));
 
   }
 

@@ -14,7 +14,7 @@ public class PlayMusic extends CommandBase {
 
   @Override
   public void initialize() {
-    mMusic.loadMusic("Wii Channel.chrp");
+    mMusic.loadMusic("WiiChannel.chrp");
     mMusic.play();
   }
 

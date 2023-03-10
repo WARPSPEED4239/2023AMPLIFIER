@@ -41,12 +41,12 @@ public class RobotContainer {
   // private RamseteAutoBuilder mAutoBuilder;
 
   public RobotContainer() {
-    mArm.setDefaultCommand(new ArmSetSpeedJoystick(mArm, mJoystick));
-    mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
-    mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
-    mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
-    mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
-    mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
+    // mArm.setDefaultCommand(new ArmSetSpeedJoystick(mArm, mJoystick));
+    // mDrivetrain.setDefaultCommand(new StraightWithGyro(mDrivetrain, mController));
+    // mIntake.setDefaultCommand(new IntakeMotorsSetSpeed(mIntake, 0.0));
+    // mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
+    // mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
+    // mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
     mMusic.setDefaultCommand(new PlayMusic(mMusic));
 
     targetChooser.setDefaultOption("Do Nothing", Constants.TargetTask.DoNothing);
@@ -67,26 +67,26 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-	  mController.a().onTrue(new ShifterSetState(mShifter, false));
-	  mController.b().onTrue(new ShifterSetState(mShifter, true));
+	  // mController.a().onTrue(new ShifterSetState(mShifter, false));
+	  // mController.b().onTrue(new ShifterSetState(mShifter, true));
 
-    // mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
-    // mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
+    // // mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
+    // // mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
 
-    mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
-    mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
-    mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, false));
-    mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, true));
+    // mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
+    // mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
+    // mJoystick.button(5).onTrue(new ClawPistonSetState(mIntakeClaw, false));
+    // mJoystick.button(6).onTrue(new ClawPistonSetState(mIntakeClaw, true));
 
-    mJoystick.button(7).onTrue(new GoToPosition(mArm, mSlider, Positions.Station));
-    mJoystick.button(8).onTrue(new GoToPosition(mArm, mSlider, Positions.eStop));
-    mJoystick.button(9).onTrue(new GoToPosition(mArm, mSlider, Positions.LowScoring));
-    mJoystick.button(10).onTrue(new GoToPosition(mArm, mSlider, Positions.HighScoring));
-    mJoystick.button(11).onTrue(new GoToPosition(mArm, mSlider, Positions.Starting));
-    mJoystick.button(12).onTrue(new GoToPosition(mArm, mSlider, Positions.Intaking));
+    // mJoystick.button(7).onTrue(new GoToPosition(mArm, mSlider, Positions.Station));
+    // mJoystick.button(8).onTrue(new GoToPosition(mArm, mSlider, Positions.eStop));
+    // mJoystick.button(9).onTrue(new GoToPosition(mArm, mSlider, Positions.LowScoring));
+    // mJoystick.button(10).onTrue(new GoToPosition(mArm, mSlider, Positions.HighScoring));
+    // mJoystick.button(11).onTrue(new GoToPosition(mArm, mSlider, Positions.Starting));
+    // mJoystick.button(12).onTrue(new GoToPosition(mArm, mSlider, Positions.Intaking));
 
-    mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
-    mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
+    // mJoystick.povUp().whileTrue(new SliderSetSpeed(mSlider, 1.0));
+    // mJoystick.povDown().whileTrue(new SliderSetSpeed(mSlider, -1.0));
   }
 
   // private void configureAutoCommands() {
