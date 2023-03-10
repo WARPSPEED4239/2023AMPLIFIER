@@ -1,9 +1,5 @@
 package frc.robot;
 
-import java.io.File;
-import java.util.HashMap;
-
-import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.RamseteAutoBuilder;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -14,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Positions;
-import frc.robot.Constants.TargetTask;
 import frc.robot.commands.Arm.ArmSetSpeed;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
@@ -75,6 +70,9 @@ public class RobotContainer {
   private void configureBindings() {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
+
+    mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeed(mArm, mJoystick));
+    mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeed(mArm, mJoystick));
 
     mJoystick.button(3).whileTrue(new IntakeMotorsSetSpeed(mIntake, 0.5));
     mJoystick.button(4).whileTrue(new IntakeMotorsSetSpeed(mIntake, -0.5));
