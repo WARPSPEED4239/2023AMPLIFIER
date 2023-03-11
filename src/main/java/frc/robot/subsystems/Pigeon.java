@@ -1,12 +1,13 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.Pigeon2;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class Pigeon {
 
-  private final static PigeonIMU Pigeon = new PigeonIMU(Constants.PIGEON_IMU);
+  private final static Pigeon2 Pigeon = new Pigeon2(Constants.PIGEON_IMU);
+
   
   public Pigeon() {}
 

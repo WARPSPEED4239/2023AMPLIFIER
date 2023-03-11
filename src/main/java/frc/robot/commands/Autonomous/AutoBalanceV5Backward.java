@@ -30,7 +30,7 @@ public class AutoBalanceV5Backward extends CommandBase {
 
   @Override
   public void execute() {
-    mRoll = Pigeon.getRoll();
+    mRoll = Pigeon.getPitch();
     
     if(mSequence == 0) {
       moveUntilAngledUp(-0.75);
@@ -38,6 +38,7 @@ public class AutoBalanceV5Backward extends CommandBase {
       moveStraightForTime(-0.5, 2.0);
     } else if(mSequence == 2) {
       levelRobot();
+
     }
   }
 
