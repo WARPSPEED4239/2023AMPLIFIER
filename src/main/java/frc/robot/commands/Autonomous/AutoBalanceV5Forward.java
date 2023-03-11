@@ -12,7 +12,7 @@ public class AutoBalanceV5Forward extends CommandBase {
   private final Shifter mShifter;
   private final Timer mTimer = new Timer();
   private double mStartingYaw;
-  private double mRoll;
+  private double mPitch;
   private int mSequence = -1;
 
   public AutoBalanceV5Forward(Drivetrain drivetrain, Shifter shifter) {
@@ -30,7 +30,7 @@ public class AutoBalanceV5Forward extends CommandBase {
 
   @Override
   public void execute() {
-    mRoll = Pigeon.getPitch();
+    mPitch = Pigeon.getPitch();
     
     if(mSequence == 0) {
       moveUntilAngledUp(0.75);
@@ -50,7 +50,7 @@ public class AutoBalanceV5Forward extends CommandBase {
   }
   
   private void moveUntilAngledUp(double speed) {
-    if (Math.abs(mRoll) > 10.0) {
+    if (Math.abs(mPitch) > 10.0) {
       mSequence++;
       // reset timer for the next sequence
       mTimer.reset();
@@ -70,10 +70,10 @@ public class AutoBalanceV5Forward extends CommandBase {
   }
 
   private void levelRobot() {
-    if(mRoll < -2.0) {
+    if(mPitch < -2.0) {
       System.out.println("moving forward");
       mDrivetrain.moveStraightUsingGyro(0.30, mStartingYaw);
-    } else if(mRoll > 2.0) {
+    } else if(mPitch > 2.0) {
       System.out.println("moving backward");
       mDrivetrain.moveStraightUsingGyro(-0.30, mStartingYaw);
     } else {
