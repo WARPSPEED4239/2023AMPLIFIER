@@ -13,8 +13,8 @@ public final class Constants {
     ARM_MOTOR = 7,
     ARM_ENCODER_CONTROLLER = 8,
     SLIDER_MOTOR = 11,
-    CLAW_RIGHT_MOTOR = 3,
-    CLAW_LEFT_MOTOR = 4,
+    CLAW_RIGHT_MOTOR = 12,
+    CLAW_LEFT_MOTOR = 13,
 
     SHIFTER_REVERSE_SOLENOID = 3,
     SHIFTER_FORWARD_SOLENOID = 4,
@@ -33,6 +33,7 @@ public final class Constants {
     JOYSTICK = 1,
 
     PIGEON_IMU = 9,
+    CANDLE = 10,
 
     INTEGRATED_SRX_UNITS_PER_ROTATION = 2048,
     SRX_UNITS_PER_ROTATION = 4096;

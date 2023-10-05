@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.ctre.phoenix.led.CANdle;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,6 +24,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeClaw;
 import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Slider;
+import frc.robot.tools.RGBController;
 
 public class RobotContainer {
   private final CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER);
@@ -34,6 +37,8 @@ public class RobotContainer {
   private final IntakeClaw mIntakeClaw = new IntakeClaw();
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
+  private final RGBController mRGBController = new RGBController(new CANdle(Constants.CANDLE));
+
 
   // private RamseteAutoBuilder mAutoBuilder;
 
@@ -131,5 +136,9 @@ public class RobotContainer {
 
   public Arm getArm() {
     return mArm;
+  }
+
+  public RGBController getRGBController() {
+    return mRGBController;
   }
 }

@@ -8,6 +8,7 @@ import frc.robot.commands.Automated.PositionValues;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Slider;
 import frc.robot.tools.UnitConversion;
+import frc.robot.tools.RGBController.Color;
 
 public class Robot extends TimedRobot {
 
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
     mRobotContainer = new RobotContainer();
     mSlider = mRobotContainer.getSlider();
     mArm = mRobotContainer.getArm();
+
+    mRobotContainer.getRGBController().setColor(Color.Red);
   }
 
   @Override
