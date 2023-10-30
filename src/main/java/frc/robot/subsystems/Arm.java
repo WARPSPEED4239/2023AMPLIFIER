@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -24,6 +26,9 @@ public class Arm extends SubsystemBase {
 
   private double maxVelocity = 130.0;
   private double maxAcceleration = 80.0;
+  private double currentLimit = 5.0;
+  private double currentThreshold = 10.0;
+  private double currentThresholdTime = 3.0;
 
   private double kP = 2.6;
   private double kI = 0.0;
@@ -45,6 +50,9 @@ public class Arm extends SubsystemBase {
     ArmMotor.configRemoteFeedbackFilter(Constants.ARM_ENCODER_CONTROLLER, RemoteSensorSource.TalonSRX_SelectedSensor, 0);
     ArmMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.RemoteSensor0, 0, TIMEOUT_MS);
     ArmMotor.configFeedbackNotContinuous(false, TIMEOUT_MS); // 4095 -> 4096
+
+    ArmMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, currentLimit * 1.5, currentThreshold * 1.5, currentThresholdTime * 2));
+    // ArmMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, currentLimit, currentThreshold, currentThresholdTime));
 
     ArmMotor.configMotionCruiseVelocity(maxVelocity);
     ArmMotor.configMotionAcceleration(maxAcceleration);

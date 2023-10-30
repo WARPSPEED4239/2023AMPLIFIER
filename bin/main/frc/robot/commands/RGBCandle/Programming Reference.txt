@@ -1,0 +1,12 @@
+FRC Java - Setting up Eclipse & WPILIB
+https://www.youtube.com/watch?v=dNXu97q08uI
+
+FRC Java Development #2: RobotBuilder
+https://www.youtube.com/watch?v=hbPVbdkpkls
+
+How to set up Eclipse for FRC Java development 2017-2018
+https://www.youtube.com/watch?v=ph0otJTHA7o
+
+Ask the Experts - Crash Course: Programming in Java
+https://www.youtube.com/watch?v=tR8wtXd2Ack
+

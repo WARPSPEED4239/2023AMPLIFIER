@@ -68,4 +68,14 @@ public final class Constants {
       ScoreConeDriveBackwards, DriveForwardTouchCharge, DriveForwardAutoBalance, 
       ScoreConeBackwardAutoBalance, DriveBackwardAutoBalance
   }
+
+    //Led lights
+    public static final class LedLights {
+      public static final String Yellow = "Yellow";
+      public static final String Purple = "Purple";
+      public static final String Red = "Red";
+      public static final String Blue = "Blue";
+      public static final String Green = "Green";
+      public static final String Orange = "Orange";
+  }
 }

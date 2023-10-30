@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.net.http.HttpResponse.PushPromiseHandler;
+
 import com.ctre.phoenix.led.CANdle;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -9,16 +11,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.LedLights;
 import frc.robot.Constants.Positions;
 import frc.robot.commands.Arm.ArmSetSpeedJoystick;
 import frc.robot.commands.Automated.GoToPosition;
 import frc.robot.commands.Autonomous.AutonomousCommand;
+import frc.robot.commands.RGBCandle.ChangeLedLights;
 import frc.robot.commands.Drivetrain.ShifterSetState;
 import frc.robot.commands.Drivetrain.StraightWithGyro;
 import frc.robot.commands.Intake.ClawPistonSetState;
 import frc.robot.commands.Intake.IntakeMotorsSetSpeed;
 import frc.robot.commands.Slider.SliderSetSpeed;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.CandleControl;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeClaw;
@@ -30,7 +35,7 @@ public class RobotContainer {
   private final CommandXboxController mController = new CommandXboxController(Constants.XBOX_CONTROLLER);
   private final CommandJoystick mJoystick = new CommandJoystick(Constants.JOYSTICK);
   private SendableChooser<Constants.TargetTask> targetChooser = new SendableChooser<>();
-
+  public CandleControl mCandleControl = new CandleControl();
   private final Arm mArm = new Arm();
   private final Drivetrain mDrivetrain = new Drivetrain();
   private final Intake mIntake = new Intake();
@@ -38,7 +43,9 @@ public class RobotContainer {
   private final Shifter mShifter = new Shifter();
   private final Slider mSlider = new Slider();
   private final RGBController mRGBController = new RGBController(new CANdle(Constants.CANDLE));
-
+  private final ChangeLedLights mBlueLedLights = new ChangeLedLights(mCandleControl, LedLights.Blue);
+  private final ChangeLedLights mRedLedLights = new ChangeLedLights(mCandleControl, LedLights.Red);
+  
 
   // private RamseteAutoBuilder mAutoBuilder;
 
@@ -49,6 +56,9 @@ public class RobotContainer {
     mIntakeClaw.setDefaultCommand(new ClawPistonSetState(mIntakeClaw, false));
     mShifter.setDefaultCommand(new ShifterSetState(mShifter, true));
     mSlider.setDefaultCommand(new SliderSetSpeed(mSlider, 0.0));
+    mBlueLedLights.setDefualtCommand(new ChangeLedLights(mCandleControl, LedLights.Blue));
+    mRedLedLights.setDefualtCommand(new ChangeLedLights(mCandleControl, LedLights.Red));
+    
 
     targetChooser.setDefaultOption("Do Nothing", Constants.TargetTask.DoNothing);
     targetChooser.addOption("Drive Forward", Constants.TargetTask.DriveForward);
@@ -70,6 +80,10 @@ public class RobotContainer {
   private void configureBindings() {
 	  mController.a().onTrue(new ShifterSetState(mShifter, false));
 	  mController.b().onTrue(new ShifterSetState(mShifter, true));
+    mController.leftBumper().onTrue(new ChangeLedLights(mCandleControl, LedLights.Blue));
+    mController.rightBumper().onTrue(new ChangeLedLights(mCandleControl, LedLights.Red));
+  
+  
 
     // mJoystick.axisGreaterThan(1, 0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));
     // mJoystick.axisLessThan(1, -0.3).whileTrue(new ArmSetSpeedJoystick(mArm, mJoystick));

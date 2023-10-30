@@ -7,10 +7,10 @@ public final class PositionValues {
                                INTAKING_ARM = 152.0,
                                INTAKING_SLIDER = 0.0,
 
-                               LOW_SCORING_ARM = 200.0,
+                               LOW_SCORING_ARM = 198.0,
                                LOW_SCORING_SLIDER = 9.0,
 
-                               HIGH_SCORING_ARM = 213.0,
+                               HIGH_SCORING_ARM = 210.0,
                                HIGH_SCORING_SLIDER = 23.0,
 
                                STATION_ARM = 197.5,
